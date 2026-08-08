@@ -1,0 +1,11 @@
+click
+faster-whisper
+pydub
+noisereduce
+ffmpeg-python
+tqdm
+numpy
+soundfile
+streamlit
+opencv-python
+srt
