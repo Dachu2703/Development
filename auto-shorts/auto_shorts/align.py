@@ -32,8 +32,8 @@ def _snap_to_word_boundary(boundary: float, words: List[Dict], side: str = "star
 
 
 def snap_to_silence(
-    candidates: List[Dict],
-    silences: List[Tuple[float, float]],
+    candidates: Optional[List[Dict]],
+    silences: Optional[List[Tuple[float, float]]],
     transcript_path: Optional[str] = None,
     min_length: int = 15,
     max_length: int = 60,
@@ -43,6 +43,11 @@ def snap_to_silence(
     If `transcript_path` is provided and contains `words`, clip boundaries that fall inside a word
     will be adjusted outward to the word start/end to avoid mid-word cuts.
     """
+    if candidates is None:
+        candidates = []
+    if silences is None:
+        silences = []
+
     silence_starts = [s for s, _ in silences]
     silence_ends = [e for _, e in silences]
     silence_starts.sort()

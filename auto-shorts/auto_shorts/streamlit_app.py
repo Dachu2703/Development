@@ -9,32 +9,25 @@ from auto_shorts.logging_config import logger
 
 
 st.set_page_config(page_title="auto-shorts Studio", layout="wide")
-st.title("auto-shorts Studio — Smart Short Clip Maker")
+st.title("auto-shorts Studio")
+st.subheader("Create vertical short clips from longer videos")
+
 st.markdown(
-    "Create platform-ready vertical clips from longer videos with clear split guidance, clean cuts, and optional captions."
+    "Use the upload or local path input, choose your platform, then run a dry-run to preview segments before exporting final clips."
 )
 
-st.sidebar.title("Export settings")
-platform = st.sidebar.selectbox(
+platform = st.selectbox(
     "Target platform",
     ["YouTube Shorts", "Instagram Reels", "TikTok"],
     index=0,
 )
 
 platform_caption = {
-    "YouTube Shorts": "Generate snappy vertical cuts optimized for YouTube Shorts.",
-    "Instagram Reels": "Create engaging short reels for Instagram with the right pacing.",
-    "TikTok": "Produce fast, vertical TikTok-ready clips with attention-grabbing timing.",
+    "YouTube Shorts": "Snappy vertical clips for YouTube.",
+    "Instagram Reels": "Short, engaging Reels-ready clips.",
+    "TikTok": "Fast-paced clips for TikTok.",
 }
 st.caption(platform_caption.get(platform, "Create vertical clips for social video platforms."))
-
-st.info(
-    "**How it works:**\n"
-    "1. Upload a video file or paste a local file path.\n"
-    "2. Pick the target platform and set clip length.\n"
-    "3. Click `Create Project & Generate (dry-run manifest)` to preview segments.\n"
-    "4. Then click `Export Clips (run full job)` to create final shorts."
-)
 
 platform_defaults = {
     "YouTube Shorts": {"min_length": 15, "max_length": 60, "num_shorts": 10},
@@ -43,56 +36,62 @@ platform_defaults = {
 }
 settings = platform_defaults.get(platform, platform_defaults["YouTube Shorts"])
 
-st.sidebar.header(f"{platform} Settings")
-st.sidebar.markdown(
-    "**Recommended settings:**\n"
-    f"- Clip length: {settings['min_length']} to {settings['max_length']} seconds\n"
-    f"- Suggested clips: {settings['num_shorts']}"
-)
-st.sidebar.info("For very large videos (>1 GB), prefer the local file path input instead of browser upload.")
-num_shorts = st.sidebar.number_input(
-    "Number of clips",
-    min_value=1,
-    max_value=50,
-    value=settings["num_shorts"],
-)
-min_length = st.sidebar.number_input(
-    "Min length (s)",
-    min_value=5,
-    max_value=300,
-    value=settings["min_length"],
-)
-max_length = st.sidebar.number_input(
-    "Max length (s)",
-    min_value=10,
-    max_value=600,
-    value=settings["max_length"],
-)
-remove_silence = st.sidebar.checkbox("Remove silence", value=True)
-clean_audio_flag = st.sidebar.checkbox("Noise reduction", value=False)
+col1, col2, col3 = st.columns(3)
+with col1:
+    num_shorts = st.number_input(
+        "Number of clips",
+        min_value=1,
+        max_value=50,
+        value=settings["num_shorts"],
+    )
+with col2:
+    min_length = st.number_input(
+        "Min length (s)",
+        min_value=5,
+        max_value=300,
+        value=settings["min_length"],
+    )
+with col3:
+    max_length = st.number_input(
+        "Max length (s)",
+        min_value=10,
+        max_value=600,
+        value=settings["max_length"],
+    )
+
+remove_silence = st.checkbox("Trim silence from clips", value=True)
+clean_audio_flag = st.checkbox("Noise reduction", value=False)
+captions = st.checkbox("Burn captions into clips", value=False)
 vertical = True
-st.sidebar.info("Vertical 9:16 output is always applied for short-form platforms.")
-captions = st.sidebar.checkbox("Burn captions", value=False)
+model_size = "small"
+beam_size = 2
+word_timestamps = captions
 
+st.header("Upload or select your video")
+uploaded = st.file_uploader("Upload a video file", type=["mp4", "mov", "mkv", "avi", "webm"])
+local_path = st.text_input("Or use a local file path", placeholder="D:\\tmp\\Amitsha.mp4")
 
-st.header("Upload video")
-uploaded = st.file_uploader("Drop a video file or browse", type=["mp4", "mov", "mkv", "avi", "webm"])
-local_path = st.text_input("Or paste local file path")
+st.markdown("**Output folder**")
+st.info("`./output/project_<id>/<platform>/`", icon="ℹ️")
 
 output_base = Path("./output")
 db_path = Path("./auto_shorts.db")
+project_tmp_root = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
+project_tmp_root.mkdir(parents=True, exist_ok=True)
 
-st.markdown("#### Output folder")
-st.write("Final clips and manifest files are saved to: `./output/project_<id>/<platform>/` inside the app folder.")
-st.write("For example, if project id is 1 and platform is YouTube Shorts, output goes to `./output/project_1/YouTube_Shorts/`.")
+def _create_upload_tempdir() -> Path:
+    try:
+        return Path(tempfile.mkdtemp(prefix="auto-shorts-", dir=str(project_tmp_root)))
+    except Exception:
+        return Path(tempfile.mkdtemp(prefix="auto-shorts-"))
 
-if st.button("Create Project & Generate (dry-run manifest)"):
+if st.button("Create dry-run manifest"):
     # determine source path
     if uploaded is None and not local_path:
         st.error("Provide a file via upload or local path")
     else:
         if uploaded is not None:
-            tmpdir = Path(tempfile.mkdtemp(prefix="auto-shorts-"))
+            tmpdir = _create_upload_tempdir()
             src_path = tmpdir / uploaded.name
             with open(src_path, "wb") as f:
                 f.write(uploaded.getbuffer())
@@ -112,18 +111,22 @@ if st.button("Create Project & Generate (dry-run manifest)"):
         proj = db.get_project(str(db_path), pid)
         st.info("Running pipeline (dry-run)... this may take a while")
         try:
-            manifest_path = runner.run_project(
-                proj,
-                str(db_path),
-                str(output_base),
-                dry_run=True,
-                platform=platform,
-                min_length=min_length,
-                max_length=max_length,
-                clean_audio=clean_audio_flag,
-                vertical=vertical,
-                captions=captions,
-            )
+            with st.spinner("Analyzing video and generating manifest…"):
+                manifest_path = runner.run_project(
+                    proj,
+                    str(db_path),
+                    str(output_base),
+                    dry_run=True,
+                    platform=platform,
+                    min_length=min_length,
+                    max_length=max_length,
+                    clean_audio=clean_audio_flag,
+                    vertical=vertical,
+                    captions=captions,
+                    model_size=model_size,
+                    beam_size=beam_size,
+                    word_timestamps=word_timestamps,
+                )
             st.success(f"Manifest created: {manifest_path}")
             st.info("The manifest is a preview of the clip segments. No final clips are exported in dry-run mode.")
             with open(manifest_path, "r", encoding="utf-8") as mf:
@@ -174,18 +177,22 @@ if st.button("Export Clips (run full job)"):
         if st.button("Confirm Export"):
             proj = db.get_project(str(db_path), int(sel))
             try:
-                manifest_path = runner.run_project(
-                    proj,
-                    str(db_path),
-                    str(output_base),
-                    dry_run=False,
-                    platform=platform,
-                    min_length=min_length,
-                    max_length=max_length,
-                    clean_audio=clean_audio_flag,
-                    vertical=vertical,
-                    captions=captions,
-                )
+                with st.spinner("Exporting final clips… this may take several minutes"):
+                    manifest_path = runner.run_project(
+                        proj,
+                        str(db_path),
+                        str(output_base),
+                        dry_run=False,
+                        platform=platform,
+                        min_length=min_length,
+                        max_length=max_length,
+                        clean_audio=clean_audio_flag,
+                        vertical=vertical,
+                        captions=captions,
+                        model_size=model_size,
+                        beam_size=beam_size,
+                        word_timestamps=word_timestamps,
+                    )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             except Exception as e:
                 logger.exception("Export failed during full job")

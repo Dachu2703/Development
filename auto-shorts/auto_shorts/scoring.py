@@ -63,9 +63,10 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
         data = json.load(f)
 
     segments = data.get("segments") or []
-    if not segments and data.get("words"):
+    words = data.get("words") or []
+    if not segments and words:
         # Aggregate words into rough segments of 10s windows
-        words = data["words"]
+        segments = []
         segments = []
         if not words:
             return []

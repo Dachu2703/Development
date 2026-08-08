@@ -8,16 +8,61 @@ from .db import update_project_status, add_clip
 from .logging_config import logger
 
 
-def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, clean_audio: bool = False, vertical: bool = False, captions: bool = False):
+def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False):
     src = project["source"]
     pid = project["id"]
     update_project_status(db_path, pid, "processing")
 
     try:
-        transcript = transcribe.transcribe(src)
+        # Transcribe and validate outputs step-by-step with defensive checks and logging
+        transcript = transcribe.transcribe(
+            src,
+            model_size=model_size,
+            beam_size=beam_size,
+            word_timestamps=word_timestamps,
+        )
+        logger.debug(f"Transcription output path: {transcript}")
+
+        # inspect transcript JSON early to ensure it is valid
+        try:
+            import json
+            from pathlib import Path
+            tpath = Path(transcript)
+            if not tpath.exists():
+                logger.warning(f"Transcript file not found: {transcript}")
+                transcript_data = {}
+            else:
+                with open(tpath, 'r', encoding='utf-8') as tf:
+                    transcript_data = json.load(tf)
+            segs = transcript_data.get('segments') or []
+            words = transcript_data.get('words') or []
+            logger.debug(f"Transcript segments: {len(segs)}, words: {len(words)}")
+        except Exception as e:
+            logger.exception("Failed to read/parse transcript JSON")
+            transcript_data = {}
+            segs = []
+            words = []
+
         sil = silence.detect_silences(src)
+        if sil is None:
+            logger.debug("silence.detect_silences returned None, normalizing to []")
+            sil = []
+        logger.debug(f"Detected silences: {len(sil)}")
+
         candidates = scoring.score_sentences(transcript, min_length=min_length, max_length=max_length, top_k=20)
-        aligned = align.snap_to_silence(candidates, sil, transcript_path=transcript, min_length=min_length, max_length=max_length)
+        if candidates is None:
+            logger.debug("scoring.score_sentences returned None, normalizing to []")
+            candidates = []
+        logger.debug(f"Initial candidate clips: {len(candidates)}")
+
+        # Ensure align receives valid iterables
+        try:
+            aligned = align.snap_to_silence(candidates or [], sil or [], transcript_path=transcript, min_length=min_length, max_length=max_length)
+        except Exception:
+            logger.exception("snap_to_silence failed — logging inputs")
+            logger.debug(f"candidates (first 5): {candidates[:5] if isinstance(candidates, list) else str(candidates)}")
+            logger.debug(f"silences (first 5): {sil[:5] if isinstance(sil, list) else str(sil)}")
+            raise
 
         manifest = {"source": src, "platform": platform, "segments": aligned}
         outdir = Path(output_dir) / f"project_{pid}" / platform.replace(" ", "_")

@@ -5,6 +5,9 @@ import tempfile
 import os
 
 from .audio_clean import clean_audio
+
+PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
+PROJECT_TMP_ROOT.mkdir(parents=True, exist_ok=True)
 import cv2
 import urllib.request
 from pathlib import Path as _Path
@@ -56,6 +59,12 @@ def _extract_frame(path: str, time: float, out_path: Path) -> bool:
     return proc.returncode == 0 and out_path.exists()
 
 
+def _create_frame_tempfile(t: float) -> Path:
+    tmp_dir = PROJECT_TMP_ROOT / "frames"
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    return tmp_dir / f"autos_shorts_frame_{int(t)}.jpg"
+
+
 def _ensure_dnn_model(cache_dir: _Path = None):
     if cache_dir is None:
         cache_dir = _Path.home() / ".cache" / "auto-shorts" / "models"
@@ -80,7 +89,7 @@ def _ensure_dnn_model(cache_dir: _Path = None):
 
 def _detect_face_center(path: str, t: float) -> tuple:
     # extract frame and run OpenCV DNN face detector with Haar fallback
-    tmp = Path(tempfile.gettempdir()) / f"autos_shorts_frame_{int(t)}.jpg"
+    tmp = _create_frame_tempfile(t)
     ok = _extract_frame(path, t, tmp)
     if not ok:
         return None
@@ -148,6 +157,7 @@ def _format_srt_time(seconds: float) -> str:
 
 
 def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, srt_path: Path):
+    words = words or []
     # Collect words in clip and group into lines of ~3s
     items = []
     idx = 1
