@@ -1,8 +1,11 @@
 import hashlib
 import json
+import logging
 import subprocess
 from pathlib import Path
 from typing import Dict, List
+
+from .logging_config import logger
 
 
 def _ffprobe_duration(path: Path) -> float:
@@ -59,28 +62,58 @@ def transcribe(video_path: str, cache_dir: str = None, model_size: str = "small"
     compute_type = "int8"
     try:
         model = WhisperModel(model_size, device="cpu", compute_type=compute_type)
-        print(f"[auto-shorts] faster-whisper using compute_type={compute_type} device=cpu model={model_size}")
-    except Exception:
+        logger.debug(f"faster-whisper using compute_type={compute_type} device=cpu model={model_size}")
+    except Exception as exc:
         compute_type = "default"
+        logger.warning(f"faster-whisper compute_type={compute_type} failed, falling back to default: {exc}")
         model = WhisperModel(model_size, device="cpu")
-        print(f"[auto-shorts] faster-whisper fallback to compute_type={compute_type} device=cpu model={model_size}")
+        logger.debug(f"faster-whisper fallback to compute_type={compute_type} device=cpu model={model_size}")
 
     segments = []
     words_all: List[Dict] = []
-    # faster-whisper allows streaming over segments
-    for segment in model.transcribe(str(src), beam_size=5, word_timestamps=True):
-        # segment is a dict-like object with start/end/text/words
+    # faster-whisper allows streaming over segments or returning (segments, info)
+    result = model.transcribe(str(src), beam_size=5, word_timestamps=True)
+    if isinstance(result, tuple) and len(result) == 2:
+        segment_iter = result[0]
+    else:
+        segment_iter = result
+
+    for segment in segment_iter:
+        # segment may be a dict-like object or a simple object with attributes
+        if isinstance(segment, dict):
+            start = segment.get("start")
+            end = segment.get("end")
+            text = segment.get("text", "")
+            word_items = segment.get("words", [])
+        else:
+            start = getattr(segment, "start", None)
+            end = getattr(segment, "end", None)
+            text = getattr(segment, "text", "")
+            word_items = getattr(segment, "words", [])
+
+        if hasattr(word_items, "__iter__") and not isinstance(word_items, (str, bytes, dict)):
+            word_items = list(word_items)
+
         seg = {
-            "start": float(segment.start),
-            "end": float(segment.end),
-            "text": segment.text,
+            "start": float(start or 0.0),
+            "end": float(end or 0.0),
+            "text": text,
             "words": [],
         }
-        if hasattr(segment, "words") and segment.words:
-            for w in segment.words:
-                word = {"start": float(w.start), "end": float(w.end), "text": w.word, "confidence": getattr(w, "confidence", None)}
-                seg["words"].append(word)
-                words_all.append(word)
+        for w in word_items:
+            if isinstance(w, dict):
+                ws = float(w.get("start", 0.0))
+                we = float(w.get("end", ws))
+                wt = w.get("text", "")
+                wc = w.get("confidence", None)
+            else:
+                ws = float(getattr(w, "start", 0.0))
+                we = float(getattr(w, "end", ws))
+                wt = getattr(w, "word", "")
+                wc = getattr(w, "confidence", None)
+            word = {"start": ws, "end": we, "text": wt, "confidence": wc}
+            seg["words"].append(word)
+            words_all.append(word)
         segments.append(seg)
 
     transcript: Dict = {

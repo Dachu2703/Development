@@ -1,9 +1,11 @@
+import json
+import logging
 from pathlib import Path
 from typing import Dict, Any
-import json
 
 from . import transcribe, silence, scoring, align, export
 from .db import update_project_status, add_clip
+from .logging_config import logger
 
 
 def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, clean_audio: bool = False, vertical: bool = False, captions: bool = False):
@@ -45,4 +47,5 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
         return str(manifest_path)
     except Exception as exc:
         update_project_status(db_path, pid, "error")
+        logger.exception(f"Project {pid} failed while processing {src}")
         raise

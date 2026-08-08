@@ -5,6 +5,7 @@ import tempfile
 import streamlit as st
 
 from auto_shorts import db, runner
+from auto_shorts.logging_config import logger
 
 
 st.set_page_config(page_title="auto-shorts Studio", layout="wide")
@@ -150,6 +151,7 @@ if st.button("Create Project & Generate (dry-run manifest)"):
             except Exception:
                 st.info("Waveform preview unavailable (install pydub/soundfile).")
         except Exception as e:
+            logger.exception("Pipeline failed during dry-run")
             st.error(f"Pipeline failed: {e}")
 
         # cleanup uploaded tmp files only
@@ -186,5 +188,6 @@ if st.button("Export Clips (run full job)"):
                 )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             except Exception as e:
+                logger.exception("Export failed during full job")
                 st.error(f"Export failed: {e}")
 
