@@ -18,12 +18,16 @@ def _check_ffmpeg():
 @click.option("--platform", default="YouTube Shorts", type=click.Choice(["YouTube Shorts", "Instagram Reels", "TikTok"]), help="Target platform for your short clips")
 @click.option("--min-length", default=15, help="Minimum clip length (seconds)")
 @click.option("--max-length", default=60, help="Maximum clip length (seconds)")
+@click.option("--num-shorts", default=None, type=int, help="Number of shorts to generate (top-K candidates)")
+@click.option("--prioritize-length", is_flag=True, help="Prioritize clip length over requested count (use max-length windows)")
+@click.option("--force-exact-length", is_flag=True, help="Force exact clip length in seconds (no snapping)")
+@click.option("--exact-clip-length", default=None, type=int, help="Exact clip length in seconds when forcing exact length")
 @click.option("--vertical", is_flag=True, help="Reframe to vertical 9:16 for Shorts" )
 @click.option("--captions", is_flag=True, help="Burn captions into clips for Shorts")
 @click.option("--cache-dir", default=None, help="Transcript cache directory")
 @click.option("--output-dir", default="output", help="Output directory for clips")
 @click.option("--dry-run", is_flag=True, help="Only create manifest, don't export clips")
-def main(input, platform, min_length, max_length, vertical, captions, cache_dir, output_dir, dry_run):
+def main(input, platform, min_length, max_length, vertical, captions, cache_dir, output_dir, dry_run, num_shorts, prioritize_length, force_exact_length, exact_clip_length):
     """auto-shorts: create YouTube Shorts-style vertical clips from a longer video.
 
     This is a scaffolded CLI that runs a minimal pipeline and writes a manifest.
@@ -37,7 +41,8 @@ def main(input, platform, min_length, max_length, vertical, captions, cache_dir,
     silences = silence.detect_silences(input)
     click.echo(f"Found {len(silences)} silence intervals")
     click.echo("Scoring candidate segments...")
-    candidates = scoring.score_sentences(transcript, min_length=min_length, max_length=max_length)
+    top_k = int(num_shorts) if num_shorts else None
+    candidates = scoring.score_sentences(transcript, min_length=min_length, max_length=max_length, top_k=top_k or 20, prioritize_length=bool(prioritize_length), force_exact_length=bool(force_exact_length), exact_clip_length=exact_clip_length)
     click.echo(f"Got {len(candidates)} candidate segments")
     click.echo("Aligning to silence boundaries and word boundaries...")
     aligned = align.snap_to_silence(candidates, silences, transcript_path=transcript, min_length=min_length, max_length=max_length)
@@ -61,6 +66,7 @@ def main(input, platform, min_length, max_length, vertical, captions, cache_dir,
     click.echo(f"Wrote manifest: {manifest_path}")
     if not dry_run:
         click.echo("Exporting clips...")
+        # honor num_shorts if provided via CLI (passed through runner)
         exported = export.export_clips(input, aligned, output_dir, platform=platform, vertical=vertical, captions=captions)
         click.echo(f"Exported {len(exported)} clips to {output_dir}")
 
@@ -98,7 +104,8 @@ def list_projects(db_path):
 @click.option("--clean-audio", is_flag=True)
 @click.option("--vertical", is_flag=True)
 @click.option("--captions", is_flag=True)
-def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio, vertical, captions):
+@click.option("--num-shorts", default=None, type=int, help="Number of shorts to generate (top-K candidates)")
+def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio, vertical, captions, num_shorts):
     db.init_db(db_path)
     proj = db.get_project(db_path, project_id)
     if not proj:
@@ -111,6 +118,7 @@ def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio,
         output_dir,
         platform=platform,
         dry_run=dry_run,
+        num_shorts=num_shorts,
         clean_audio=clean_audio,
         vertical=vertical,
         captions=captions,

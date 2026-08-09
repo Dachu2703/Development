@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import List, Dict
 import tempfile
 import os
+import shutil
 
 from .audio_clean import clean_audio
 
@@ -213,7 +214,8 @@ def export_clips(
         platform_tag = platform.lower().replace(" ", "_")
         out_file = out_dir / f"clip_{platform_tag}_{i:02d}.mp4"
 
-        with tempfile.TemporaryDirectory() as td:
+        # create temporary working directory on the project temp root
+        with tempfile.TemporaryDirectory(dir=str(PROJECT_TMP_ROOT)) as td:
             td = Path(td)
             cut_file = td / f"cut_{i:02d}.mp4"
             vf = []
@@ -302,7 +304,16 @@ def export_clips(
                     raise RuntimeError(f"ffmpeg burn captions failed for segment {i}: {proc2.stderr}")
             else:
                 # move proc_file to out_file
-                os.replace(str(proc_file), str(out_file))
+                try:
+                    # Prefer atomic replace when on same filesystem
+                    os.replace(str(proc_file), str(out_file))
+                except OSError as e:
+                    # On cross-device moves this will fail; fall back to copy+remove
+                    try:
+                        shutil.copy2(str(proc_file), str(out_file))
+                        os.remove(str(proc_file))
+                    except Exception as e2:
+                        raise RuntimeError(f"Export failed moving file: {e} -> {e2}")
 
             results.append({"file": str(out_file), "start": start, "end": end, "reason": seg.get("reason", "")})
 

@@ -53,7 +53,7 @@ def _overlaps(a: Tuple[float, float], b: Tuple[float, float], buffer: float = 5.
     return not (a[1] + buffer < b[0] or b[1] + buffer < a[0])
 
 
-def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5) -> List[Dict]:
+def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5, prioritize_length: bool = False, force_exact_length: bool = False, exact_clip_length: int | None = None) -> List[Dict]:
     """Score sentences/segments from a transcript JSON and return top candidate clips.
 
     Transcript JSON should contain `segments` (with start,end,text) or `words`.
@@ -65,14 +65,27 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
     segments = data.get("segments") or []
     words = data.get("words") or []
     if not segments and words:
-        # Aggregate words into rough segments of 10s windows
-        segments = []
+        # Aggregate words into rough segments sized around desired top_k candidates
         segments = []
         if not words:
             return []
-        # Create small segments around every 10s window
+        # Create segments based on duration. If prioritize_length is set, use max_length windows;
+        # otherwise use duration/top_k and clamp to [min_length, max_length].
         dur = data.get("duration", 0)
-        step = min(max_length, max(10, dur / 10 if dur else 10))
+        if not dur:
+            return []
+        if prioritize_length:
+            if force_exact_length and exact_clip_length:
+                # use exact fixed windows of exact_clip_length seconds
+                step = int(max(1, exact_clip_length))
+            else:
+                step = min(max_length, max(min_length, max_length))
+        else:
+            # ideal step is dur/top_k, but clamp to [min_length, max_length]
+            if top_k <= 0:
+                return []
+            ideal = dur / max(1, top_k)
+            step = min(max_length, max(min_length, ideal))
         t = 0.0
         while t < dur:
             segments.append({"start": t, "end": min(t + step, dur), "text": ""})
