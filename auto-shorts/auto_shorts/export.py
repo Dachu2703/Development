@@ -7,6 +7,8 @@ import shutil
 
 from .audio_clean import clean_audio
 
+MAX_SHORT_DURATION = 180.0
+
 PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
 PROJECT_TMP_ROOT.mkdir(parents=True, exist_ok=True)
 import cv2
@@ -168,20 +170,22 @@ def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, s
     for w in words:
         ws = float(w.get("start", 0.0))
         we = float(w.get("end", ws))
-        if ws < clip_start or ws > clip_end:
+        # Keep words that overlap the clip, including a word that starts just
+        # before the cut. Clamp its SRT timing to avoid negative timestamps.
+        if we <= clip_start or ws >= clip_end:
             continue
         if cur_start is None:
-            cur_start = ws
-        cur_end = we
+            cur_start = max(ws, clip_start)
+        cur_end = min(we, clip_end)
         cur_text.append(w.get("text", ""))
         # flush if >3s
         if cur_end - cur_start >= 3.0:
-            items.append((cur_start - clip_start, cur_end - clip_start, " ".join(cur_text)))
+            items.append((max(0.0, cur_start - clip_start), max(0.0, cur_end - clip_start), " ".join(cur_text)))
             cur_start = None
             cur_text = []
             cur_end = None
     if cur_text and cur_start is not None:
-        items.append((cur_start - clip_start, cur_end - clip_start, " ".join(cur_text)))
+        items.append((max(0.0, cur_start - clip_start), max(0.0, cur_end - clip_start), " ".join(cur_text)))
 
     with open(srt_path, "w", encoding="utf-8") as f:
         for i, (s, e, t) in enumerate(items, start=1):
@@ -209,8 +213,13 @@ def export_clips(
 
     # process each segment
     for i, seg in enumerate(segments, start=1):
-        start = seg["start"]
-        end = seg["end"]
+        start = float(seg["start"])
+        end = float(seg["end"])
+        duration = end - start
+        if duration <= 0:
+            raise ValueError(f"Segment {i} has an invalid duration: {start}–{end}")
+        if duration > MAX_SHORT_DURATION:
+            raise ValueError(f"Segment {i} exceeds the {int(MAX_SHORT_DURATION)} second maximum")
         platform_tag = platform.lower().replace(" ", "_")
         out_file = out_dir / f"clip_{platform_tag}_{i:02d}.mp4"
 
@@ -253,10 +262,10 @@ def export_clips(
                 "-y",
                 "-ss",
                 str(start),
-                "-to",
-                str(end),
                 "-i",
                 video_path,
+                "-t",
+                str(duration),
             ]
             if vf_str or captions or clean_audio_flag:
                 # re-encode path

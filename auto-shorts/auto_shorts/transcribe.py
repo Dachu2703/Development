@@ -11,6 +11,11 @@ from typing import Dict, List
 from .logging_config import logger
 
 
+# Keep generated data inside the project by default.  A user-profile cache can
+# be read-only when Streamlit is launched from a sandboxed IDE process.
+DEFAULT_CACHE_DIR = Path(__file__).resolve().parents[1] / ".auto_shorts_cache"
+
+
 def _ffprobe_duration(path: Path) -> float:
     cmd = [
         "ffprobe",
@@ -51,7 +56,7 @@ def transcribe(video_path: str, cache_dir: str = None, model_size: str = "small"
 
     src = Path(video_path)
     if cache_dir is None:
-        cache_dir = Path.home() / ".cache" / "auto-shorts"
+        cache_dir = DEFAULT_CACHE_DIR
     else:
         cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)

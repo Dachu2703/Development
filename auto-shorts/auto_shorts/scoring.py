@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 import json
 import re
 
@@ -15,6 +15,21 @@ KEYWORDS = [
     "don't",
     "do not",
 ]
+
+MAX_SHORT_DURATION = 180
+
+
+def duration_bounds(target_duration: int) -> Tuple[int, int]:
+    """Return the preferred duration range for a requested Short.
+
+    The upper bound is deliberately a little flexible for a natural sentence
+    boundary, but is never allowed to exceed the product-wide three minute
+    limit.
+    """
+    target = int(target_duration)
+    if not 1 <= target <= MAX_SHORT_DURATION:
+        raise ValueError(f"target_duration must be between 1 and {MAX_SHORT_DURATION} seconds")
+    return max(5, int(target * 0.85)), min(MAX_SHORT_DURATION, max(target, int(target * 1.15)))
 
 
 def _keyword_score(text: str) -> float:
@@ -53,7 +68,51 @@ def _overlaps(a: Tuple[float, float], b: Tuple[float, float], buffer: float = 5.
     return not (a[1] + buffer < b[0] or b[1] + buffer < a[0])
 
 
-def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5, prioritize_length: bool = False, force_exact_length: bool = False, exact_clip_length: int | None = None) -> List[Dict]:
+def _peak_centered_window(segments: List[Dict], peak_index: int, target: float, maximum: float) -> Tuple[float, float]:
+    """Build a context window around a scored transcript segment.
+
+    Transcript segment boundaries are used whenever possible, expanding before
+    and after the peak instead of starting a clip at the peak itself.
+    """
+    peak = segments[peak_index]
+    start = float(peak.get("start", 0.0))
+    end = float(peak.get("end", start))
+    peak_start, peak_end = start, end
+    left, right = peak_index - 1, peak_index + 1
+
+    while (left >= 0 or right < len(segments)) and end - start < target:
+        left_length = (end - float(segments[left].get("start", start))) if left >= 0 else float("inf")
+        right_length = (float(segments[right].get("end", end)) - start) if right < len(segments) else float("inf")
+        # Add the side that stays closest to the target, while respecting max.
+        choices = []
+        if left >= 0 and left_length <= maximum:
+            proposed_start = float(segments[left].get("start", start))
+            context_imbalance = abs((peak_start - proposed_start) - (end - peak_end))
+            choices.append((context_imbalance, abs(target - left_length), "left"))
+        if right < len(segments) and right_length <= maximum:
+            proposed_end = float(segments[right].get("end", end))
+            context_imbalance = abs((peak_start - start) - (proposed_end - peak_end))
+            choices.append((context_imbalance, abs(target - right_length), "right"))
+        if not choices:
+            break
+        side = min(choices)[2]
+        if side == "left":
+            start = float(segments[left].get("start", start))
+            left -= 1
+        else:
+            end = float(segments[right].get("end", end))
+            right += 1
+
+    # A transcript segment may itself exceed the cap. Keep the peak within a
+    # capped window; later alignment can still move it to a nearby pause.
+    if end - start > maximum:
+        midpoint = (float(peak.get("start", start)) + float(peak.get("end", end))) / 2
+        start = max(start, midpoint - maximum / 2)
+        end = start + maximum
+    return start, end
+
+
+def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5, prioritize_length: bool = False, force_exact_length: bool = False, exact_clip_length: int | None = None, target_duration: Optional[int] = None) -> List[Dict]:
     """Score sentences/segments from a transcript JSON and return top candidate clips.
 
     Transcript JSON should contain `segments` (with start,end,text) or `words`.
@@ -91,11 +150,19 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
             segments.append({"start": t, "end": min(t + step, dur), "text": ""})
             t += step
 
+    if target_duration is not None:
+        min_length, max_length = duration_bounds(target_duration)
+    max_length = min(int(max_length), MAX_SHORT_DURATION)
+
     candidates: List[Dict] = []
-    for seg in segments:
-        start = float(seg.get("start", 0.0))
-        end = float(seg.get("end", start))
+    for index, seg in enumerate(segments):
+        peak_start = float(seg.get("start", 0.0))
+        peak_end = float(seg.get("end", peak_start))
+        start = peak_start
+        end = peak_end
         text = seg.get("text", "")
+        if target_duration is not None:
+            start, end = _peak_centered_window(segments, index, float(target_duration), float(max_length))
         length = end - start
         ks = _keyword_score(text)
         ns = _number_score(text)
@@ -110,6 +177,12 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
         if qs > 0:
             reason_parts.append("question")
         reason_parts.append(f"len={int(length)}")
+        if target_duration is not None:
+            reason_parts.append("peak-centered")
+            # A complete Short should present the statement with some setup
+            # and a follow-through, not begin or end at the peak itself.
+            if start < peak_start and end > peak_end:
+                reason_parts.append("context-before-after")
         candidates.append({"start": start, "end": end, "score": float(total), "reason": ",".join(reason_parts)})
 
     # sort by score desc
@@ -129,7 +202,10 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
         if len(picks) >= top_k:
             break
 
-    return picks
+    # Rank by engagement to decide *which* unique moments to keep, then return
+    # them in source order. Export therefore follows the original narrative
+    # rather than jumping between timestamps by descending score.
+    return sorted(picks, key=lambda clip: (clip["start"], clip["end"]))
 
 
 def ensure_no_midword(clips: List[Dict], transcript_path: str, eps: float = 0.02) -> bool:

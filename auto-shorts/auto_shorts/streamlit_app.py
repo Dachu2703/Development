@@ -5,7 +5,7 @@ import shutil
 import tempfile
 import streamlit as st
 
-from auto_shorts import db, runner
+from auto_shorts import db, export, runner
 from auto_shorts.logging_config import logger
 
 
@@ -35,9 +35,9 @@ platform_caption = {
 st.caption(platform_caption.get(platform, "Create vertical clips for social video platforms."))
 
 platform_defaults = {
-    "YouTube Shorts": {"min_length": 15, "max_length": 60, "num_shorts": 10},
-    "Instagram Reels": {"min_length": 10, "max_length": 60, "num_shorts": 8},
-    "TikTok": {"min_length": 10, "max_length": 60, "num_shorts": 12},
+    "YouTube Shorts": {"target_duration": 60, "num_shorts": 10},
+    "Instagram Reels": {"target_duration": 60, "num_shorts": 8},
+    "TikTok": {"target_duration": 60, "num_shorts": 12},
 }
 settings = platform_defaults.get(platform, platform_defaults["YouTube Shorts"])
 
@@ -49,31 +49,26 @@ with col1:
         max_value=50,
         value=settings["num_shorts"],
     )
-    prioritize_length = st.checkbox("Prioritize clip length over count (use Max length windows)", value=False, help="If enabled, clips will be sized by Max length and fewer clips may be produced.")
-    force_exact_length = False
-    exact_clip_length = None
-    if prioritize_length:
-        force_exact_length = st.checkbox("Force exact clip length (no silence/word snapping)", value=False, help="Create clips of exactly the requested length in seconds, without snapping to silence or words.")
-        if force_exact_length:
-            exact_clip_length = st.number_input("Exact clip length (s)", min_value=1, max_value=3600, value=min(settings["max_length"], 60))
 with col2:
-    min_length = st.number_input(
-        "Min length (s)",
-        min_value=5,
-        max_value=300,
-        value=settings["min_length"],
+    target_duration = st.number_input(
+        "Target clip duration (seconds)",
+        min_value=15,
+        max_value=180,
+        value=settings["target_duration"],
+        help="Clips are built around high-engagement moments. The duration may vary slightly to keep natural sentence boundaries, but never exceeds 180 seconds.",
     )
 with col3:
-    max_length = st.number_input(
-        "Max length (s)",
-        min_value=10,
-        max_value=600,
-        value=settings["max_length"],
-    )
+    min_length = max(5, int(target_duration * 0.85))
+    max_length = min(180, max(int(target_duration), int(target_duration * 1.15)))
+    st.metric("Natural duration range", f"{min_length}–{max_length}s")
 
-remove_silence = st.checkbox("Trim silence from clips", value=True)
+fine_tune_pauses = st.checkbox(
+    "Fine-tune clip boundaries using full-video silence detection (slow)",
+    value=False,
+    help="Off uses transcript sentence boundaries for a fast preview. Enable only when you need additional pause-level trimming.",
+)
 clean_audio_flag = st.checkbox("Noise reduction", value=False)
-captions = st.checkbox("Burn captions into clips", value=False)
+captions = st.checkbox("Burn English captions into clips (slower)", value=False)
 fast_mode = st.checkbox(
     "Faster processing (smaller model, quicker preview)",
     value=True,
@@ -82,7 +77,9 @@ fast_mode = st.checkbox(
 vertical = True
 model_size = "tiny" if fast_mode else "small"
 beam_size = 1 if fast_mode else 2
-word_timestamps = captions
+# A preview needs segment-level timestamps only. Word timestamps are expensive
+# and are requested only by a full captioned export.
+word_timestamps = False
 
 if captions and fast_mode:
     st.info("Captions slow processing down. Disable captions to make export faster.")
@@ -178,6 +175,11 @@ if st.button("Create dry-run manifest"):
         proj = db.get_project(str(db_path), pid)
         st.info("Running pipeline (dry-run)... this may take a while")
         try:
+            progress_bar = st.progress(0, text="Preparing analysis…")
+
+            def update_progress(value: int, message: str) -> None:
+                progress_bar.progress(value, text=message)
+
             with st.spinner("Analyzing video and generating manifest…"):
                 manifest_path = runner.run_project(
                     proj,
@@ -188,15 +190,15 @@ if st.button("Create dry-run manifest"):
                     min_length=min_length,
                     max_length=max_length,
                     num_shorts=int(num_shorts),
-                    prioritize_length=bool(prioritize_length),
-                    force_exact_length=bool(force_exact_length),
-                    exact_clip_length=int(exact_clip_length) if exact_clip_length else None,
+                    target_duration=int(target_duration),
                     clean_audio=clean_audio_flag,
                     vertical=vertical,
                     captions=captions,
                     model_size=model_size,
                     beam_size=beam_size,
                     word_timestamps=word_timestamps,
+                    progress_callback=update_progress,
+                    use_silence_detection=fine_tune_pauses,
                 )
             st.success(f"Manifest created: {manifest_path}")
             st.session_state["last_project_id"] = pid
@@ -250,25 +252,35 @@ if st.session_state.get("last_project_id"):
     if st.button("Export clips for last dry-run"):
         proj = db.get_project(str(db_path), int(st.session_state["last_project_id"]))
         try:
-            with st.spinner("Exporting final clips… this may take several minutes"):
-                manifest_path = runner.run_project(
-                    proj,
-                    str(db_path),
-                    str(output_base),
-                    dry_run=False,
-                    platform=platform,
-                    min_length=min_length,
-                    max_length=max_length,
-                    num_shorts=int(num_shorts),
-                    prioritize_length=bool(prioritize_length),
-                    clean_audio=clean_audio_flag,
-                    vertical=vertical,
-                    captions=captions,
-                    model_size=model_size,
-                    beam_size=beam_size,
-                    word_timestamps=word_timestamps,
-                )
-            st.success(f"Export completed. Manifest: {manifest_path}")
+            if captions:
+                # The preview intentionally skips word timestamps. Captioned
+                # output therefore needs one full pass to obtain them.
+                st.info("Captions need word timestamps, so this export will run one additional transcription pass.")
+                with st.spinner("Exporting captioned clips…"):
+                    manifest_path = runner.run_project(
+                        proj, str(db_path), str(output_base), dry_run=False,
+                        platform=platform, min_length=min_length, max_length=max_length,
+                        num_shorts=int(num_shorts), target_duration=int(target_duration),
+                        clean_audio=clean_audio_flag, vertical=vertical, captions=True,
+                        model_size=model_size, beam_size=beam_size, word_timestamps=True,
+                        use_silence_detection=fine_tune_pauses,
+                    )
+                st.success(f"Export completed. Manifest: {manifest_path}")
+            else:
+                # Reuse the already-scored manifest: no transcription, silence
+                # scan, or peak-selection work is repeated during export.
+                with st.spinner("Exporting saved clip selections…"):
+                    results = export.export_clips(
+                        proj["source"], manifest_segments, str(export_path), platform=platform,
+                        vertical=vertical, captions=False, clean_audio_flag=clean_audio_flag,
+                    )
+                for result, segment in zip(results, manifest_segments):
+                    db.add_clip(
+                        str(db_path), proj["id"], result["start"], result["end"], result["file"],
+                        float(segment.get("score", 0.0)), segment.get("reason", ""),
+                    )
+                db.update_project_status(str(db_path), proj["id"], "completed")
+                st.success(f"Export completed: {len(results)} clips")
             st.write(f"Final clips will be written to `{export_path}`")
         except Exception as e:
             logger.exception("Export failed during last-dry-run export")
@@ -297,13 +309,14 @@ if st.button("Export Clips (run full job)"):
                         min_length=min_length,
                             max_length=max_length,
                             num_shorts=int(num_shorts),
-                            prioritize_length=bool(prioritize_length),
+                            target_duration=int(target_duration),
                         clean_audio=clean_audio_flag,
                         vertical=vertical,
                         captions=captions,
                         model_size=model_size,
                         beam_size=beam_size,
                         word_timestamps=word_timestamps,
+                        use_silence_detection=fine_tune_pauses,
                     )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             except Exception as e:

@@ -60,8 +60,9 @@ def snap_to_silence(
             with open(transcript_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             words = data.get("words", [])
-            duration = data.get("duration")
-        except Exception:
+            raw_duration = data.get("duration")
+            duration = float(raw_duration) if raw_duration is not None else None
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
             words = []
 
     out = []
@@ -78,7 +79,9 @@ def snap_to_silence(
             new_start = _snap_to_word_boundary(new_start, words, side="start")
             new_end = _snap_to_word_boundary(new_end, words, side="end")
 
-        # enforce min/max
+        # Keep the target duration flexible enough for a natural boundary, but
+        # never produce a clip beyond the supplied maximum (180 seconds in the
+        # normal pipeline).
         if new_end - new_start < min_length:
             new_end = new_start + min_length
         if new_end - new_start > max_length:
@@ -90,6 +93,10 @@ def snap_to_silence(
                 new_end = duration
             if new_start < 0:
                 new_start = 0.0
+
+        # A video shorter than min_length is valid; do not create an invalid
+        # end-before-start interval when clamping to its duration.
+        new_start = min(max(0.0, new_start), new_end)
 
         out.append({"start": max(0.0, new_start), "end": float(new_end), **{k: v for k, v in c.items() if k not in ("start", "end")}})
 

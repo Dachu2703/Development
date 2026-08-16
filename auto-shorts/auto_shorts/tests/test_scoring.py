@@ -1,7 +1,9 @@
 import json
 from pathlib import Path
 
-from auto_shorts.scoring import ensure_no_midword, score_sentences
+import pytest
+
+from auto_shorts.scoring import MAX_SHORT_DURATION, duration_bounds, ensure_no_midword, score_sentences
 
 
 def test_ensure_no_midword_ok(tmp_path: Path):
@@ -56,3 +58,50 @@ def test_score_sentences_basic(tmp_path: Path):
     # should pick the segment with 'key point' as top
     assert len(picks) >= 1
     assert any("keywords" in p.get("reason", "") or "numbers" in p.get("reason", "") for p in picks)
+
+
+def test_target_duration_builds_a_peak_centered_clip(tmp_path: Path):
+    transcript = {
+        "duration": 120.0,
+        "segments": [
+            {"start": 0, "end": 20, "text": "introductory context"},
+            {"start": 20, "end": 40, "text": "more context before the answer"},
+            {"start": 40, "end": 60, "text": "The key point is 50% of users make this mistake."},
+            {"start": 60, "end": 80, "text": "the explanation and conclusion"},
+            {"start": 80, "end": 100, "text": "unrelated closing remarks"},
+        ],
+    }
+    path = tmp_path / "peaks.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), target_duration=60, top_k=1)
+
+    assert len(picks) == 1
+    clip = picks[0]
+    assert clip["start"] < 40 < clip["end"]
+    assert clip["end"] - clip["start"] <= 69
+    assert "peak-centered" in clip["reason"]
+
+
+def test_duration_bounds_enforces_three_minute_limit():
+    assert duration_bounds(MAX_SHORT_DURATION) == (153, MAX_SHORT_DURATION)
+    with pytest.raises(ValueError):
+        duration_bounds(MAX_SHORT_DURATION + 1)
+
+
+def test_selected_highlights_are_returned_in_source_order(tmp_path: Path):
+    transcript = {
+        "duration": 140.0,
+        "segments": [
+            {"start": 0, "end": 20, "text": "A key point for the audience."},
+            {"start": 20, "end": 40, "text": "ordinary explanation"},
+            {"start": 100, "end": 120, "text": "The biggest tip is a surprising 50% result."},
+        ],
+    }
+    path = tmp_path / "ordered.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), min_length=15, max_length=60, top_k=2)
+
+    assert len(picks) == 2
+    assert [clip["start"] for clip in picks] == sorted(clip["start"] for clip in picks)

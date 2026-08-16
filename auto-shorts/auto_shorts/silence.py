@@ -1,5 +1,20 @@
 import subprocess
+import hashlib
+import json
+from pathlib import Path
 from typing import List, Tuple
+
+
+DEFAULT_CACHE_DIR = Path(__file__).resolve().parents[1] / ".auto_shorts_cache"
+
+
+def _silence_cache_path(video_path: str, noise_db: int, min_silence_len: float, cache_dir: str | None) -> Path:
+    source = Path(video_path)
+    stat = source.stat()
+    key = f"{source.resolve()}|{stat.st_mtime_ns}|{stat.st_size}|{noise_db}|{min_silence_len}"
+    directory = Path(cache_dir) if cache_dir else DEFAULT_CACHE_DIR
+    directory.mkdir(parents=True, exist_ok=True)
+    return directory / f"{source.stem}-{hashlib.sha1(key.encode()).hexdigest()}.silences.json"
 
 
 def _ffmpeg_silence_detect(video_path: str, noise_db: int = -30, min_silence_len: float = 0.5) -> List[Tuple[float, float]]:
@@ -61,15 +76,26 @@ def _pydub_detect(video_path: str, noise_db: int = -30, min_silence_len: float =
     return [(float(start_ms / 1000.0), float(end_ms / 1000.0)) for start_ms, end_ms in intervals]
 
 
-def detect_silences(video_path: str, noise_db: int = -30, min_silence_len: float = 0.5) -> List[Tuple[float, float]]:
+def detect_silences(video_path: str, noise_db: int = -30, min_silence_len: float = 0.5, cache_dir: str | None = None) -> List[Tuple[float, float]]:
     """Detect silences using ffmpeg's silencedetect filter, falling back to pydub.
 
     Returns a list of (start, end) silence intervals in seconds.
     """
+    cache_path = _silence_cache_path(video_path, noise_db, min_silence_len, cache_dir)
+    if cache_path.exists():
+        try:
+            return [(float(start), float(end)) for start, end in json.loads(cache_path.read_text(encoding="utf-8"))]
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
+            # Ignore a partial/corrupt cache and regenerate it.
+            pass
+
     # Try ffmpeg first
     silences = _ffmpeg_silence_detect(video_path, noise_db=noise_db, min_silence_len=min_silence_len)
     if silences:
-        return silences
-    # Fallback to pydub
-    return _pydub_detect(video_path, noise_db=noise_db, min_silence_len=min_silence_len)
+        result = silences
+    else:
+        # Fallback to pydub
+        result = _pydub_detect(video_path, noise_db=noise_db, min_silence_len=min_silence_len)
+    cache_path.write_text(json.dumps(result), encoding="utf-8")
+    return result
 
