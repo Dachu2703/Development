@@ -195,3 +195,79 @@ PermissionError: [Errno 13] Permission denied: 'C:\\Users\\rajas\\.cache\\auto-s
 2026-08-16 01:00:15,011 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amitsha-e4406904437fb3b0423fa58e7532057df925e325-0ede41c4fc01831b0018110fe693659598757f84.transcript.json
 2026-08-16 01:00:15,018 DEBUG auto_shorts Transcript segments: 25, words: 384
 2026-08-16 01:00:15,028 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-16 13:26:07,406 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-16 13:26:07,406 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-16 13:26:09,958 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-16 13:26:09,958 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-16 13:26:09,959 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-16 13:26:33,684 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-16 13:26:33,684 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-16 13:26:38,894 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-16 13:26:38,895 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-16 13:26:38,895 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-16 13:27:10,946 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-16 13:27:34,438 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-16 18:35:07,794 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-16 18:35:07,795 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-16 18:35:13,309 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-16 18:35:13,310 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-16 18:35:13,310 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-16 18:35:32,474 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-16 18:41:38,429 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 18:41:38,430 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 18:41:38,434 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-16 18:45:27,313 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 18:45:27,314 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 18:45:27,317 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-16 18:46:06,661 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 18:46:06,668 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 18:46:06,679 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-16 21:10:54,091 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 21:10:54,102 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 21:10:54,108 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-16 21:20:04,715 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 21:20:04,715 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 21:20:04,715 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-16 21:25:30,196 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Amithshah-2476e96ce5dd39490f1a3627c9a3f42928556bbe-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-16 21:25:30,196 DEBUG auto_shorts Transcript segments: 29, words: 0
+2026-08-16 21:25:30,207 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-16 21:26:27,891 ERROR auto_shorts Export failed during last-dry-run export
+Traceback (most recent call last):
+  File "d:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 349, in <module>
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 399, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\Amithshah.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: mp42mp41
+    creation_time   : 2026-08-09T14:41:09.000000Z
+  Duration: 00:11:04.63, start: 0.000000, bitrate: 11178 kb/s
+  Stream #0:0[0x1](eng): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1280x720 [SAR 1:1 DAR 16:9], 10855 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-09T14:41:09.000000Z
+      handler_name    : ?Mainconcept Video Media Handler
+      encoder         : AVC Coding
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 317 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-09T14:41:09.000000Z
+      handler_name    : #Mainconcept MP4 Sound Media Handler
+[vost#0:0/libx264 @ 00000184fff76300] Multiple -filter/-af/-vf options specified for stream 0, only the last option '-filter:v drawtext=fontfile=C\:/Windows/Fonts/arial.ttf:text='Siva Guru Astrologer':fontcolor=white:fontsize=63:box=1:boxcolor=black@0.55:boxborderw=19:x=20:y=58' will be used.
+[AVFilterGraph @ 0000018480103640] No option name near '/Windows/Fonts/arial.ttf:text=Siva Guru Astrologer:fontcolor=white:fontsize=63:box=1:boxcolor=black@0.55:boxborderw=19:x=20:y=58'
+[AVFilterGraph @ 0000018480103640] Error parsing a filter description around: 
+[AVFilterGraph @ 0000018480103640] Error parsing filterchain 'drawtext=fontfile=C\:/Windows/Fonts/arial.ttf:text='Siva Guru Astrologer':fontcolor=white:fontsize=63:box=1:boxcolor=black@0.55:boxborderw=19:x=20:y=58' around: 
+Error opening output file D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp90upk621\cut_01.mp4.
+Error opening output files: Invalid argument
+

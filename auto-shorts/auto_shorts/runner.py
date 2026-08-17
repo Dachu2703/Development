@@ -1,14 +1,14 @@
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
-from . import transcribe, silence, scoring, align, export
+from . import transcribe, silence, scoring, align, export, transitions
 from .db import update_project_status, add_clip
 from .logging_config import logger
 
 
-def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, **kwargs):
+def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, resolution: tuple = (1080, 1920), transitions_enabled: bool = False, transitions_type: str = "zoom_in", transitions_duration: float = 1.6, transitions_min_gap: float = 6.0, transitions_threshold: float = 3.0, transitions_max_per_clip: int = 3, guest_info: Optional[Dict] = None, **kwargs):
     src = project["source"]
     pid = project["id"]
     update_project_status(db_path, pid, "processing")
@@ -113,6 +113,25 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
                     and float(word.get("start", 0.0)) < clip_end
                 ]
 
+        # Main-content camera transitions — annotate the aligned clips with
+        # transition offsets derived from the same scoring heuristics used for
+        # short selection. This happens before the manifest is written so the
+        # dry-run preview shows exactly where transitions will land.
+        transitions_config = None
+        if transitions_enabled:
+            report(90, "Marking main-content transitions…")
+            transitions_config = {
+                "enabled": True,
+                "type": transitions_type,
+                "duration": transitions_duration,
+                "min_gap": transitions_min_gap,
+                "threshold": transitions_threshold,
+                "max_per_clip": transitions_max_per_clip,
+            }
+            aligned = transitions.apply_transitions(
+                aligned, transcript_data, transitions_config
+            )
+
         # A final guard protects callers that bypass the UI or use an old API.
         for segment in aligned:
             segment["end"] = min(float(segment["end"]), float(segment["start"]) + scoring.MAX_SHORT_DURATION)
@@ -137,6 +156,8 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
             vertical=vertical,
             captions=captions,
             clean_audio_flag=clean_audio,
+            resolution=resolution,
+            guest_info=guest_info,
         )
         # store clips
         for r in results:

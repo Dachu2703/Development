@@ -4,7 +4,7 @@ from pathlib import Path
 
 import click
 
-from . import transcribe, silence, scoring, align, export
+from . import transcribe, silence, scoring, align, export, transitions
 from . import db, runner
 
 
@@ -27,7 +27,17 @@ def _check_ffmpeg():
 @click.option("--cache-dir", default=None, help="Transcript cache directory")
 @click.option("--output-dir", default="output", help="Output directory for clips")
 @click.option("--dry-run", is_flag=True, help="Only create manifest, don't export clips")
-def main(input, platform, min_length, max_length, vertical, captions, cache_dir, output_dir, dry_run, num_shorts, prioritize_length, force_exact_length, exact_clip_length):
+@click.option("--resolution", default="1080x1920", help="Output resolution as WxH (default: 1080x1920)")
+@click.option("--guest-name", default=None, help="Guest name to overlay on short clips")
+@click.option("--guest-contact", default=None, help="Guest contact number to overlay on short clips")
+@click.option("--guest-extra", default=None, help="Extra guest information to overlay")
+@click.option("--transitions", is_flag=True, help="Enable smooth camera transitions on main-content points")
+@click.option("--transition-type", default="zoom_in", type=click.Choice(["zoom_in", "zoom_out", "fade_through"]), help="Transition effect type")
+@click.option("--transition-duration", default=1.6, type=float, help="Transition duration in seconds")
+@click.option("--transition-min-gap", default=6.0, type=float, help="Minimum seconds between transitions")
+@click.option("--transition-threshold", default=3.0, type=float, help="Minimum content importance score to trigger a transition")
+@click.option("--transition-max-per-clip", default=3, type=int, help="Maximum transitions per exported short clip")
+def main(input, platform, min_length, max_length, vertical, captions, cache_dir, output_dir, dry_run, num_shorts, prioritize_length, force_exact_length, exact_clip_length, resolution, guest_name, guest_contact, guest_extra, transitions, transition_type, transition_duration, transition_min_gap, transition_threshold, transition_max_per_clip):
     """auto-shorts: create YouTube Shorts-style vertical clips from a longer video.
 
     This is a scaffolded CLI that runs a minimal pipeline and writes a manifest.
@@ -55,6 +65,37 @@ def main(input, platform, min_length, max_length, vertical, captions, cache_dir,
     except Exception:
         # scoring.ensure_no_midword may not be available
         pass
+
+    # Main-content transitions support
+    transitions_config = None
+    if transitions:
+        click.echo("Marking main-content transition points...")
+        with open(transcript, "r", encoding="utf-8") as tf:
+            transcript_data = json.load(tf)
+        transitions_config = {
+            "enabled": True,
+            "type": transition_type,
+            "duration": transition_duration,
+            "min_gap": transition_min_gap,
+            "threshold": transition_threshold,
+            "max_per_clip": transition_max_per_clip,
+        }
+        try:
+            aligned = transitions.apply_transitions(aligned, transcript_data, transitions_config)
+        except Exception as exc:
+            click.echo(f"Warning: transitions skipped due to error: {exc}")
+
+    # Guest info overlay configuration
+    guest_info = None
+    if guest_name or guest_contact:
+        guest_info = {}
+        if guest_name:
+            guest_info["name"] = str(guest_name).strip()
+        if guest_contact:
+            guest_info["contact"] = str(guest_contact).strip()
+        if guest_extra:
+            guest_info["extra"] = str(guest_extra).strip()
+
     manifest = {
         "source": input,
         "platform": platform,
@@ -67,7 +108,8 @@ def main(input, platform, min_length, max_length, vertical, captions, cache_dir,
     if not dry_run:
         click.echo("Exporting clips...")
         # honor num_shorts if provided via CLI (passed through runner)
-        exported = export.export_clips(input, aligned, output_dir, platform=platform, vertical=vertical, captions=captions)
+        res_w, res_h = map(int, resolution.lower().split("x"))
+        exported = export.export_clips(input, aligned, output_dir, platform=platform, vertical=vertical, captions=captions, resolution=(res_w, res_h), transitions=transitions_config, guest_info=guest_info)
         click.echo(f"Exported {len(exported)} clips to {output_dir}")
 
 
@@ -105,13 +147,24 @@ def list_projects(db_path):
 @click.option("--vertical", is_flag=True)
 @click.option("--captions", is_flag=True)
 @click.option("--num-shorts", default=None, type=int, help="Number of shorts to generate (top-K candidates)")
-def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio, vertical, captions, num_shorts):
+@click.option("--resolution", default="1080x1920", help="Output resolution as WxH (default: 1080x1920)")
+@click.option("--guest-name", default=None, help="Guest name to overlay on short clips")
+@click.option("--guest-contact", default=None, help="Guest contact number to overlay on short clips")
+@click.option("--guest-extra", default=None, help="Extra guest information to overlay")
+@click.option("--transitions", is_flag=True, help="Enable camera transitions on main-content points")
+@click.option("--transition-type", default="zoom_in", type=click.Choice(["zoom_in", "zoom_out", "fade_through"]), help="Transition effect type")
+@click.option("--transition-duration", default=1.6, type=float, help="Transition duration in seconds")
+@click.option("--transition-min-gap", default=6.0, type=float, help="Minimum seconds between transitions")
+@click.option("--transition-threshold", default=3.0, type=float, help="Minimum content importance score to trigger a transition")
+@click.option("--transition-max-per-clip", default=3, type=int, help="Max transitions per exported short clip")
+def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio, vertical, captions, num_shorts, resolution, guest_name, guest_contact, guest_extra, transitions, transition_type, transition_duration, transition_min_gap, transition_threshold, transition_max_per_clip):
     db.init_db(db_path)
     proj = db.get_project(db_path, project_id)
     if not proj:
         click.echo("Project not found")
         return
     click.echo(f"Running project {project_id} (dry_run={dry_run}) for platform: {platform}...")
+    res_w, res_h = map(int, resolution.lower().split("x"))
     manifest = runner.run_project(
         proj,
         db_path,
@@ -122,9 +175,26 @@ def run_project(project_id, db_path, output_dir, platform, dry_run, clean_audio,
         clean_audio=clean_audio,
         vertical=vertical,
         captions=captions,
+        resolution=(res_w, res_h),
+        transitions_enabled=transitions,
+        transitions_type=transition_type,
+        transitions_duration=transition_duration,
+        transitions_min_gap=transition_min_gap,
+        transitions_threshold=transition_threshold,
+        transitions_max_per_clip=transition_max_per_clip,
+        guest_info={"name": guest_name, "contact": guest_contact, "extra": guest_extra} if (guest_name or guest_contact) else None,
     )
     click.echo(f"Manifest: {manifest}")
 
 
+# The README quickstart (``python -m auto_shorts.cli input.mp4 ...``) passes a
+# video path directly to the standalone ``main`` command. Project commands
+# (create-project/list-projects/run-project) are dispatched to the ``cli``
+# group. Route by the presence of a media file as the first argument.
 if __name__ == "__main__":
-    cli()
+    import sys
+    _MEDIA_SUFFIXES = (".mp4", ".mov", ".mkv", ".avi", ".webm", ".m4v", ".ts", ".mpg", ".mpeg")
+    if len(sys.argv) > 1 and sys.argv[1].lower().endswith(_MEDIA_SUFFIXES):
+        main()
+    else:
+        cli()

@@ -1,9 +1,17 @@
 import json
 import os
+import sys
 from pathlib import Path
 import shutil
 import tempfile
 import streamlit as st
+
+# Ensure the project root (parent of this package) is importable regardless of
+# how the app is launched (e.g. `streamlit run auto_shorts/streamlit_app.py`
+# puts the package dir on sys.path, not the project root).
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 from auto_shorts import db, export, runner
 from auto_shorts.logging_config import logger
@@ -75,21 +83,68 @@ fast_mode = st.checkbox(
     help="Use a faster transcription mode so the app runs faster on local machines.",
 )
 vertical = True
+resolution_choice = st.selectbox(
+    "Output resolution",
+    ["1080x1920", "1920x1080", "1080x1080"],
+    index=0,
+    help="Resolution for the exported vertical short clips.",
+)
+res_w, res_h = map(int, resolution_choice.split("x"))
+resolution = (res_w, res_h)
 model_size = "tiny" if fast_mode else "small"
 beam_size = 1 if fast_mode else 2
 # A preview needs segment-level timestamps only. Word timestamps are expensive
 # and are requested only by a full captioned export.
 word_timestamps = False
 
+# --- Main-content camera transitions -------------------------------------
+st.header("Main-Content Transitions")
+transitions_enabled = st.checkbox(
+    "Enable smooth camera transitions on main content",
+    value=False,
+    help="Adds a subtle zoom/fade emphasis when the speaker moves into an important section. The main content is never cut or removed.",
+)
+if transitions_enabled:
+    transition_type = st.selectbox(
+        "Transition style",
+        ["zoom_in", "zoom_out", "fade_through"],
+        help="zoom_in pushes into the speaker, zoom_out pulls back, fade_through whites out briefly.",
+    )
+    transition_duration = st.slider(
+        "Transition duration (s)", 0.5, 3.0, 1.6, 0.1,
+        help="How long the transition effect lasts. Content is never removed — only a smooth visual emphasis.",
+    )
+    transition_min_gap = st.slider(
+        "Minimum time between transitions (s)", 2.0, 15.0, 6.0, 0.5,
+        help="Prevents transitions from feeling too frequent.",
+    )
+    transition_threshold = st.slider(
+        "Content importance threshold", 0.0, 10.0, 3.0, 0.5,
+        help="Higher values = fewer transitions; only very important content triggers them.",
+    )
+    transition_max_per_clip = st.slider("Max transitions per clip", 1, 6, 3)
+else:
+    transition_type = "zoom_in"
+    transition_duration = 1.6
+    transition_min_gap = 6.0
+    transition_threshold = 3.0
+    transition_max_per_clip = 3
+
 if captions and fast_mode:
     st.info("Captions slow processing down. Disable captions to make export faster.")
+
+# --- Guest Information Overlay -----------------------------------------
+st.header("Guest Information Overlay")
+guest_name = st.text_input("Guest name", help="Displayed at top of each short clip")
+guest_contact = st.text_input("Guest contact number", help="Displayed beneath the name")
+guest_extra = st.text_input("Extra information (optional)", help="Any other relevant guest details")
 
 st.header("Upload or select your video")
 uploaded = st.file_uploader("Upload a video file", type=["mp4", "mov", "mkv", "avi", "webm"])
 local_path = st.text_input("Or use a local file path", placeholder="D:\\tmp\\Amitsha.mp4")
 
 st.markdown("**Output folder**")
-st.info("`./output/project_<id>/<platform>/`", icon="ℹ️")
+st.info("`./output/project_<id>/<platform>/`")
 
 output_base = Path("./output")
 db_path = Path("./auto_shorts.db")
@@ -180,7 +235,7 @@ if st.button("Create dry-run manifest"):
             def update_progress(value: int, message: str) -> None:
                 progress_bar.progress(value, text=message)
 
-            with st.spinner("Analyzing video and generating manifest…"):
+            with st.spinner("Analyzing video and creating preview manifest…"):
                 manifest_path = runner.run_project(
                     proj,
                     str(db_path),
@@ -199,8 +254,20 @@ if st.button("Create dry-run manifest"):
                     word_timestamps=word_timestamps,
                     progress_callback=update_progress,
                     use_silence_detection=fine_tune_pauses,
+                    resolution=resolution,
+                    transitions_enabled=transitions_enabled,
+                    transitions_type=transition_type,
+                    transitions_duration=transition_duration,
+                    transitions_min_gap=transition_min_gap,
+                    transitions_threshold=transition_threshold,
+                    transitions_max_per_clip=transition_max_per_clip,
+                    guest_info={
+                        "name": guest_name,
+                        "contact": guest_contact,
+                        "extra": guest_extra,
+                    },
                 )
-            st.success(f"Manifest created: {manifest_path}")
+            st.success(f"Preview manifest created: {manifest_path}")
             st.session_state["last_project_id"] = pid
             st.session_state["last_manifest_path"] = str(manifest_path)
             with open(manifest_path, "r", encoding="utf-8") as mf:
@@ -223,7 +290,7 @@ if st.button("Create dry-run manifest"):
                     values.append(chunk.rms)
                 st.subheader("Waveform (RMS) — timeline overview")
                 st.line_chart(values)
-                # overlay segment markers as text list
+                # segment markers as text list
                 st.write("Segments:")
                 for i, seg in enumerate(manifest.get("segments", []), start=1):
                     st.write(f"{i}: {seg.get('start'):.1f}s - {seg.get('end'):.1f}s")
@@ -245,17 +312,16 @@ if st.session_state.get("last_project_id"):
     st.subheader("Dry-run completed — ready to export")
     manifest_segments = st.session_state.get("last_manifest_segments", [])
     st.write(f"Project ID: {st.session_state['last_project_id']}")
+    # Actually show count
     st.write(f"Detected segments: {len(manifest_segments)}")
-    st.write(f"Manifest: {st.session_state['last_manifest_path']}")
+    st.write(f"Preview manifest: {st.session_state['last_manifest_path']}")
     export_path = output_base / f"project_{st.session_state['last_project_id']}" / platform.replace(" ", "_")
     st.write(f"Export folder: `{export_path}`")
     if st.button("Export clips for last dry-run"):
         proj = db.get_project(str(db_path), int(st.session_state["last_project_id"]))
         try:
             if captions:
-                # The preview intentionally skips word timestamps. Captioned
-                # output therefore needs one full pass to obtain them.
-                st.info("Captions need word timestamps, so this export will run one additional transcription pass.")
+                st.info("Captions need word timestamps, so this export will run extra transcription.")
                 with st.spinner("Exporting captioned clips…"):
                     manifest_path = runner.run_project(
                         proj, str(db_path), str(output_base), dry_run=False,
@@ -264,15 +330,31 @@ if st.session_state.get("last_project_id"):
                         clean_audio=clean_audio_flag, vertical=vertical, captions=True,
                         model_size=model_size, beam_size=beam_size, word_timestamps=True,
                         use_silence_detection=fine_tune_pauses,
+                        resolution=resolution,
+                        transitions_enabled=transitions_enabled,
+                        transitions_type=transition_type,
+                        transitions_duration=transition_duration,
+                        transitions_min_gap=transition_min_gap,
+                        transitions_threshold=transition_threshold,
+                        transitions_max_per_clip=transition_max_per_clip,
+                        guest_info={
+                            "name": guest_name,
+                            "contact": guest_contact,
+                            "extra": guest_extra,
+                        },
                     )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             else:
-                # Reuse the already-scored manifest: no transcription, silence
-                # scan, or peak-selection work is repeated during export.
                 with st.spinner("Exporting saved clip selections…"):
                     results = export.export_clips(
                         proj["source"], manifest_segments, str(export_path), platform=platform,
                         vertical=vertical, captions=False, clean_audio_flag=clean_audio_flag,
+                        resolution=resolution,
+                        guest_info={
+                            "name": guest_name,
+                            "contact": guest_contact,
+                            "extra": guest_extra,
+                        },
                     )
                 for result, segment in zip(results, manifest_segments):
                     db.add_clip(
@@ -317,9 +399,20 @@ if st.button("Export Clips (run full job)"):
                         beam_size=beam_size,
                         word_timestamps=word_timestamps,
                         use_silence_detection=fine_tune_pauses,
+                        resolution=resolution,
+                        transitions_enabled=transitions_enabled,
+                        transitions_type=transition_type,
+                        transitions_duration=transition_duration,
+                        transitions_min_gap=transition_min_gap,
+                        transitions_threshold=transition_threshold,
+                        transitions_max_per_clip=transition_max_per_clip,
+                        guest_info={
+                            "name": guest_name,
+                            "contact": guest_contact,
+                            "extra": guest_extra,
+                        },
                     )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             except Exception as e:
                 logger.exception("Export failed during full job")
                 st.error(f"Export failed: {e}")
-
