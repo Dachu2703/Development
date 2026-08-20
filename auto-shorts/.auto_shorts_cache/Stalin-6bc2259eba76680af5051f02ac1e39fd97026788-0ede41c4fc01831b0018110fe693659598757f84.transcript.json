@@ -1,0 +1,4509 @@
+{
+  "source": "D:\\tmp\\Stalin.mp4",
+  "model": "tiny",
+  "duration": 704.423764,
+  "segments": [
+    {
+      "start": 7.219999999999999,
+      "end": 10.66,
+      "text": " அவருடனங்கு உண்டமைகத் தெரியதுகொள்ள அப்படிப்படிchte பிள்.",
+      "words": [
+        {
+          "start": 7.219999999999999,
+          "end": 8.62,
+          "text": " அவருடனங்கு",
+          "confidence": null
+        },
+        {
+          "start": 8.62,
+          "end": 10.02,
+          "text": " உண்டமைகத்",
+          "confidence": null
+        },
+        {
+          "start": 10.02,
+          "end": 10.02,
+          "text": " தெரியதுகொள்ள",
+          "confidence": null
+        },
+        {
+          "start": 10.02,
+          "end": 10.02,
+          "text": " அப்படிப்படிchte",
+          "confidence": null
+        },
+        {
+          "start": 10.02,
+          "end": 10.66,
+          "text": " பிள்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 10.66,
+      "end": 11.5,
+      "text": " 5-6-7-7 4-6-7-7 4-9 1-8,",
+      "words": [
+        {
+          "start": 10.66,
+          "end": 11.5,
+          "text": " 5",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-6",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-7",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-7",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": " 4",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-6",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-7",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-7",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": " 4",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-9",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": " 1",
+          "confidence": null
+        },
+        {
+          "start": 11.5,
+          "end": 11.5,
+          "text": "-8,",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 11.62,
+      "end": 22.6,
+      "text": " பெரியது தெரியதுத்து வைரவ்வும் நக்கைத்துப் பிறக்கு பேசலாமல்லாம் அந்த விடிக்கும் ringsரா empresas.",
+      "words": [
+        {
+          "start": 11.62,
+          "end": 11.62,
+          "text": " பெரியது",
+          "confidence": null
+        },
+        {
+          "start": 11.62,
+          "end": 13.16,
+          "text": " தெரியதுத்து",
+          "confidence": null
+        },
+        {
+          "start": 13.16,
+          "end": 13.16,
+          "text": " வைரவ்வும்",
+          "confidence": null
+        },
+        {
+          "start": 13.16,
+          "end": 13.16,
+          "text": " நக்கைத்துப்",
+          "confidence": null
+        },
+        {
+          "start": 13.16,
+          "end": 13.16,
+          "text": " பிறக்கு",
+          "confidence": null
+        },
+        {
+          "start": 13.16,
+          "end": 13.16,
+          "text": " பேசலாமல்லாம்",
+          "confidence": null
+        },
+        {
+          "start": 13.16,
+          "end": 17.76,
+          "text": " அந்த",
+          "confidence": null
+        },
+        {
+          "start": 17.76,
+          "end": 19.24,
+          "text": " விடிக்கும்",
+          "confidence": null
+        },
+        {
+          "start": 19.24,
+          "end": 22.6,
+          "text": " ringsரா",
+          "confidence": null
+        },
+        {
+          "start": 22.6,
+          "end": 22.6,
+          "text": " empresas.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 52.6,
+      "end": 60.98,
+      "text": " சிரப்பாசம் அவ்விண்டுரு justamente பென்று மதாகே வ отдельபரக விடைய ஒரு கைத்து வலம்பறின் அந்து சுக் கைத்தாக வேலை அல்லவேண்டு ஆனாருமே...",
+      "words": [
+        {
+          "start": 52.6,
+          "end": 53.46,
+          "text": " சிரப்பாசம்",
+          "confidence": null
+        },
+        {
+          "start": 53.46,
+          "end": 54.34,
+          "text": " அவ்விண்டுரு",
+          "confidence": null
+        },
+        {
+          "start": 54.34,
+          "end": 54.34,
+          "text": " justamente",
+          "confidence": null
+        },
+        {
+          "start": 54.34,
+          "end": 54.8,
+          "text": " பென்று",
+          "confidence": null
+        },
+        {
+          "start": 54.8,
+          "end": 54.96,
+          "text": " மதாகே",
+          "confidence": null
+        },
+        {
+          "start": 54.96,
+          "end": 55.28,
+          "text": " வ",
+          "confidence": null
+        },
+        {
+          "start": 55.28,
+          "end": 56.22,
+          "text": " отдельபரக",
+          "confidence": null
+        },
+        {
+          "start": 56.22,
+          "end": 56.22,
+          "text": " விடைய",
+          "confidence": null
+        },
+        {
+          "start": 56.22,
+          "end": 56.24,
+          "text": " ஒரு",
+          "confidence": null
+        },
+        {
+          "start": 56.24,
+          "end": 56.68,
+          "text": " கைத்து",
+          "confidence": null
+        },
+        {
+          "start": 56.68,
+          "end": 57.52,
+          "text": " வலம்பறின்",
+          "confidence": null
+        },
+        {
+          "start": 57.52,
+          "end": 58.6,
+          "text": " அந்து",
+          "confidence": null
+        },
+        {
+          "start": 58.6,
+          "end": 58.92,
+          "text": " சுக்",
+          "confidence": null
+        },
+        {
+          "start": 58.92,
+          "end": 58.96,
+          "text": " கைத்தாக",
+          "confidence": null
+        },
+        {
+          "start": 58.96,
+          "end": 60.68,
+          "text": " வேலை",
+          "confidence": null
+        },
+        {
+          "start": 60.68,
+          "end": 60.68,
+          "text": " அல்லவேண்டு",
+          "confidence": null
+        },
+        {
+          "start": 60.68,
+          "end": 60.98,
+          "text": " ஆனாருமே...",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 63.300000000000004,
+      "end": 66.98,
+      "text": " ஆனார் ஒருக்கேடன் தலை வருகம், ஆனார் அ sizzாவலருக்கும் பார்.",
+      "words": [
+        {
+          "start": 62.64,
+          "end": 63.32,
+          "text": " ஆனார்",
+          "confidence": null
+        },
+        {
+          "start": 63.32,
+          "end": 64.8,
+          "text": " ஒருக்கேடன்",
+          "confidence": null
+        },
+        {
+          "start": 64.8,
+          "end": 64.8,
+          "text": " தலை",
+          "confidence": null
+        },
+        {
+          "start": 64.8,
+          "end": 64.8,
+          "text": " வருகம்,",
+          "confidence": null
+        },
+        {
+          "start": 64.8,
+          "end": 66.06,
+          "text": " ஆனார்",
+          "confidence": null
+        },
+        {
+          "start": 66.06,
+          "end": 66.06,
+          "text": " அ",
+          "confidence": null
+        },
+        {
+          "start": 66.06,
+          "end": 66.58,
+          "text": " sizzாவலருக்கும்",
+          "confidence": null
+        },
+        {
+          "start": 66.58,
+          "end": 66.98,
+          "text": " பார்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 66.98,
+      "end": 73.1,
+      "text": " ஒரு தொண்டாடுவில் கிற்ப கண்கலை விடைவில் ஆனால்புபகழி இதை வேலை.",
+      "words": [
+        {
+          "start": 66.98,
+          "end": 67.16,
+          "text": " ஒரு",
+          "confidence": null
+        },
+        {
+          "start": 67.16,
+          "end": 69.0,
+          "text": " தொண்டாடுவில்",
+          "confidence": null
+        },
+        {
+          "start": 69.0,
+          "end": 69.0,
+          "text": " கிற்ப",
+          "confidence": null
+        },
+        {
+          "start": 69.0,
+          "end": 69.0,
+          "text": " கண்கலை",
+          "confidence": null
+        },
+        {
+          "start": 69.0,
+          "end": 70.52,
+          "text": " விடைவில்",
+          "confidence": null
+        },
+        {
+          "start": 70.52,
+          "end": 71.84,
+          "text": " ஆனால்புபகழி",
+          "confidence": null
+        },
+        {
+          "start": 71.84,
+          "end": 72.06,
+          "text": " இதை",
+          "confidence": null
+        },
+        {
+          "start": 72.06,
+          "end": 73.1,
+          "text": " வேலை.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 73.1,
+      "end": 102.96,
+      "text": " ஆனால் கத்தினுடைய பாண்டையும் உன் தலைவிருவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவி",
+      "words": [
+        {
+          "start": 73.1,
+          "end": 73.88,
+          "text": " ஆனால்",
+          "confidence": null
+        },
+        {
+          "start": 73.88,
+          "end": 74.5,
+          "text": " கத்தினுடைய",
+          "confidence": null
+        },
+        {
+          "start": 74.5,
+          "end": 75.0,
+          "text": " பாண்டையும்",
+          "confidence": null
+        },
+        {
+          "start": 75.0,
+          "end": 75.22,
+          "text": " உன்",
+          "confidence": null
+        },
+        {
+          "start": 75.22,
+          "end": 102.96,
+          "text": " தலைவிருவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவி",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 102.96,
+      "end": 129.26,
+      "text": " அது மிகவும் விடித்து என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடையும் என்னுடைய",
+      "words": [
+        {
+          "start": 102.96,
+          "end": 104.36,
+          "text": " அது",
+          "confidence": null
+        },
+        {
+          "start": 104.36,
+          "end": 104.98,
+          "text": " மிகவும்",
+          "confidence": null
+        },
+        {
+          "start": 104.98,
+          "end": 104.98,
+          "text": " விடித்து",
+          "confidence": null
+        },
+        {
+          "start": 104.98,
+          "end": 105.22,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 105.22,
+          "end": 105.62,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 105.62,
+          "end": 105.98,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 105.98,
+          "end": 106.42,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 106.42,
+          "end": 106.7,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 106.7,
+          "end": 106.84,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 106.84,
+          "end": 106.88,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 106.88,
+          "end": 107.5,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 107.5,
+          "end": 107.8,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 107.8,
+          "end": 107.82,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 107.82,
+          "end": 109.98,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 109.98,
+          "end": 110.94,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 110.94,
+          "end": 111.44,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 111.44,
+          "end": 112.42,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 112.42,
+          "end": 112.6,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 112.6,
+          "end": 112.6,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 112.6,
+          "end": 113.36,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 113.36,
+          "end": 113.36,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 113.36,
+          "end": 115.7,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 115.7,
+          "end": 118.68,
+          "text": " என்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 118.68,
+          "end": 129.26,
+          "text": " என்னுடைய",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 133.54,
+      "end": 141.7,
+      "text": " பிறகு மன attractiveந்தாற்கு நாற்குச் சொல்ல காணமாறு ஆரால்.",
+      "words": [
+        {
+          "start": 133.54,
+          "end": 134.94,
+          "text": " பிறகு",
+          "confidence": null
+        },
+        {
+          "start": 134.94,
+          "end": 136.34,
+          "text": " மன",
+          "confidence": null
+        },
+        {
+          "start": 136.34,
+          "end": 139.04,
+          "text": " attractiveந்தாற்கு",
+          "confidence": null
+        },
+        {
+          "start": 139.04,
+          "end": 139.78,
+          "text": " நாற்குச்",
+          "confidence": null
+        },
+        {
+          "start": 139.78,
+          "end": 139.78,
+          "text": " சொல்ல",
+          "confidence": null
+        },
+        {
+          "start": 139.78,
+          "end": 140.36,
+          "text": " காணமாறு",
+          "confidence": null
+        },
+        {
+          "start": 140.36,
+          "end": 141.7,
+          "text": " ஆரால்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 141.7,
+      "end": 151.5,
+      "text": " எங்குச் சிúcarப்பிம் போக்குகொண்டனரித்தி Aren'tுன்பேலும் போகலையும் செய்கிறேன் அரத்து குறசந்தமால்.",
+      "words": [
+        {
+          "start": 141.7,
+          "end": 143.94,
+          "text": " எங்குச்",
+          "confidence": null
+        },
+        {
+          "start": 143.94,
+          "end": 144.3,
+          "text": " சிúcarப்பிம்",
+          "confidence": null
+        },
+        {
+          "start": 144.3,
+          "end": 146.22,
+          "text": " போக்குகொண்டனரித்தி",
+          "confidence": null
+        },
+        {
+          "start": 146.22,
+          "end": 146.22,
+          "text": " Aren'tுன்பேலும்",
+          "confidence": null
+        },
+        {
+          "start": 146.22,
+          "end": 148.78,
+          "text": " போகலையும்",
+          "confidence": null
+        },
+        {
+          "start": 148.78,
+          "end": 148.98,
+          "text": " செய்கிறேன்",
+          "confidence": null
+        },
+        {
+          "start": 148.98,
+          "end": 149.92,
+          "text": " அரத்து",
+          "confidence": null
+        },
+        {
+          "start": 149.92,
+          "end": 151.5,
+          "text": " குறசந்தமால்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 151.5,
+      "end": 153.7,
+      "text": " சாதாம் சிகவில்லாயும் என்று நாம் துமினெள்ளோகிறதா?",
+      "words": [
+        {
+          "start": 151.5,
+          "end": 152.0,
+          "text": " சாதாம்",
+          "confidence": null
+        },
+        {
+          "start": 152.0,
+          "end": 152.64,
+          "text": " சிகவில்லாயும்",
+          "confidence": null
+        },
+        {
+          "start": 152.64,
+          "end": 153.7,
+          "text": " என்று",
+          "confidence": null
+        },
+        {
+          "start": 153.7,
+          "end": 153.7,
+          "text": " நாம்",
+          "confidence": null
+        },
+        {
+          "start": 153.7,
+          "end": 153.7,
+          "text": " துமினெள்ளோகிறதா?",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 153.7,
+      "end": 156.7,
+      "text": " நாம் உண்�재 கல்ூஷமத்தால tablespoon சாதாம்.",
+      "words": [
+        {
+          "start": 153.7,
+          "end": 153.88,
+          "text": " நாம்",
+          "confidence": null
+        },
+        {
+          "start": 153.88,
+          "end": 155.12,
+          "text": " உண்�재",
+          "confidence": null
+        },
+        {
+          "start": 155.12,
+          "end": 155.56,
+          "text": " கல்ூஷமத்தால",
+          "confidence": null
+        },
+        {
+          "start": 155.56,
+          "end": 155.56,
+          "text": " tablespoon",
+          "confidence": null
+        },
+        {
+          "start": 155.56,
+          "end": 156.7,
+          "text": " சாதாம்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 156.7,
+      "end": 161.6,
+      "text": " தமே பென்பத்துகர்கள் அதைப்பசென்றி வாஸிராவோ சிகவில்லாயா?",
+      "words": [
+        {
+          "start": 156.7,
+          "end": 157.08,
+          "text": " தமே",
+          "confidence": null
+        },
+        {
+          "start": 157.08,
+          "end": 157.72,
+          "text": " பென்பத்துகர்கள்",
+          "confidence": null
+        },
+        {
+          "start": 157.72,
+          "end": 158.3,
+          "text": " அதைப்பசென்றி",
+          "confidence": null
+        },
+        {
+          "start": 158.3,
+          "end": 161.1,
+          "text": " வாஸிராவோ",
+          "confidence": null
+        },
+        {
+          "start": 161.1,
+          "end": 161.6,
+          "text": " சிகவில்லாயா?",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 161.6,
+      "end": 164.72,
+      "text": " தவதை முட்SA- issueவிலை பிரச்சாயில்லாம்?",
+      "words": [
+        {
+          "start": 161.6,
+          "end": 162.86,
+          "text": " தவதை",
+          "confidence": null
+        },
+        {
+          "start": 162.86,
+          "end": 162.86,
+          "text": " முட்SA",
+          "confidence": null
+        },
+        {
+          "start": 162.86,
+          "end": 162.86,
+          "text": "-",
+          "confidence": null
+        },
+        {
+          "start": 162.86,
+          "end": 164.3,
+          "text": " issueவிலை",
+          "confidence": null
+        },
+        {
+          "start": 164.3,
+          "end": 164.72,
+          "text": " பிரச்சாயில்லாம்?",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 164.72,
+      "end": 166.64,
+      "text": " எதற்கு அஷ Rudolphந்து இன்னுடைய கல்லை.",
+      "words": [
+        {
+          "start": 164.72,
+          "end": 165.48,
+          "text": " எதற்கு",
+          "confidence": null
+        },
+        {
+          "start": 165.48,
+          "end": 165.68,
+          "text": " அஷ",
+          "confidence": null
+        },
+        {
+          "start": 165.68,
+          "end": 165.92,
+          "text": " Rudolphந்து",
+          "confidence": null
+        },
+        {
+          "start": 165.92,
+          "end": 166.64,
+          "text": " இன்னுடைய",
+          "confidence": null
+        },
+        {
+          "start": 166.64,
+          "end": 166.64,
+          "text": " கல்லை.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 166.64,
+      "end": 168.72,
+      "text": " உன்னுடைய நன்று முகுள்ளி மிகவும் இருக்காலும்.",
+      "words": [
+        {
+          "start": 166.64,
+          "end": 167.36,
+          "text": " உன்னுடைய",
+          "confidence": null
+        },
+        {
+          "start": 167.36,
+          "end": 167.36,
+          "text": " நன்று",
+          "confidence": null
+        },
+        {
+          "start": 167.36,
+          "end": 168.46,
+          "text": " முகுள்ளி",
+          "confidence": null
+        },
+        {
+          "start": 168.46,
+          "end": 168.46,
+          "text": " மிகவும்",
+          "confidence": null
+        },
+        {
+          "start": 168.46,
+          "end": 168.72,
+          "text": " இருக்காலும்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 168.72,
+      "end": 171.32,
+      "text": " என்னான் கல்ங்கிற்கு வைத்து வைத்து வைத்து ஆரசின் தாத்து முதை.",
+      "words": [
+        {
+          "start": 168.72,
+          "end": 169.42,
+          "text": " என்னான்",
+          "confidence": null
+        },
+        {
+          "start": 169.42,
+          "end": 170.08,
+          "text": " கல்ங்கிற்கு",
+          "confidence": null
+        },
+        {
+          "start": 170.08,
+          "end": 170.2,
+          "text": " வைத்து",
+          "confidence": null
+        },
+        {
+          "start": 170.2,
+          "end": 170.4,
+          "text": " வைத்து",
+          "confidence": null
+        },
+        {
+          "start": 170.4,
+          "end": 170.56,
+          "text": " வைத்து",
+          "confidence": null
+        },
+        {
+          "start": 170.56,
+          "end": 170.9,
+          "text": " ஆரசின்",
+          "confidence": null
+        },
+        {
+          "start": 170.9,
+          "end": 171.02,
+          "text": " தாத்து",
+          "confidence": null
+        },
+        {
+          "start": 171.02,
+          "end": 171.32,
+          "text": " முதை.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 171.4,
+      "end": 173.18,
+      "text": " நீ கார்னை கல்ங்கிறால்லோது ஆரசின்பர்கள்.",
+      "words": [
+        {
+          "start": 171.4,
+          "end": 171.6,
+          "text": " நீ",
+          "confidence": null
+        },
+        {
+          "start": 171.6,
+          "end": 171.94,
+          "text": " கார்னை",
+          "confidence": null
+        },
+        {
+          "start": 171.94,
+          "end": 172.64,
+          "text": " கல்ங்கிறால்லோது",
+          "confidence": null
+        },
+        {
+          "start": 172.64,
+          "end": 173.18,
+          "text": " ஆரசின்பர்கள்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 175.12000000000003,
+      "end": 178.26,
+      "text": " என்னுடம் சதலப்பும் என்னாள் கல் holidaysனloே பேட்டும் தேப்புமிடிருக்கிறது.",
+      "words": [
+        {
+          "start": 175.12000000000003,
+          "end": 176.32000000000002,
+          "text": " என்னுடம்",
+          "confidence": null
+        },
+        {
+          "start": 176.32000000000002,
+          "end": 177.52,
+          "text": " சதலப்பும்",
+          "confidence": null
+        },
+        {
+          "start": 177.52,
+          "end": 177.52,
+          "text": " என்னாள்",
+          "confidence": null
+        },
+        {
+          "start": 177.52,
+          "end": 177.52,
+          "text": " கல்",
+          "confidence": null
+        },
+        {
+          "start": 177.52,
+          "end": 177.52,
+          "text": " holidaysனloே",
+          "confidence": null
+        },
+        {
+          "start": 177.52,
+          "end": 177.72,
+          "text": " பேட்டும்",
+          "confidence": null
+        },
+        {
+          "start": 177.72,
+          "end": 178.26,
+          "text": " தேப்புமிடிருக்கிறது.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 179.18,
+      "end": 183.26,
+      "text": " திவு கணறுசே செய்யலாம்பு மடியardan...",
+      "words": [
+        {
+          "start": 179.18,
+          "end": 180.38,
+          "text": " திவு",
+          "confidence": null
+        },
+        {
+          "start": 180.38,
+          "end": 180.7,
+          "text": " கணறுசே",
+          "confidence": null
+        },
+        {
+          "start": 180.7,
+          "end": 182.22,
+          "text": " செய்யலாம்பு",
+          "confidence": null
+        },
+        {
+          "start": 182.22,
+          "end": 183.26,
+          "text": " மடியardan...",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 183.26,
+      "end": 184.16,
+      "text": " குணை கணறுகிறாகப்ப முடியே பேட்டவர நியதை செய்துப் போகிறேன்.",
+      "words": [
+        {
+          "start": 183.26,
+          "end": 183.6,
+          "text": " குணை",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 183.6,
+          "text": " கணறுகிறாகப்ப",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 183.6,
+          "text": " முடியே",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 183.6,
+          "text": " பேட்டவர",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 183.6,
+          "text": " நியதை",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 183.6,
+          "text": " செய்துப்",
+          "confidence": null
+        },
+        {
+          "start": 183.6,
+          "end": 184.16,
+          "text": " போகிறேன்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 187.54000000000002,
+      "end": 191.02,
+      "text": " அதன், தமீ நட்டில் நனக்கல் விடாசைத் துழக்கிறாளே பேட்டு насிக்கொள்ளாம்...",
+      "words": [
+        {
+          "start": 187.18,
+          "end": 187.78,
+          "text": " அதன்,",
+          "confidence": null
+        },
+        {
+          "start": 187.78,
+          "end": 188.1,
+          "text": " தமீ",
+          "confidence": null
+        },
+        {
+          "start": 188.1,
+          "end": 188.4,
+          "text": " நட்டில்",
+          "confidence": null
+        },
+        {
+          "start": 188.4,
+          "end": 188.6,
+          "text": " நனக்கல்",
+          "confidence": null
+        },
+        {
+          "start": 188.6,
+          "end": 189.24,
+          "text": " விடாசைத்",
+          "confidence": null
+        },
+        {
+          "start": 189.24,
+          "end": 189.24,
+          "text": " துழக்கிறாளே",
+          "confidence": null
+        },
+        {
+          "start": 189.24,
+          "end": 190.56,
+          "text": " பேட்டு",
+          "confidence": null
+        },
+        {
+          "start": 190.56,
+          "end": 191.16,
+          "text": " насிக்கொள்ளாம்...",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 191.16,
+      "end": 198.56,
+      "text": " ஆதில் இந்தத்த முடியிருகிறது, அந்து நீ திரியுளாம்.",
+      "words": [
+        {
+          "start": 191.16,
+          "end": 193.88,
+          "text": " ஆதில்",
+          "confidence": null
+        },
+        {
+          "start": 193.88,
+          "end": 196.4,
+          "text": " இந்தத்த",
+          "confidence": null
+        },
+        {
+          "start": 196.4,
+          "end": 196.42,
+          "text": " முடியிருகிறது,",
+          "confidence": null
+        },
+        {
+          "start": 196.58,
+          "end": 197.26,
+          "text": " அந்து",
+          "confidence": null
+        },
+        {
+          "start": 197.26,
+          "end": 197.34,
+          "text": " நீ",
+          "confidence": null
+        },
+        {
+          "start": 197.34,
+          "end": 198.56,
+          "text": " திரியுளாம்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 200.44,
+      "end": 201.84,
+      "text": " எனக்கு haven't been this industry.",
+      "words": [
+        {
+          "start": 200.44,
+          "end": 201.84,
+          "text": " எனக்கு",
+          "confidence": null
+        },
+        {
+          "start": 201.84,
+          "end": 201.84,
+          "text": " haven't",
+          "confidence": null
+        },
+        {
+          "start": 201.84,
+          "end": 201.84,
+          "text": " been",
+          "confidence": null
+        },
+        {
+          "start": 201.84,
+          "end": 201.84,
+          "text": " this",
+          "confidence": null
+        },
+        {
+          "start": 201.84,
+          "end": 201.84,
+          "text": " industry.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 203.84,
+      "end": 204.4,
+      "text": " அந்திரவைவர் பொட முடியவின் பிற்றாள்.",
+      "words": [
+        {
+          "start": 203.84,
+          "end": 204.4,
+          "text": " அந்திரவைவர்",
+          "confidence": null
+        },
+        {
+          "start": 204.4,
+          "end": 204.4,
+          "text": " பொட",
+          "confidence": null
+        },
+        {
+          "start": 204.4,
+          "end": 204.4,
+          "text": " முடியவின்",
+          "confidence": null
+        },
+        {
+          "start": 204.4,
+          "end": 204.4,
+          "text": " பிற்றாள்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 204.4,
+      "end": 205.94,
+      "text": " இதென்னுடைக் கிடிவிட்டுயுமானக் கிழிவிடித்து.",
+      "words": [
+        {
+          "start": 204.4,
+          "end": 204.72,
+          "text": " இதென்னுடைக்",
+          "confidence": null
+        },
+        {
+          "start": 204.72,
+          "end": 205.94,
+          "text": " கிடிவிட்டுயுமானக்",
+          "confidence": null
+        },
+        {
+          "start": 205.94,
+          "end": 205.94,
+          "text": " கிழிவிடித்து.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 206.0,
+      "end": 209.54,
+      "text": " அதாது, யாதிருகொள்கிறோம்.",
+      "words": [
+        {
+          "start": 206.0,
+          "end": 206.56,
+          "text": " அதாது,",
+          "confidence": null
+        },
+        {
+          "start": 208.18,
+          "end": 209.54,
+          "text": " யாதிருகொள்கிறோம்.Julio,",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 209.54,
+      "end": 211.56,
+      "text": "Julio, வேலையிலையில் காலைப் பார்.",
+      "words": [
+        {
+          "start": 209.54,
+          "end": 210.34,
+          "text": " வேலையிலையில்",
+          "confidence": null
+        },
+        {
+          "start": 210.34,
+          "end": 211.56,
+          "text": " காலைப்",
+          "confidence": null
+        },
+        {
+          "start": 211.56,
+          "end": 211.56,
+          "text": " பார்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 211.56,
+      "end": 241.54,
+      "text": " எனக்கு சல வண்டாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அவ்வினுடையாம் அ",
+      "words": [
+        {
+          "start": 211.56,
+          "end": 211.86,
+          "text": " எனக்கு",
+          "confidence": null
+        },
+        {
+          "start": 211.86,
+          "end": 212.1,
+          "text": " சல",
+          "confidence": null
+        },
+        {
+          "start": 212.1,
+          "end": 212.72,
+          "text": " வண்டாம்",
+          "confidence": null
+        },
+        {
+          "start": 212.72,
+          "end": 213.62,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 213.62,
+          "end": 214.6,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 214.6,
+          "end": 214.84,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 214.84,
+          "end": 215.2,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 215.2,
+          "end": 215.88,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 215.88,
+          "end": 215.92,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 215.92,
+          "end": 216.72,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 216.72,
+          "end": 216.88,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 216.88,
+          "end": 218.42,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 218.42,
+          "end": 218.82,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 218.82,
+          "end": 218.82,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 218.82,
+          "end": 221.06,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 221.06,
+          "end": 221.06,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 221.06,
+          "end": 221.06,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 221.06,
+          "end": 221.06,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 221.06,
+          "end": 221.46,
+          "text": " அவ்வினுடையாம்",
+          "confidence": null
+        },
+        {
+          "start": 221.46,
+          "end": 241.54,
+          "text": " அ",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 241.54,
+      "end": 247.62,
+      "text": " அப்பாாவுடனதி போட்டம் தாங்தை தாங்கள்.",
+      "words": [
+        {
+          "start": 241.54,
+          "end": 243.46,
+          "text": " அப்பாாவுடனதி",
+          "confidence": null
+        },
+        {
+          "start": 243.46,
+          "end": 245.54,
+          "text": " போட்டம்",
+          "confidence": null
+        },
+        {
+          "start": 245.54,
+          "end": 247.02,
+          "text": " தாங்தை",
+          "confidence": null
+        },
+        {
+          "start": 247.02,
+          "end": 247.62,
+          "text": " தாங்கள்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 247.62,
+      "end": 250.96,
+      "text": " ஒருயை அது ஒரு ஏது பரண்மோகிறம் இருந்தைகள் குட்டாது. நாடந்திய",
+      "words": [
+        {
+          "start": 247.62,
+          "end": 248.16,
+          "text": " ஒருயை",
+          "confidence": null
+        },
+        {
+          "start": 248.16,
+          "end": 248.26,
+          "text": " அது",
+          "confidence": null
+        },
+        {
+          "start": 248.26,
+          "end": 248.32,
+          "text": " ஒரு",
+          "confidence": null
+        },
+        {
+          "start": 248.32,
+          "end": 248.54,
+          "text": " ஏது",
+          "confidence": null
+        },
+        {
+          "start": 248.54,
+          "end": 249.04,
+          "text": " பரண்மோகிறம்",
+          "confidence": null
+        },
+        {
+          "start": 249.04,
+          "end": 249.52,
+          "text": " இருந்தைகள்",
+          "confidence": null
+        },
+        {
+          "start": 249.52,
+          "end": 250.3,
+          "text": " குட்டாது.",
+          "confidence": null
+        },
+        {
+          "start": 250.3,
+          "end": 250.96,
+          "text": " நாடந்திய",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 250.96,
+      "end": 255.9,
+      "text": " அவர் பரியம் ஒரும் வரத்து முடித்து நிட்சி எல்லப் பார்க் கீட்டேன் likedகனக்கு முடி இல்லாம்.",
+      "words": [
+        {
+          "start": 250.96,
+          "end": 251.18,
+          "text": " அவர்",
+          "confidence": null
+        },
+        {
+          "start": 251.18,
+          "end": 251.54,
+          "text": " பரியம்",
+          "confidence": null
+        },
+        {
+          "start": 251.54,
+          "end": 252.42,
+          "text": " ஒரும்",
+          "confidence": null
+        },
+        {
+          "start": 252.42,
+          "end": 253.0,
+          "text": " வரத்து",
+          "confidence": null
+        },
+        {
+          "start": 253.0,
+          "end": 253.36,
+          "text": " முடித்து",
+          "confidence": null
+        },
+        {
+          "start": 253.36,
+          "end": 254.72,
+          "text": " நிட்சி",
+          "confidence": null
+        },
+        {
+          "start": 254.72,
+          "end": 254.78,
+          "text": " எல்லப்",
+          "confidence": null
+        },
+        {
+          "start": 254.78,
+          "end": 254.78,
+          "text": " பார்க்",
+          "confidence": null
+        },
+        {
+          "start": 254.78,
+          "end": 254.78,
+          "text": " கீட்டேன்",
+          "confidence": null
+        },
+        {
+          "start": 254.78,
+          "end": 255.02,
+          "text": " likedகனக்கு",
+          "confidence": null
+        },
+        {
+          "start": 255.02,
+          "end": 255.22,
+          "text": " முடி",
+          "confidence": null
+        },
+        {
+          "start": 255.22,
+          "end": 255.9,
+          "text": " இல்லாம்.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 255.9,
+      "end": 285.68,
+      "text": " இதா உன்னுடையும் அனைத்தால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்னால் அன்ன",
+      "words": [
+        {
+          "start": 255.9,
+          "end": 256.14,
+          "text": " இதா",
+          "confidence": null
+        },
+        {
+          "start": 256.14,
+          "end": 256.72,
+          "text": " உன்னுடையும்",
+          "confidence": null
+        },
+        {
+          "start": 256.72,
+          "end": 258.38,
+          "text": " அனைத்தால்",
+          "confidence": null
+        },
+        {
+          "start": 258.38,
+          "end": 258.4,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 258.4,
+          "end": 258.7,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 258.7,
+          "end": 258.82,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 258.82,
+          "end": 258.82,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 258.82,
+          "end": 259.04,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 259.04,
+          "end": 259.08,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 259.08,
+          "end": 259.4,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 259.4,
+          "end": 259.56,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 259.56,
+          "end": 259.58,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 259.58,
+          "end": 260.0,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 260.0,
+          "end": 260.0,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 260.0,
+          "end": 260.32,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 260.32,
+          "end": 260.48,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 260.48,
+          "end": 260.56,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 260.56,
+          "end": 261.52,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 261.52,
+          "end": 261.52,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 261.52,
+          "end": 264.0,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 264.0,
+          "end": 265.7,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 265.7,
+          "end": 266.2,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 266.2,
+          "end": 266.2,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 266.2,
+          "end": 266.82,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 266.82,
+          "end": 266.82,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 266.82,
+          "end": 266.82,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 266.82,
+          "end": 267.18,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 267.18,
+          "end": 268.3,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 268.3,
+          "end": 271.42,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 271.42,
+          "end": 271.42,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 271.42,
+          "end": 271.84,
+          "text": " அன்னால்",
+          "confidence": null
+        },
+        {
+          "start": 271.84,
+          "end": 285.68,
+          "text": " அன்ன",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 285.68,
+      "end": 315.02,
+      "text": " நீங்களிய மடிச் சொல்லோகொண்டுக்கட்டு இன்னும் அமைவருக்கும் 1-2 seráண் These are the routes between the gate and the gate crossing.",
+      "words": [
+        {
+          "start": 285.68,
+          "end": 287.2,
+          "text": " நீங்களிய",
+          "confidence": null
+        },
+        {
+          "start": 287.2,
+          "end": 288.32,
+          "text": " மடிச்",
+          "confidence": null
+        },
+        {
+          "start": 288.32,
+          "end": 288.7,
+          "text": " சொல்லோகொண்டுக்கட்டு",
+          "confidence": null
+        },
+        {
+          "start": 288.7,
+          "end": 290.2,
+          "text": " இன்னும்",
+          "confidence": null
+        },
+        {
+          "start": 290.2,
+          "end": 292.58,
+          "text": " அமைவருக்கும்",
+          "confidence": null
+        },
+        {
+          "start": 292.58,
+          "end": 292.62,
+          "text": " 1",
+          "confidence": null
+        },
+        {
+          "start": 292.62,
+          "end": 293.34,
+          "text": "-2",
+          "confidence": null
+        },
+        {
+          "start": 293.34,
+          "end": 294.06,
+          "text": " seráண்",
+          "confidence": null
+        },
+        {
+          "start": 294.06,
+          "end": 294.06,
+          "text": " These",
+          "confidence": null
+        },
+        {
+          "start": 294.06,
+          "end": 294.06,
+          "text": " are",
+          "confidence": null
+        },
+        {
+          "start": 294.06,
+          "end": 299.1,
+          "text": " the",
+          "confidence": null
+        },
+        {
+          "start": 299.1,
+          "end": 301.82,
+          "text": " routes",
+          "confidence": null
+        },
+        {
+          "start": 301.82,
+          "end": 302.2,
+          "text": " between",
+          "confidence": null
+        },
+        {
+          "start": 302.2,
+          "end": 304.52,
+          "text": " the",
+          "confidence": null
+        },
+        {
+          "start": 304.52,
+          "end": 311.74,
+          "text": " gate",
+          "confidence": null
+        },
+        {
+          "start": 311.74,
+          "end": 311.92,
+          "text": " and",
+          "confidence": null
+        },
+        {
+          "start": 311.92,
+          "end": 312.1,
+          "text": " the",
+          "confidence": null
+        },
+        {
+          "start": 312.1,
+          "end": 314.8,
+          "text": " gate",
+          "confidence": null
+        },
+        {
+          "start": 314.8,
+          "end": 315.02,
+          "text": " crossing.",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 379.08,
+      "end": 405.0,
+      "text": " வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வருடைய வ",
+      "words": [
+        {
+          "start": 379.08,
+          "end": 380.12,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.12,
+          "end": 380.12,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.12,
+          "end": 380.12,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.12,
+          "end": 380.12,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.12,
+          "end": 380.12,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.12,
+          "end": 380.36,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.36,
+          "end": 380.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 380.56,
+          "end": 381.06,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 381.06,
+          "end": 381.14,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 381.14,
+          "end": 382.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 382.56,
+          "end": 382.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 382.56,
+          "end": 383.62,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 383.62,
+          "end": 386.02,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 386.02,
+          "end": 386.02,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 386.02,
+          "end": 386.02,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 386.02,
+          "end": 386.62,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 386.62,
+          "end": 386.76,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 386.76,
+          "end": 387.18,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 387.18,
+          "end": 387.32,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 387.32,
+          "end": 387.32,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 387.32,
+          "end": 387.42,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 387.42,
+          "end": 387.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 387.56,
+          "end": 391.44,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.44,
+          "end": 391.44,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.44,
+          "end": 391.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.56,
+          "end": 391.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.56,
+          "end": 391.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.56,
+          "end": 391.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.56,
+          "end": 391.56,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 391.56,
+          "end": 392.1,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 392.1,
+          "end": 392.1,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 392.1,
+          "end": 392.3,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 392.3,
+          "end": 393.54,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 393.54,
+          "end": 394.58,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 394.58,
+          "end": 394.88,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 394.88,
+          "end": 401.04,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 401.04,
+          "end": 404.38,
+          "text": " வருடைய",
+          "confidence": null
+        },
+        {
+          "start": 404.38,
+          "end": 405.0,
+          "text": " வ",
+          "confidence": null
+        }
+      ]
+    },
+    {
+      "start": 615.0,
+      "end": 644.98,
+      "text": " ஆனால் விஷமானும் நல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அல்லுகின் அ",
+      "words": [
+        {
+          "start": 615.0,
+          "end": 615.64,
+          "text": " ஆனால்",
+          "confidence": null
+        },
+        {
+          "start": 615.64,
+          "end": 616.2,
+          "text": " விஷமானும்",
+          "confidence": null
+        },
+        {
+          "start": 616.2,
+          "end": 616.6,
+          "text": " நல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 616.6,
+          "end": 617.02,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 617.02,
+          "end": 617.38,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 617.38,
+          "end": 617.52,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 617.52,
+          "end": 617.84,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 617.84,
+          "end": 618.22,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 618.22,
+          "end": 618.48,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 618.48,
+          "end": 618.52,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 618.52,
+          "end": 619.4,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 619.4,
+          "end": 619.58,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 619.58,
+          "end": 622.7,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 622.7,
+          "end": 623.38,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 623.38,
+          "end": 623.38,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 623.38,
+          "end": 623.76,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 623.76,
+          "end": 623.78,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 623.78,
+          "end": 624.48,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 624.48,
+          "end": 624.66,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 624.66,
+          "end": 625.18,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 625.18,
+          "end": 625.84,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 625.84,
+          "end": 627.02,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 627.02,
+          "end": 627.56,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 627.56,
+          "end": 628.14,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 628.14,
+          "end": 629.2,
+          "text": " அல்லுகின்",
+          "confidence": null
+        },
+        {
+          "start": 629.2,
+          "end": 644.98,
+          "text": " அ",
+          "confidence": null
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "start": 7.219999999999999,
+      "end": 8.62,
+      "text": " அவருடனங்கு",
+      "confidence": null
+    },
+    {
+      "start": 8.62,
+      "end": 10.02,
+      "text": " உண்டமைகத்",
+      "confidence": null
+    },
+    {
+      "start": 10.02,
+      "end": 10.02,
+      "text": " தெரியதுகொள்ள",
+      "confidence": null
+    },
+    {
+      "start": 10.02,
+      "end": 10.02,
+      "text": " அப்படிப்படிchte",
+      "confidence": null
+    },
+    {
+      "start": 10.02,
+      "end": 10.66,
+      "text": " பிள்.",
+      "confidence": null
+    },
+    {
+      "start": 10.66,
+      "end": 11.5,
+      "text": " 5",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-6",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-7",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-7",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": " 4",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-6",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-7",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-7",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": " 4",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-9",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": " 1",
+      "confidence": null
+    },
+    {
+      "start": 11.5,
+      "end": 11.5,
+      "text": "-8,",
+      "confidence": null
+    },
+    {
+      "start": 11.62,
+      "end": 11.62,
+      "text": " பெரியது",
+      "confidence": null
+    },
+    {
+      "start": 11.62,
+      "end": 13.16,
+      "text": " தெரியதுத்து",
+      "confidence": null
+    },
+    {
+      "start": 13.16,
+      "end": 13.16,
+      "text": " வைரவ்வும்",
+      "confidence": null
+    },
+    {
+      "start": 13.16,
+      "end": 13.16,
+      "text": " நக்கைத்துப்",
+      "confidence": null
+    },
+    {
+      "start": 13.16,
+      "end": 13.16,
+      "text": " பிறக்கு",
+      "confidence": null
+    },
+    {
+      "start": 13.16,
+      "end": 13.16,
+      "text": " பேசலாமல்லாம்",
+      "confidence": null
+    },
+    {
+      "start": 13.16,
+      "end": 17.76,
+      "text": " அந்த",
+      "confidence": null
+    },
+    {
+      "start": 17.76,
+      "end": 19.24,
+      "text": " விடிக்கும்",
+      "confidence": null
+    },
+    {
+      "start": 19.24,
+      "end": 22.6,
+      "text": " ringsரா",
+      "confidence": null
+    },
+    {
+      "start": 22.6,
+      "end": 22.6,
+      "text": " empresas.",
+      "confidence": null
+    },
+    {
+      "start": 52.6,
+      "end": 53.46,
+      "text": " சிரப்பாசம்",
+      "confidence": null
+    },
+    {
+      "start": 53.46,
+      "end": 54.34,
+      "text": " அவ்விண்டுரு",
+      "confidence": null
+    },
+    {
+      "start": 54.34,
+      "end": 54.34,
+      "text": " justamente",
+      "confidence": null
+    },
+    {
+      "start": 54.34,
+      "end": 54.8,
+      "text": " பென்று",
+      "confidence": null
+    },
+    {
+      "start": 54.8,
+      "end": 54.96,
+      "text": " மதாகே",
+      "confidence": null
+    },
+    {
+      "start": 54.96,
+      "end": 55.28,
+      "text": " வ",
+      "confidence": null
+    },
+    {
+      "start": 55.28,
+      "end": 56.22,
+      "text": " отдельபரக",
+      "confidence": null
+    },
+    {
+      "start": 56.22,
+      "end": 56.22,
+      "text": " விடைய",
+      "confidence": null
+    },
+    {
+      "start": 56.22,
+      "end": 56.24,
+      "text": " ஒரு",
+      "confidence": null
+    },
+    {
+      "start": 56.24,
+      "end": 56.68,
+      "text": " கைத்து",
+      "confidence": null
+    },
+    {
+      "start": 56.68,
+      "end": 57.52,
+      "text": " வலம்பறின்",
+      "confidence": null
+    },
+    {
+      "start": 57.52,
+      "end": 58.6,
+      "text": " அந்து",
+      "confidence": null
+    },
+    {
+      "start": 58.6,
+      "end": 58.92,
+      "text": " சுக்",
+      "confidence": null
+    },
+    {
+      "start": 58.92,
+      "end": 58.96,
+      "text": " கைத்தாக",
+      "confidence": null
+    },
+    {
+      "start": 58.96,
+      "end": 60.68,
+      "text": " வேலை",
+      "confidence": null
+    },
+    {
+      "start": 60.68,
+      "end": 60.68,
+      "text": " அல்லவேண்டு",
+      "confidence": null
+    },
+    {
+      "start": 60.68,
+      "end": 60.98,
+      "text": " ஆனாருமே...",
+      "confidence": null
+    },
+    {
+      "start": 62.64,
+      "end": 63.32,
+      "text": " ஆனார்",
+      "confidence": null
+    },
+    {
+      "start": 63.32,
+      "end": 64.8,
+      "text": " ஒருக்கேடன்",
+      "confidence": null
+    },
+    {
+      "start": 64.8,
+      "end": 64.8,
+      "text": " தலை",
+      "confidence": null
+    },
+    {
+      "start": 64.8,
+      "end": 64.8,
+      "text": " வருகம்,",
+      "confidence": null
+    },
+    {
+      "start": 64.8,
+      "end": 66.06,
+      "text": " ஆனார்",
+      "confidence": null
+    },
+    {
+      "start": 66.06,
+      "end": 66.06,
+      "text": " அ",
+      "confidence": null
+    },
+    {
+      "start": 66.06,
+      "end": 66.58,
+      "text": " sizzாவலருக்கும்",
+      "confidence": null
+    },
+    {
+      "start": 66.58,
+      "end": 66.98,
+      "text": " பார்.",
+      "confidence": null
+    },
+    {
+      "start": 66.98,
+      "end": 67.16,
+      "text": " ஒரு",
+      "confidence": null
+    },
+    {
+      "start": 67.16,
+      "end": 69.0,
+      "text": " தொண்டாடுவில்",
+      "confidence": null
+    },
+    {
+      "start": 69.0,
+      "end": 69.0,
+      "text": " கிற்ப",
+      "confidence": null
+    },
+    {
+      "start": 69.0,
+      "end": 69.0,
+      "text": " கண்கலை",
+      "confidence": null
+    },
+    {
+      "start": 69.0,
+      "end": 70.52,
+      "text": " விடைவில்",
+      "confidence": null
+    },
+    {
+      "start": 70.52,
+      "end": 71.84,
+      "text": " ஆனால்புபகழி",
+      "confidence": null
+    },
+    {
+      "start": 71.84,
+      "end": 72.06,
+      "text": " இதை",
+      "confidence": null
+    },
+    {
+      "start": 72.06,
+      "end": 73.1,
+      "text": " வேலை.",
+      "confidence": null
+    },
+    {
+      "start": 73.1,
+      "end": 73.88,
+      "text": " ஆனால்",
+      "confidence": null
+    },
+    {
+      "start": 73.88,
+      "end": 74.5,
+      "text": " கத்தினுடைய",
+      "confidence": null
+    },
+    {
+      "start": 74.5,
+      "end": 75.0,
+      "text": " பாண்டையும்",
+      "confidence": null
+    },
+    {
+      "start": 75.0,
+      "end": 75.22,
+      "text": " உன்",
+      "confidence": null
+    },
+    {
+      "start": 75.22,
+      "end": 102.96,
+      "text": " தலைவிருவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவிட்டுவி",
+      "confidence": null
+    },
+    {
+      "start": 102.96,
+      "end": 104.36,
+      "text": " அது",
+      "confidence": null
+    },
+    {
+      "start": 104.36,
+      "end": 104.98,
+      "text": " மிகவும்",
+      "confidence": null
+    },
+    {
+      "start": 104.98,
+      "end": 104.98,
+      "text": " விடித்து",
+      "confidence": null
+    },
+    {
+      "start": 104.98,
+      "end": 105.22,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 105.22,
+      "end": 105.62,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 105.62,
+      "end": 105.98,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 105.98,
+      "end": 106.42,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 106.42,
+      "end": 106.7,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 106.7,
+      "end": 106.84,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 106.84,
+      "end": 106.88,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 106.88,
+      "end": 107.5,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 107.5,
+      "end": 107.8,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 107.8,
+      "end": 107.82,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 107.82,
+      "end": 109.98,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 109.98,
+      "end": 110.94,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 110.94,
+      "end": 111.44,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 111.44,
+      "end": 112.42,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 112.42,
+      "end": 112.6,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 112.6,
+      "end": 112.6,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 112.6,
+      "end": 113.36,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 113.36,
+      "end": 113.36,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 113.36,
+      "end": 115.7,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 115.7,
+      "end": 118.68,
+      "text": " என்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 118.68,
+      "end": 129.26,
+      "text": " என்னுடைய",
+      "confidence": null
+    },
+    {
+      "start": 133.54,
+      "end": 134.94,
+      "text": " பிறகு",
+      "confidence": null
+    },
+    {
+      "start": 134.94,
+      "end": 136.34,
+      "text": " மன",
+      "confidence": null
+    },
+    {
+      "start": 136.34,
+      "end": 139.04,
+      "text": " attractiveந்தாற்கு",
+      "confidence": null
+    },
+    {
+      "start": 139.04,
+      "end": 139.78,
+      "text": " நாற்குச்",
+      "confidence": null
+    },
+    {
+      "start": 139.78,
+      "end": 139.78,
+      "text": " சொல்ல",
+      "confidence": null
+    },
+    {
+      "start": 139.78,
+      "end": 140.36,
+      "text": " காணமாறு",
+      "confidence": null
+    },
+    {
+      "start": 140.36,
+      "end": 141.7,
+      "text": " ஆரால்.",
+      "confidence": null
+    },
+    {
+      "start": 141.7,
+      "end": 143.94,
+      "text": " எங்குச்",
+      "confidence": null
+    },
+    {
+      "start": 143.94,
+      "end": 144.3,
+      "text": " சிúcarப்பிம்",
+      "confidence": null
+    },
+    {
+      "start": 144.3,
+      "end": 146.22,
+      "text": " போக்குகொண்டனரித்தி",
+      "confidence": null
+    },
+    {
+      "start": 146.22,
+      "end": 146.22,
+      "text": " Aren'tுன்பேலும்",
+      "confidence": null
+    },
+    {
+      "start": 146.22,
+      "end": 148.78,
+      "text": " போகலையும்",
+      "confidence": null
+    },
+    {
+      "start": 148.78,
+      "end": 148.98,
+      "text": " செய்கிறேன்",
+      "confidence": null
+    },
+    {
+      "start": 148.98,
+      "end": 149.92,
+      "text": " அரத்து",
+      "confidence": null
+    },
+    {
+      "start": 149.92,
+      "end": 151.5,
+      "text": " குறசந்தமால்.",
+      "confidence": null
+    },
+    {
+      "start": 151.5,
+      "end": 152.0,
+      "text": " சாதாம்",
+      "confidence": null
+    },
+    {
+      "start": 152.0,
+      "end": 152.64,
+      "text": " சிகவில்லாயும்",
+      "confidence": null
+    },
+    {
+      "start": 152.64,
+      "end": 153.7,
+      "text": " என்று",
+      "confidence": null
+    },
+    {
+      "start": 153.7,
+      "end": 153.7,
+      "text": " நாம்",
+      "confidence": null
+    },
+    {
+      "start": 153.7,
+      "end": 153.7,
+      "text": " துமினெள்ளோகிறதா?",
+      "confidence": null
+    },
+    {
+      "start": 153.7,
+      "end": 153.88,
+      "text": " நாம்",
+      "confidence": null
+    },
+    {
+      "start": 153.88,
+      "end": 155.12,
+      "text": " உண்�재",
+      "confidence": null
+    },
+    {
+      "start": 155.12,
+      "end": 155.56,
+      "text": " கல்ூஷமத்தால",
+      "confidence": null
+    },
+    {
+      "start": 155.56,
+      "end": 155.56,
+      "text": " tablespoon",
+      "confidence": null
+    },
+    {
+      "start": 155.56,
+      "end": 156.7,
+      "text": " சாதாம்.",
+      "confidence": null
+    },
+    {
+      "start": 156.7,
+      "end": 157.08,
+      "text": " தமே",
+      "confidence": null
+    },
+    {
+      "start": 157.08,
+      "end": 157.72,
+      "text": " பென்பத்துகர்கள்",
+      "confidence": null
+    },
+    {
+      "start": 157.72,
+      "end": 158.3,
+      "text": " அதைப்பசென்றி",
+      "confidence": null
+    },
+    {
+      "start": 158.3,
+      "end": 161.1,
+      "text": " வாஸிராவோ",
+      "confidence": null
+    },
+    {
+      "start": 161.1,
+      "end": 161.6,
+      "text": " சிகவில்லாயா?",
+      "confidence": null
+    },
+    {
+      "start": 161.6,
+      "end": 162.86,
+      "text": " தவதை",
+      "confidence": null
+    },
+    {
+      "start": 162.86,
+      "end": 162.86,
+      "text": " முட்SA",
+      "confidence": null
+    },
+    {
+      "start": 162.86,
+      "end": 162.86,
+      "text": "-",
+      "confidence": null
+    },
+    {
+      "start": 162.86,
+      "end": 164.3,
+      "text": " issueவிலை",
+      "confidence": null
+    },
+    {
+      "start": 164.3,
+      "end": 164.72,
+      "text": " பிரச்சாயில்லாம்?",
+      "confidence": null
+    },
+    {
+      "start": 164.72,
+      "end": 165.48,
+      "text": " எதற்கு",
+      "confidence": null
+    },
+    {
+      "start": 165.48,
+      "end": 165.68,
+      "text": " அஷ",
+      "confidence": null
+    },
+    {
+      "start": 165.68,
+      "end": 165.92,
+      "text": " Rudolphந்து",
+      "confidence": null
+    },
+    {
+      "start": 165.92,
+      "end": 166.64,
+      "text": " இன்னுடைய",
+      "confidence": null
+    },
+    {
+      "start": 166.64,
+      "end": 166.64,
+      "text": " கல்லை.",
+      "confidence": null
+    },
+    {
+      "start": 166.64,
+      "end": 167.36,
+      "text": " உன்னுடைய",
+      "confidence": null
+    },
+    {
+      "start": 167.36,
+      "end": 167.36,
+      "text": " நன்று",
+      "confidence": null
+    },
+    {
+      "start": 167.36,
+      "end": 168.46,
+      "text": " முகுள்ளி",
+      "confidence": null
+    },
+    {
+      "start": 168.46,
+      "end": 168.46,
+      "text": " மிகவும்",
+      "confidence": null
+    },
+    {
+      "start": 168.46,
+      "end": 168.72,
+      "text": " இருக்காலும்.",
+      "confidence": null
+    },
+    {
+      "start": 168.72,
+      "end": 169.42,
+      "text": " என்னான்",
+      "confidence": null
+    },
+    {
+      "start": 169.42,
+      "end": 170.08,
+      "text": " கல்ங்கிற்கு",
+      "confidence": null
+    },
+    {
+      "start": 170.08,
+      "end": 170.2,
+      "text": " வைத்து",
+      "confidence": null
+    },
+    {
+      "start": 170.2,
+      "end": 170.4,
+      "text": " வைத்து",
+      "confidence": null
+    },
+    {
+      "start": 170.4,
+      "end": 170.56,
+      "text": " வைத்து",
+      "confidence": null
+    },
+    {
+      "start": 170.56,
+      "end": 170.9,
+      "text": " ஆரசின்",
+      "confidence": null
+    },
+    {
+      "start": 170.9,
+      "end": 171.02,
+      "text": " தாத்து",
+      "confidence": null
+    },
+    {
+      "start": 171.02,
+      "end": 171.32,
+      "text": " முதை.",
+      "confidence": null
+    },
+    {
+      "start": 171.4,
+      "end": 171.6,
+      "text": " நீ",
+      "confidence": null
+    },
+    {
+      "start": 171.6,
+      "end": 171.94,
+      "text": " கார்னை",
+      "confidence": null
+    },
+    {
+      "start": 171.94,
+      "end": 172.64,
+      "text": " கல்ங்கிறால்லோது",
+      "confidence": null
+    },
+    {
+      "start": 172.64,
+      "end": 173.18,
+      "text": " ஆரசின்பர்கள்.",
+      "confidence": null
+    },
+    {
+      "start": 175.12000000000003,
+      "end": 176.32000000000002,
+      "text": " என்னுடம்",
+      "confidence": null
+    },
+    {
+      "start": 176.32000000000002,
+      "end": 177.52,
+      "text": " சதலப்பும்",
+      "confidence": null
+    },
+    {
+      "start": 177.52,
+      "end": 177.52,
+      "text": " என்னாள்",
+      "confidence": null
+    },
+    {
+      "start": 177.52,
+      "end": 177.52,
+      "text": " கல்",
+      "confidence": null
+    },
+    {
+      "start": 177.52,
+      "end": 177.52,
+      "text": " holidaysனloே",
+      "confidence": null
+    },
+    {
+      "start": 177.52,
+      "end": 177.72,
+      "text": " பேட்டும்",
+      "confidence": null
+    },
+    {
+      "start": 177.72,
+      "end": 178.26,
+      "text": " தேப்புமிடிருக்கிறது.",
+      "confidence": null
+    },
+    {
+      "start": 179.18,
+      "end": 180.38,
+      "text": " திவு",
+      "confidence": null
+    },
+    {
+      "start": 180.38,
+      "end": 180.7,
+      "text": " கணறுசே",
+      "confidence": null
+    },
+    {
+      "start": 180.7,
+      "end": 182.22,
+      "text": " செய்யலாம்பு",
+      "confidence": null
+    },
+    {
+      "start": 182.22,
+      "end": 183.26,
+      "text": " மடியardan...",
+      "confidence": null
+    },
+    {
+      "start": 183.26,
+      "end": 183.6,
+      "text": " குணை",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 183.6,
+      "text": " கணறுகிறாகப்ப",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 183.6,
+      "text": " முடியே",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 183.6,
+      "text": " பேட்டவர",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 183.6,
+      "text": " நியதை",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 183.6,
+      "text": " செய்துப்",
+      "confidence": null
+    },
+    {
+      "start": 183.6,
+      "end": 184.16,
+      "text": " போகிறேன்.",
+      "confidence": null
+    },
+    {
+      "start": 187.18,
+      "end": 187.78,
+      "text": " அதன்,",
+      "confidence": null
+    },
+    {
+      "start": 187.78,
+      "end": 188.1,
+      "text": " தமீ",
+      "confidence": null
+    },
+    {
+      "start": 188.1,
+      "end": 188.4,
+      "text": " நட்டில்",
+      "confidence": null
+    },
+    {
+      "start": 188.4,
+      "end": 188.6,
+      "text": " நனக்கல்",
+      "confidence": null
+    },
+    {
+      "start": 188.6,
+      "end": 189.24,
+      "text": " விடாசைத்",
+      "confidence": null
+    },
+    {
+      "start": 189.24,
+      "end": 189.24,
+      "text": " துழக்கிறாளே",
+      "confidence": null
+    },
+    {
+      "start": 189.24,
+      "end": 190.56,
+      "text": " பேட்டு",
+      "confidence": null
+    },
+    {
+      "start": 190.56,
+      "end": 191.16,
+      "text": " насிக்கொள்ளாம்...",
+      "confidence": null
+    },
+    {
+      "start": 191.16,
+      "end": 193.88,
+      "text": " ஆதில்",
+      "confidence": null
+    },
+    {
+      "start": 193.88,
+      "end": 196.4,
+      "text": " இந்தத்த",
+      "confidence": null
+    },
+    {
+      "start": 196.4,
+      "end": 196.42,
+      "text": " முடியிருகிறது,",
+      "confidence": null
+    },
+    {
+      "start": 196.58,
+      "end": 197.26,
+      "text": " அந்து",
+      "confidence": null
+    },
+    {
+      "start": 197.26,
+      "end": 197.34,
+      "text": " நீ",
+      "confidence": null
+    },
+    {
+      "start": 197.34,
+      "end": 198.56,
+      "text": " திரியுளாம்.",
+      "confidence": null
+    },
+    {
+      "start": 200.44,
+      "end": 201.84,
+      "text": " எனக்கு",
+      "confidence": null
+    },
+    {
+      "start": 201.84,
+      "end": 201.84,
+      "text": " haven't",
+      "confidence": null
+    },
+    {
+      "start": 201.84,
+      "end": 201.84,
+      "text": " been",
+      "confidence": null
+    },
+    {
+      "start": 201.84,
+      "end": 201.84,
+      "text": " this",
+      "confidence": null
+    },
+    {
+      "start": 201.84,
+      "end": 201.84,
+      "text": " industry.",
+      "confidence": null
+    },
+    {
+      "start": 203.84,
+      "end": 204.4,
+      "text": " அந்திரவைவர்",
+      "confidence": null
+    },
+    {
+      "start": 204.4,
+      "end": 204.4,
+      "text": " பொட",
+      "confidence": null
+    },
+    {
+      "start": 204.4,
+      "end": 204.4,
+      "text": " முடியவின்",
+      "confidence": null
+    },
+    {
+      "start": 204.4,
+      "end": 204.4,
+      "text": " பிற்றாள்.",
+      "confidence": null
+    },
+    {
+      "start": 204.4,
+      "end": 204.72,
+      "text": " இதென்னுடைக்",
+      "confidence": null
+    },
+    {
+      "start": 204.72,
+      "end": 205.94,
+      "text": " கிடிவிட்டுயுமானக்",
+      "confidence": null
+    },
+    {
+      "start": 205.94,
+      "end": 205.94,
+      "text": " கிழிவிடித்து.",
+      "confidence": null
+    },
+    {
+      "start": 206.0,
+      "end": 206.56,
+      "text": " அதாது,",
+      "confidence": null
+    },
+    {
+      "start": 208.18,
+      "end": 209.54,
+      "text": " யாதிருகொள்கிறோம்.Julio,",
+      "confidence": null
+    },
+    {
+      "start": 209.54,
+      "end": 210.34,
+      "text": " வேலையிலையில்",
+      "confidence": null
+    },
+    {
+      "start": 210.34,
+      "end": 211.56,
+      "text": " காலைப்",
+      "confidence": null
+    },
+    {
+      "start": 211.56,
+      "end": 211.56,
+      "text": " பார்.",
+      "confidence": null
+    },
+    {
+      "start": 211.56,
+      "end": 211.86,
+      "text": " எனக்கு",
+      "confidence": null
+    },
+    {
+      "start": 211.86,
+      "end": 212.1,
+      "text": " சல",
+      "confidence": null
+    },
+    {
+      "start": 212.1,
+      "end": 212.72,
+      "text": " வண்டாம்",
+      "confidence": null
+    },
+    {
+      "start": 212.72,
+      "end": 213.62,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 213.62,
+      "end": 214.6,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 214.6,
+      "end": 214.84,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 214.84,
+      "end": 215.2,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 215.2,
+      "end": 215.88,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 215.88,
+      "end": 215.92,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 215.92,
+      "end": 216.72,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 216.72,
+      "end": 216.88,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 216.88,
+      "end": 218.42,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 218.42,
+      "end": 218.82,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 218.82,
+      "end": 218.82,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 218.82,
+      "end": 221.06,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 221.06,
+      "end": 221.06,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 221.06,
+      "end": 221.06,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 221.06,
+      "end": 221.06,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 221.06,
+      "end": 221.46,
+      "text": " அவ்வினுடையாம்",
+      "confidence": null
+    },
+    {
+      "start": 221.46,
+      "end": 241.54,
+      "text": " அ",
+      "confidence": null
+    },
+    {
+      "start": 241.54,
+      "end": 243.46,
+      "text": " அப்பாாவுடனதி",
+      "confidence": null
+    },
+    {
+      "start": 243.46,
+      "end": 245.54,
+      "text": " போட்டம்",
+      "confidence": null
+    },
+    {
+      "start": 245.54,
+      "end": 247.02,
+      "text": " தாங்தை",
+      "confidence": null
+    },
+    {
+      "start": 247.02,
+      "end": 247.62,
+      "text": " தாங்கள்.",
+      "confidence": null
+    },
+    {
+      "start": 247.62,
+      "end": 248.16,
+      "text": " ஒருயை",
+      "confidence": null
+    },
+    {
+      "start": 248.16,
+      "end": 248.26,
+      "text": " அது",
+      "confidence": null
+    },
+    {
+      "start": 248.26,
+      "end": 248.32,
+      "text": " ஒரு",
+      "confidence": null
+    },
+    {
+      "start": 248.32,
+      "end": 248.54,
+      "text": " ஏது",
+      "confidence": null
+    },
+    {
+      "start": 248.54,
+      "end": 249.04,
+      "text": " பரண்மோகிறம்",
+      "confidence": null
+    },
+    {
+      "start": 249.04,
+      "end": 249.52,
+      "text": " இருந்தைகள்",
+      "confidence": null
+    },
+    {
+      "start": 249.52,
+      "end": 250.3,
+      "text": " குட்டாது.",
+      "confidence": null
+    },
+    {
+      "start": 250.3,
+      "end": 250.96,
+      "text": " நாடந்திய",
+      "confidence": null
+    },
+    {
+      "start": 250.96,
+      "end": 251.18,
+      "text": " அவர்",
+      "confidence": null
+    },
+    {
+      "start": 251.18,
+      "end": 251.54,
+      "text": " பரியம்",
+      "confidence": null
+    },
+    {
+      "start": 251.54,
+      "end": 252.42,
+      "text": " ஒரும்",
+      "confidence": null
+    },
+    {
+      "start": 252.42,
+      "end": 253.0,
+      "text": " வரத்து",
+      "confidence": null
+    },
+    {
+      "start": 253.0,
+      "end": 253.36,
+      "text": " முடித்து",
+      "confidence": null
+    },
+    {
+      "start": 253.36,
+      "end": 254.72,
+      "text": " நிட்சி",
+      "confidence": null
+    },
+    {
+      "start": 254.72,
+      "end": 254.78,
+      "text": " எல்லப்",
+      "confidence": null
+    },
+    {
+      "start": 254.78,
+      "end": 254.78,
+      "text": " பார்க்",
+      "confidence": null
+    },
+    {
+      "start": 254.78,
+      "end": 254.78,
+      "text": " கீட்டேன்",
+      "confidence": null
+    },
+    {
+      "start": 254.78,
+      "end": 255.02,
+      "text": " likedகனக்கு",
+      "confidence": null
+    },
+    {
+      "start": 255.02,
+      "end": 255.22,
+      "text": " முடி",
+      "confidence": null
+    },
+    {
+      "start": 255.22,
+      "end": 255.9,
+      "text": " இல்லாம்.",
+      "confidence": null
+    },
+    {
+      "start": 255.9,
+      "end": 256.14,
+      "text": " இதா",
+      "confidence": null
+    },
+    {
+      "start": 256.14,
+      "end": 256.72,
+      "text": " உன்னுடையும்",
+      "confidence": null
+    },
+    {
+      "start": 256.72,
+      "end": 258.38,
+      "text": " அனைத்தால்",
+      "confidence": null
+    },
+    {
+      "start": 258.38,
+      "end": 258.4,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 258.4,
+      "end": 258.7,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 258.7,
+      "end": 258.82,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 258.82,
+      "end": 258.82,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 258.82,
+      "end": 259.04,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 259.04,
+      "end": 259.08,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 259.08,
+      "end": 259.4,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 259.4,
+      "end": 259.56,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 259.56,
+      "end": 259.58,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 259.58,
+      "end": 260.0,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 260.0,
+      "end": 260.0,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 260.0,
+      "end": 260.32,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 260.32,
+      "end": 260.48,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 260.48,
+      "end": 260.56,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 260.56,
+      "end": 261.52,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 261.52,
+      "end": 261.52,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 261.52,
+      "end": 264.0,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 264.0,
+      "end": 265.7,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 265.7,
+      "end": 266.2,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 266.2,
+      "end": 266.2,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 266.2,
+      "end": 266.82,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 266.82,
+      "end": 266.82,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 266.82,
+      "end": 266.82,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 266.82,
+      "end": 267.18,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 267.18,
+      "end": 268.3,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 268.3,
+      "end": 271.42,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 271.42,
+      "end": 271.42,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 271.42,
+      "end": 271.84,
+      "text": " அன்னால்",
+      "confidence": null
+    },
+    {
+      "start": 271.84,
+      "end": 285.68,
+      "text": " அன்ன",
+      "confidence": null
+    },
+    {
+      "start": 285.68,
+      "end": 287.2,
+      "text": " நீங்களிய",
+      "confidence": null
+    },
+    {
+      "start": 287.2,
+      "end": 288.32,
+      "text": " மடிச்",
+      "confidence": null
+    },
+    {
+      "start": 288.32,
+      "end": 288.7,
+      "text": " சொல்லோகொண்டுக்கட்டு",
+      "confidence": null
+    },
+    {
+      "start": 288.7,
+      "end": 290.2,
+      "text": " இன்னும்",
+      "confidence": null
+    },
+    {
+      "start": 290.2,
+      "end": 292.58,
+      "text": " அமைவருக்கும்",
+      "confidence": null
+    },
+    {
+      "start": 292.58,
+      "end": 292.62,
+      "text": " 1",
+      "confidence": null
+    },
+    {
+      "start": 292.62,
+      "end": 293.34,
+      "text": "-2",
+      "confidence": null
+    },
+    {
+      "start": 293.34,
+      "end": 294.06,
+      "text": " seráண்",
+      "confidence": null
+    },
+    {
+      "start": 294.06,
+      "end": 294.06,
+      "text": " These",
+      "confidence": null
+    },
+    {
+      "start": 294.06,
+      "end": 294.06,
+      "text": " are",
+      "confidence": null
+    },
+    {
+      "start": 294.06,
+      "end": 299.1,
+      "text": " the",
+      "confidence": null
+    },
+    {
+      "start": 299.1,
+      "end": 301.82,
+      "text": " routes",
+      "confidence": null
+    },
+    {
+      "start": 301.82,
+      "end": 302.2,
+      "text": " between",
+      "confidence": null
+    },
+    {
+      "start": 302.2,
+      "end": 304.52,
+      "text": " the",
+      "confidence": null
+    },
+    {
+      "start": 304.52,
+      "end": 311.74,
+      "text": " gate",
+      "confidence": null
+    },
+    {
+      "start": 311.74,
+      "end": 311.92,
+      "text": " and",
+      "confidence": null
+    },
+    {
+      "start": 311.92,
+      "end": 312.1,
+      "text": " the",
+      "confidence": null
+    },
+    {
+      "start": 312.1,
+      "end": 314.8,
+      "text": " gate",
+      "confidence": null
+    },
+    {
+      "start": 314.8,
+      "end": 315.02,
+      "text": " crossing.",
+      "confidence": null
+    },
+    {
+      "start": 379.08,
+      "end": 380.12,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.12,
+      "end": 380.12,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.12,
+      "end": 380.12,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.12,
+      "end": 380.12,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.12,
+      "end": 380.12,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.12,
+      "end": 380.36,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.36,
+      "end": 380.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 380.56,
+      "end": 381.06,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 381.06,
+      "end": 381.14,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 381.14,
+      "end": 382.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 382.56,
+      "end": 382.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 382.56,
+      "end": 383.62,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 383.62,
+      "end": 386.02,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 386.02,
+      "end": 386.02,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 386.02,
+      "end": 386.02,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 386.02,
+      "end": 386.62,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 386.62,
+      "end": 386.76,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 386.76,
+      "end": 387.18,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 387.18,
+      "end": 387.32,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 387.32,
+      "end": 387.32,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 387.32,
+      "end": 387.42,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 387.42,
+      "end": 387.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 387.56,
+      "end": 391.44,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.44,
+      "end": 391.44,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.44,
+      "end": 391.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.56,
+      "end": 391.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.56,
+      "end": 391.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.56,
+      "end": 391.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.56,
+      "end": 391.56,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 391.56,
+      "end": 392.1,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 392.1,
+      "end": 392.1,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 392.1,
+      "end": 392.3,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 392.3,
+      "end": 393.54,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 393.54,
+      "end": 394.58,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 394.58,
+      "end": 394.88,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 394.88,
+      "end": 401.04,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 401.04,
+      "end": 404.38,
+      "text": " வருடைய",
+      "confidence": null
+    },
+    {
+      "start": 404.38,
+      "end": 405.0,
+      "text": " வ",
+      "confidence": null
+    },
+    {
+      "start": 615.0,
+      "end": 615.64,
+      "text": " ஆனால்",
+      "confidence": null
+    },
+    {
+      "start": 615.64,
+      "end": 616.2,
+      "text": " விஷமானும்",
+      "confidence": null
+    },
+    {
+      "start": 616.2,
+      "end": 616.6,
+      "text": " நல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 616.6,
+      "end": 617.02,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 617.02,
+      "end": 617.38,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 617.38,
+      "end": 617.52,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 617.52,
+      "end": 617.84,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 617.84,
+      "end": 618.22,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 618.22,
+      "end": 618.48,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 618.48,
+      "end": 618.52,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 618.52,
+      "end": 619.4,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 619.4,
+      "end": 619.58,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 619.58,
+      "end": 622.7,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 622.7,
+      "end": 623.38,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 623.38,
+      "end": 623.38,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 623.38,
+      "end": 623.76,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 623.76,
+      "end": 623.78,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 623.78,
+      "end": 624.48,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 624.48,
+      "end": 624.66,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 624.66,
+      "end": 625.18,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 625.18,
+      "end": 625.84,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 625.84,
+      "end": 627.02,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 627.02,
+      "end": 627.56,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 627.56,
+      "end": 628.14,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 628.14,
+      "end": 629.2,
+      "text": " அல்லுகின்",
+      "confidence": null
+    },
+    {
+      "start": 629.2,
+      "end": 644.98,
+      "text": " அ",
+      "confidence": null
+    }
+  ]
+}

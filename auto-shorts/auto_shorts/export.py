@@ -212,6 +212,38 @@ def _find_font_file() -> str:
     return candidates[0]
 
 
+def _format_srt_timestamp(seconds: float) -> str:
+    """Format seconds as an SRT timestamp."""
+    total_ms = max(0, int(round(float(seconds) * 1000)))
+    hours, remainder = divmod(total_ms, 3_600_000)
+    minutes, remainder = divmod(remainder, 60_000)
+    whole_seconds, milliseconds = divmod(remainder, 1000)
+    return f"{hours:02d}:{minutes:02d}:{whole_seconds:02d},{milliseconds:03d}"
+
+
+def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, path: Path) -> None:
+    """Write overlapping word timestamps as clip-relative SRT cues."""
+    cues = []
+    for word in words or []:
+        text = str(word.get("text", "")).strip()
+        word_start = float(word.get("start", clip_start))
+        word_end = float(word.get("end", word_start))
+        start = max(clip_start, word_start)
+        end = min(clip_end, word_end)
+        if text and end > start:
+            cues.append((start - clip_start, end - clip_start, text))
+
+    lines = []
+    for index, (start, end, text) in enumerate(cues, start=1):
+        lines.extend([
+            str(index),
+            f"{_format_srt_timestamp(start)} --> {_format_srt_timestamp(end)}",
+            text,
+            "",
+        ])
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def _build_guest_overlay(
     guest_info: Dict, out_w: int, out_h: int
 ) -> str:

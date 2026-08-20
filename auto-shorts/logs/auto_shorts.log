@@ -271,3 +271,68 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\Amithshah.mp4':
 Error opening output file D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp90upk621\cut_01.mp4.
 Error opening output files: Invalid argument
 
+2026-08-20 21:47:13,090 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-20 21:47:13,093 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-20 21:47:18,649 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-20 21:47:18,649 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-20 21:47:18,649 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-20 21:47:44,640 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-20 21:55:50,777 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-20 21:55:50,778 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-20 21:55:57,899 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-20 21:55:57,902 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-20 21:55:57,904 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-20 21:56:34,210 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-20 21:59:05,811 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-20 21:59:05,812 DEBUG auto_shorts Transcript segments: 42, words: 0
+2026-08-20 22:05:26,677 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-20 22:05:26,678 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-08-20 22:05:26,684 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-20 22:06:15,943 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-20 22:06:15,944 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=True
+2026-08-20 22:06:23,340 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-20 22:06:23,341 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-20 22:06:23,341 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-20 22:06:44,926 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-20 22:07:27,122 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-20 22:07:27,123 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=True
+2026-08-20 22:07:32,632 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-20 22:07:32,633 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-20 22:07:32,634 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-20 22:07:59,751 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-20 22:18:22,386 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-0ede41c4fc01831b0018110fe693659598757f84.transcript.json
+2026-08-20 22:18:22,390 DEBUG auto_shorts Transcript segments: 35, words: 311
+2026-08-20 22:18:22,397 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-20 22:18:22,798 ERROR auto_shorts Project 47 failed while processing D:\tmp\Stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 151, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 382, in export_clips
+    _write_srt_for_clip(seg.get("words", []), start, end, srt_file)
+    ^^^^^^^^^^^^^^^^^^^
+NameError: name '_write_srt_for_clip' is not defined
+2026-08-20 22:19:21,122 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-0ede41c4fc01831b0018110fe693659598757f84.transcript.json
+2026-08-20 22:19:21,128 DEBUG auto_shorts Transcript segments: 36, words: 354
+2026-08-20 22:19:21,137 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-20 22:19:21,431 ERROR auto_shorts Project 47 failed while processing D:\tmp\Stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 151, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 382, in export_clips
+    _write_srt_for_clip(seg.get("words", []), start, end, srt_file)
+    ^^^^^^^^^^^^^^^^^^^
+NameError: name '_write_srt_for_clip' is not defined
+2026-08-20 22:19:21,434 ERROR auto_shorts Export failed during last-dry-run export
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 328, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 151, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 382, in export_clips
+    _write_srt_for_clip(seg.get("words", []), start, end, srt_file)
+    ^^^^^^^^^^^^^^^^^^^
+NameError: name '_write_srt_for_clip' is not defined
