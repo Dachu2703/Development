@@ -336,3 +336,78 @@ Traceback (most recent call last):
     _write_srt_for_clip(seg.get("words", []), start, end, srt_file)
     ^^^^^^^^^^^^^^^^^^^
 NameError: name '_write_srt_for_clip' is not defined
+2026-08-20 22:54:13,432 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-20 22:54:13,435 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-08-20 22:54:13,443 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-20 23:02:57,787 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-20 23:02:57,790 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-08-20 23:02:57,798 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-21 19:56:18,694 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-21 19:56:18,697 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-21 19:56:24,671 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-21 19:56:24,675 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-21 19:56:24,676 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-21 19:56:50,546 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-21 20:05:27,466 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-21 20:05:27,477 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-21 20:05:27,555 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-23 20:26:45,317 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-23 20:26:45,317 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-23 20:26:47,424 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-23 20:26:47,424 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-23 20:26:47,425 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-23 20:26:54,006 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-23 20:28:31,656 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-23 20:28:31,656 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-23 20:28:34,170 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-23 20:28:34,172 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-23 20:28:34,172 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-23 20:28:48,347 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-23 20:39:19,689 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 20:39:19,691 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 20:39:19,699 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 21:13:01,523 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 21:13:01,531 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 21:13:01,542 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 21:28:33,088 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 21:28:33,090 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 21:28:33,099 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-23 21:38:09,907 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 21:38:09,910 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 21:38:09,917 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 21:39:16,758 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 21:39:16,762 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 21:39:16,769 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 22:09:28,431 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 22:09:28,434 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 22:09:28,444 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 22:33:07,516 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 22:33:07,517 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 22:33:07,523 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 22:52:28,706 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 22:52:28,711 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 22:52:28,721 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-23 22:52:40,414 ERROR auto_shorts Export failed during last-dry-run export
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 367, in <module>
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+TypeError: export_clips() got an unexpected keyword argument 'bottom_image_path'
+2026-08-23 22:55:09,807 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 22:55:09,810 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 22:55:09,823 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 23:15:18,495 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 23:15:18,546 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 23:15:18,620 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 23:32:00,703 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 23:32:00,705 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 23:32:00,713 DEBUG auto_shorts Initial candidate clips: 6
+2026-08-23 23:32:46,857 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 23:32:46,857 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 23:32:46,867 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-23 23:47:29,348 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-23 23:47:29,350 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-23 23:47:29,350 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-24 00:05:20,692 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-24 00:05:20,692 DEBUG auto_shorts Transcript segments: 38, words: 0
+2026-08-24 00:05:20,700 DEBUG auto_shorts Initial candidate clips: 2

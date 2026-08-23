@@ -16,7 +16,23 @@ KEYWORDS = [
     "do not",
 ]
 
+INTRO_MARKERS = (
+    "welcome",
+    "hello everyone",
+    "hi everyone",
+    "thanks for joining",
+    "thank you for joining",
+    "in today's video",
+    "in this video",
+    "today we are going to",
+    "today we're going to",
+    "my name is",
+    "i am your host",
+    "this channel",
+)
+
 MAX_SHORT_DURATION = 180
+MIN_CONTENT_START = 10.0
 
 
 def duration_bounds(target_duration: int) -> Tuple[int, int]:
@@ -49,6 +65,98 @@ def _number_score(text: str) -> float:
 
 def _question_score(text: str) -> float:
     return 1.5 if text.strip().endswith("?") else 0.0
+
+
+def _has_content_signal(text: str) -> bool:
+    """Return True when the segment clearly carries value beyond generic filler."""
+    normalized = re.sub(r"\s+", " ", text.lower()).strip()
+    if not normalized:
+        return False
+    if _keyword_score(text) > 0 or _number_score(text) > 0 or _question_score(text) > 0:
+        return True
+    return any(token in normalized for token in (
+        "because",
+        "therefore",
+        "result",
+        "important",
+        "remember",
+        "mistake",
+        "tip",
+        "note",
+        "key point",
+        "problem",
+        "solution",
+        "this means",
+        "you should",
+    ))
+
+
+def _has_follow_through_signal(text: str) -> bool:
+    """Identify explanation or conclusion language that completes a point."""
+    normalized = re.sub(r"\s+", " ", text.lower()).strip()
+    return any(token in normalized for token in (
+        "because",
+        "therefore",
+        "so the result",
+        "this means",
+        "as a result",
+        "in conclusion",
+        "finally",
+        "that is why",
+        "you should",
+    ))
+
+
+def _is_intro_segment(text: str) -> bool:
+    """Identify common opening chatter that should not be a clip peak."""
+    normalized = re.sub(r"\s+", " ", text.lower()).strip()
+    if not normalized:
+        return False
+
+    if any(marker in normalized for marker in INTRO_MARKERS):
+        return True
+
+    intro_patterns = (
+        "this is an introduction",
+        "introduction to the video",
+        "introductory",
+        "opening statement",
+        "welcome back",
+        "hello everyone",
+        "hi everyone",
+        "my name is",
+        "i am your host",
+        "today we are going to",
+        "today we're going to",
+        "in today's video",
+        "in this video",
+        "this video is about",
+    )
+    if any(pattern in normalized for pattern in intro_patterns):
+        return True
+
+    return normalized.startswith((
+        "this is",
+        "in this",
+        "today",
+        "welcome",
+        "hello",
+        "hi ",
+        "my name",
+        "i am",
+        "i'm",
+    ))
+
+
+def _leading_intro_end(segments: List[Dict]) -> int:
+    """Return the first segment after a contiguous opening introduction."""
+    intro_end = 0
+    for segment in segments:
+        text = str(segment.get("text", ""))
+        if not _is_intro_segment(text):
+            break
+        intro_end += 1
+    return intro_end
 
 
 def _length_score(length: float, min_length: int, max_length: int) -> float:
@@ -155,20 +263,49 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
     max_length = min(int(max_length), MAX_SHORT_DURATION)
 
     candidates: List[Dict] = []
+    intro_end = _leading_intro_end(segments)
+    first_content_index = None
     for index, seg in enumerate(segments):
+        text = str(seg.get("text", ""))
+        if index >= intro_end and _has_content_signal(text):
+            first_content_index = index
+            break
+    for index, seg in enumerate(segments):
+        # Do not select any early generic preamble before the first meaningful
+        # content segment. This prevents intro/setup narration from being used as
+        # the actual short when the real takeaway happens later.
+        if index < intro_end:
+            continue
+        if first_content_index is not None and index < first_content_index and not _has_content_signal(str(seg.get("text", ""))):
+            continue
         peak_start = float(seg.get("start", 0.0))
         peak_end = float(seg.get("end", peak_start))
-        start = peak_start
+        if peak_end <= MIN_CONTENT_START:
+            continue
+        start = max(peak_start, MIN_CONTENT_START)
         end = peak_end
         text = seg.get("text", "")
         if target_duration is not None:
             start, end = _peak_centered_window(segments, index, float(target_duration), float(max_length))
+            start = max(start, MIN_CONTENT_START)
         length = end - start
         ks = _keyword_score(text)
         ns = _number_score(text)
         qs = _question_score(text)
         ls = _length_score(length, min_length, max_length)
-        total = ks * 1.0 + ns * 1.0 + qs * 1.0 + ls * 1.0
+        sequence_score = 0.0
+        has_follow_through = False
+        if target_duration is not None:
+            for following in segments[index + 1:]:
+                following_start = float(following.get("start", end))
+                if following_start >= end:
+                    break
+                if _has_follow_through_signal(str(following.get("text", ""))):
+                    has_follow_through = True
+                    break
+            if has_follow_through:
+                sequence_score = 1.5
+        total = ks * 1.0 + ns * 1.0 + qs * 1.0 + ls * 1.0 + sequence_score
         reason_parts = []
         if ks > 0:
             reason_parts.append("keywords")
@@ -176,6 +313,8 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
             reason_parts.append("numbers")
         if qs > 0:
             reason_parts.append("question")
+        if has_follow_through:
+            reason_parts.append("follow-through")
         reason_parts.append(f"len={int(length)}")
         if target_duration is not None:
             reason_parts.append("peak-centered")

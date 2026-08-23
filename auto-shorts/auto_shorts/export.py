@@ -1,4 +1,5 @@
 import subprocess
+import json
 from pathlib import Path
 from typing import List, Dict, Optional
 import tempfile
@@ -146,6 +147,12 @@ def _compute_crop_x(in_w: int, in_h: int, out_w: int, face_cx: float) -> int:
     return left
 
 
+def _compute_crop_y(in_h: int, out_h: int, face_cy: float) -> int:
+    half = out_h / 2
+    top = int(max(0, min(in_h - out_h, face_cy - half)))
+    return top
+
+
 def _get_video_fps(path: str) -> float:
     """Read the frame rate of ``path`` via ffprobe, falling back to 30 fps."""
     cmd = [
@@ -191,9 +198,9 @@ def _build_fit_filter(
     out_ar = out_w / out_h
     if in_ar > out_ar:
         # Source wider than target: scale by height, centre-crop sides.
-        return f"scale=-2:{out_h},crop={out_w}:{out_h}:(iw-{out_w})/2:0"
+        return f"scale=-2:{out_h},crop={out_w}:{out_h}:(iw-{out_w})/2:(ih-{out_h})/2"
     # Source taller than target: scale by width, centre-crop top/bottom.
-    return f"scale={out_w}:-2,crop={out_w}:{out_h}:0:(ih-{out_h})/2"
+    return f"scale={out_w}:-2,crop={out_w}:{out_h}:(iw-{out_w})/2:(ih-{out_h})/2"
 
 
 def _find_font_file() -> str:
@@ -247,38 +254,58 @@ def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, p
 def _build_guest_overlay(
     guest_info: Dict, out_w: int, out_h: int
 ) -> str:
-    """Compose drawtext filters for guest name, contact, and other info.
+    """Disable guest and promotional text overlays in generated clips."""
+    return ""
 
-    The overlay is drawn into a slim semi-transparent bar at the top of the
-    frame so it never covers the speaker's face (centre) or the captions
-    (bottom). Font size is readably scaled to the output height (≈3.3%).
-    """
-    if not guest_info:
-        return ""
-    lines = []
-    for key in ("name", "contact", "extra"):
-        val = str(guest_info.get(key, "") or "").strip()
-        if val:
-            lines.append(val)
-    if not lines:
-        return ""
 
-    fontsize = max(30, int(round(out_h * 0.033)))
-    line_h = int(round(fontsize * 1.45))
-    border = max(8, int(round(fontsize * 0.3)))
-    font_file = _find_font_file().replace("'", "\\'")
-    filters = []
-    start_y = int(round(out_h * 0.03))
-    for i, line in enumerate(lines):
-        safe = line.replace("'", "\\'").replace("%", "\\%")
-        y = start_y + i * line_h
-        filters.append(
-            f"drawtext=fontfile='{font_file}':"
-            f"text='{safe}':fontcolor=white:fontsize={fontsize}:"
-            f"box=1:boxcolor=black@0.55:boxborderw={border}:"
-            f"x=20:y={y}"
+def _build_logo_overlay(logo_path: Optional[str], out_w: int, out_h: int) -> str:
+    """Return an optional top-right logo overlay with safe padding."""
+    if not logo_path:
+        return ""
+    logo = Path(logo_path)
+    if not logo.exists():
+        return ""
+    margin = max(20, int(round(out_w * 0.02)))
+    size = max(28, int(round(min(out_w, out_h) * 0.09)))
+    return (
+        f"overlay=x=W-w-{margin}:y={margin}:" 
+        f"eval=init:shortest=1:format=auto,"
+        f"scale={size}:{size}"
+    )
+
+
+def _build_three_band_filter(
+    out_w: int, out_h: int, guest_info: Optional[Dict], duration: float
+) -> str:
+    video_h = int(round(out_h * 0.75))
+    banner_h = int(round(out_h * 0.03))
+    image_h = out_h - video_h - banner_h
+    banner = f"color=c=0x101522:s={out_w}x{banner_h}:d={duration}[banner]"
+    if guest_info:
+        lines = [
+            str(guest_info.get("title", "") or "").strip(),
+            str(guest_info.get("name", "") or "").strip(),
+            str(guest_info.get("contact", "") or "").strip(),
+        ]
+        text = " | ".join(line for line in lines if line)
+    else:
+        text = ""
+    if text:
+        safe = text.replace("\\", "\\\\").replace("'", "\\'").replace(":", "\\:")
+        font_file = _find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+        banner += (
+            f",drawtext=fontfile='{font_file}':text='{safe}':"
+            f"fontcolor=white:fontsize={max(28, int(out_h * 0.032))}:"
+            f"x=(w-text_w)/2:y=(h-text_h)/2"
         )
-    return ",".join(filters)
+    return (
+        f"[0:v]scale={out_w}:{video_h}:force_original_aspect_ratio=increase,"
+        f"crop={out_w}:{video_h}:(iw-{out_w})/2:(ih-{video_h})/2[main];"
+        f"{banner};"
+        f"[1:v]scale={out_w}:{image_h}:force_original_aspect_ratio=decrease,"
+        f"pad={out_w}:{image_h}:(ow-iw)/2:(oh-ih)/2:color=black[image];"
+        f"[main][banner][image]vstack=inputs=3[vout]"
+    )
 
 
 def _verify_video_file(path: Path, expected_w: int, expected_h: int) -> List[str]:
@@ -309,8 +336,17 @@ def _verify_video_file(path: Path, expected_w: int, expected_h: int) -> List[str
         if video is None:
             issues.append("output has no video stream")
         else:
-            w = int(video.get("width", 0) or 0)
-            h = int(video.get("height", 0) or 0)
+            matching_video = next(
+                (
+                    stream for stream in streams
+                    if stream.get("codec_type") == "video"
+                    and int(stream.get("width", 0) or 0) == expected_w
+                    and int(stream.get("height", 0) or 0) == expected_h
+                ),
+                video,
+            )
+            w = int(matching_video.get("width", 0) or 0)
+            h = int(matching_video.get("height", 0) or 0)
             if w != expected_w or h != expected_h:
                 issues.append(
                     f"resolution {w}x{h} does not match selected {expected_w}x{expected_h}"
@@ -322,6 +358,41 @@ def _verify_video_file(path: Path, expected_w: int, expected_h: int) -> List[str
     return issues
 
 
+def _remove_extra_video_streams(path: Path, expected_w: int, expected_h: int) -> None:
+    probe = [
+        "ffprobe", "-v", "error", "-show_streams", "-of", "json", str(path)
+    ]
+    proc = subprocess.run(probe, capture_output=True, text=True)
+    if proc.returncode != 0:
+        return
+    try:
+        streams = json.loads(proc.stdout or "{}").get("streams", [])
+        video_streams = [s for s in streams if s.get("codec_type") == "video"]
+        matching = next(
+            (
+                s for s in video_streams
+                if int(s.get("width", 0) or 0) == expected_w
+                and int(s.get("height", 0) or 0) == expected_h
+            ),
+            None,
+        )
+        if matching is None or len(video_streams) <= 1:
+            return
+        stream_index = int(matching.get("index", 0))
+        clean_path = path.with_name(f"{path.stem}_streams{path.suffix}")
+        remux = [
+            "ffmpeg", "-y", "-i", str(path),
+            "-map", f"0:{stream_index}", "-map", "0:a:0?",
+            "-c", "copy", "-map_metadata", "-1", "-map_chapters", "-1",
+            str(clean_path),
+        ]
+        cleaned = subprocess.run(remux, capture_output=True, text=True)
+        if cleaned.returncode == 0 and clean_path.exists():
+            os.replace(str(clean_path), str(path))
+    except (TypeError, ValueError, OSError, json.JSONDecodeError):
+        return
+
+
 def export_clips(
     video_path: str,
     segments: List[Dict],
@@ -331,8 +402,11 @@ def export_clips(
     captions: bool = False,
     clean_audio_flag: bool = False,
     face_track: bool = False,
-    resolution: tuple = (1080, 1920),
+    resolution: tuple = (1120, 1920),
     guest_info: Optional[Dict] = None,
+    transitions: Optional[Dict] = None,
+    logo_path: Optional[str] = None,
+    bottom_image_path: Optional[str] = None,
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
@@ -359,38 +433,40 @@ def export_clips(
             cut_file = td / f"cut_{i:02d}.mp4"
             vf = []
             vf_str = None
+            out_w, out_h = resolution
+            use_three_band_layout = bool(bottom_image_path and Path(bottom_image_path).exists())
             if vertical:
                 # compute crop parameters based on target resolution aspect ratio
-                out_w, out_h = resolution
                 size = _get_video_size(video_path)
                 if size:
                     in_w, in_h = size
-                    # crop width to match target aspect ratio (e.g. 9:16)
-                    crop_w = int(round(in_h * out_w / out_h))
-                    # face tracking overrides center crop
+                    if in_w >= in_h:
+                        crop_w = int(round(in_h * out_w / out_h))
+                        crop_h = in_h
+                    else:
+                        crop_w = in_w
+                        crop_h = int(round(in_w * out_h / out_w))
+
+                    crop_x = max(0, min(in_w - crop_w, (in_w - crop_w) // 2))
+                    crop_y = max(0, min(in_h - crop_h, (in_h - crop_h) // 2))
+
                     if face_track:
-                        # detect face at middle time
                         mid = (start + end) / 2.0
                         face = _detect_face_center(video_path, mid)
                         if face:
                             cx, cy, fw, fh = face
                             crop_x = _compute_crop_x(in_w, in_h, crop_w, cx)
-                            vf.append(f"crop={crop_w}:{in_h}:{crop_x}:0")
-                        else:
-                            # fallback to center crop
-                            crop_x = max(0, (in_w - crop_w) // 2)
-                            vf.append(f"crop={crop_w}:{in_h}:{crop_x}:0")
-                    else:
-                        crop_x = max(0, (in_w - crop_w) // 2)
-                        vf.append(f"crop={crop_w}:{in_h}:{crop_x}:0")
+                            crop_y = _compute_crop_y(in_h, crop_h, cy)
+
+                    vf.append(f"crop={crop_w}:{crop_h}:{crop_x}:{crop_y}")
                 else:
-                    # unknown size: use responsive crop
                     vf.append(f"crop=round(in_h*{out_w}/{out_h}):in_h")
                 vf.append(f"scale={out_w}:{out_h}")
                 vf_str = ",".join(vf)
 
-            # guest info overlay filter (applied after the vertical resize)
+            # Keep the actual content centered; default is no text overlay.
             guest_vf = _build_guest_overlay(guest_info, out_w, out_h) or None
+            logo_vf = _build_logo_overlay(logo_path, out_w, out_h) or None
 
             cmd = [
                 "ffmpeg",
@@ -402,7 +478,21 @@ def export_clips(
                 "-t",
                 str(duration),
             ]
-            if vf_str or captions or clean_audio_flag:
+            if use_three_band_layout:
+                cmd += ["-loop", "1", "-i", str(bottom_image_path)]
+                cmd += [
+                    "-filter_complex",
+                    _build_three_band_filter(out_w, out_h, guest_info, duration),
+                    "-map", "[vout]",
+                    "-map", "0:a:0?",
+                    "-map_metadata", "-1",
+                    "-map_chapters", "-1",
+                    "-sn",
+                    "-dn",
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                    "-c:a", "aac", "-b:a", "192k", "-shortest", str(cut_file),
+                ]
+            elif vf_str or captions or clean_audio_flag:
                 # Combine all filter components into a single -vf option
                 # (multiple -vf options cause FFmpeg to only use the last one)
                 vf_parts = []
@@ -415,6 +505,8 @@ def export_clips(
                     subtitle_vf = f"subtitles={str(srt_file)}:force_style='Fontsize=36,PrimaryColour=&HFFFFFF&'"
                 if guest_vf:
                     vf_parts.append(guest_vf)
+                if logo_vf:
+                    vf_parts.append(logo_vf)
                 if subtitle_vf:
                     vf_parts.append(subtitle_vf)
                 if vf_parts:
@@ -473,17 +565,19 @@ def export_clips(
                         raise RuntimeError(f"Export failed moving file: {e} -> {e2}")
 
             # post-render verification (hard resolution requirement)
+            if use_three_band_layout:
+                _remove_extra_video_streams(out_file, out_w, out_h)
             verify_issues = _verify_video_file(out_file, out_w, out_h)
             if verify_issues:
                 # Re-export with explicit scale+crop to force the exact resolution
+                reexport_file = out_file.with_name(f"{out_file.stem}_verified{out_file.suffix}")
                 reexport_cmd = [
                     "ffmpeg",
                     "-y",
                     "-i",
                     str(out_file),
                     "-vf",
-                    f"{_build_fit_filter(_get_video_size(video_path)[0], _get_video_size(video_path)[1], out_w, out_h)},",
-                    f"scale={out_w}:{out_h}",
+                    f"{_build_fit_filter(_get_video_size(video_path)[0], _get_video_size(video_path)[1], out_w, out_h)},scale={out_w}:{out_h}",
                     "-c:v",
                     "libx264",
                     "-preset",
@@ -492,11 +586,12 @@ def export_clips(
                     "23",
                     "-c:a",
                     "copy",
-                    str(out_file),
+                    str(reexport_file),
                 ]
                 proc3 = subprocess.run(reexport_cmd, capture_output=True, text=True)
                 if proc3.returncode != 0:
                     raise RuntimeError(f"Re-export to exact resolution failed: {proc3.stderr}")
+                os.replace(str(reexport_file), str(out_file))
                 # Re-verify
                 verify_issues = _verify_video_file(out_file, out_w, out_h)
                 if verify_issues:

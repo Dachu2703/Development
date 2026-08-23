@@ -87,7 +87,7 @@ fast_mode = st.checkbox(
 vertical = True
 resolution_choice = st.selectbox(
     "Output resolution",
-    ["1080x1920", "1920x1080", "1080x1080"],
+    ["1120x1920", "1920x1080", "1080x1080"],
     index=0,
     help="Resolution for the exported vertical short clips.",
 )
@@ -137,12 +137,14 @@ if captions and fast_mode:
 
 # --- Guest Information Overlay -----------------------------------------
 st.header("Guest Information Overlay")
+guest_title = st.text_input("Title", help="Displayed in the middle banner of each short clip")
 guest_name = st.text_input("Guest name", help="Displayed at top of each short clip")
 guest_contact = st.text_input("Guest contact number", help="Displayed beneath the name")
 guest_extra = st.text_input("Extra information (optional)", help="Any other relevant guest details")
 
 st.header("Upload or select your video")
 uploaded = st.file_uploader("Upload a video file", type=["mp4", "mov", "mkv", "avi", "webm"])
+bottom_image = st.file_uploader("Upload bottom image", type=["png", "jpg", "jpeg", "webp"])
 local_path = st.text_input("Or use a local file path", placeholder="D:\\tmp\\Amitsha.mp4")
 
 st.markdown("**Output folder**")
@@ -187,6 +189,19 @@ def _find_ffmpeg_executable() -> Path | None:
                 return path
 
     return None
+
+
+def _materialize_bottom_image(uploaded_image) -> str | None:
+    if uploaded_image is None:
+        return None
+    image_dir = project_tmp_root / "layout-images"
+    image_dir.mkdir(parents=True, exist_ok=True)
+    image_path = image_dir / uploaded_image.name
+    image_path.write_bytes(uploaded_image.getbuffer())
+    return str(image_path)
+
+
+bottom_image_path = _materialize_bottom_image(bottom_image)
 
 
 ffmpeg_exe = _find_ffmpeg_executable()
@@ -264,10 +279,12 @@ if st.button("Create dry-run manifest"):
                     transitions_threshold=transition_threshold,
                     transitions_max_per_clip=transition_max_per_clip,
                     guest_info={
+                        "title": guest_title,
                         "name": guest_name,
                         "contact": guest_contact,
                         "extra": guest_extra,
                     },
+                    bottom_image_path=bottom_image_path,
                 )
             st.success(f"Preview manifest created: {manifest_path}")
             st.session_state["last_project_id"] = pid
@@ -340,10 +357,12 @@ if st.session_state.get("last_project_id"):
                         transitions_threshold=transition_threshold,
                         transitions_max_per_clip=transition_max_per_clip,
                         guest_info={
+                            "title": guest_title,
                             "name": guest_name,
                             "contact": guest_contact,
                             "extra": guest_extra,
                         },
+                        bottom_image_path=bottom_image_path,
                     )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             else:
@@ -353,10 +372,12 @@ if st.session_state.get("last_project_id"):
                         vertical=vertical, captions=False, clean_audio_flag=clean_audio_flag,
                         resolution=resolution,
                         guest_info={
+                            "title": guest_title,
                             "name": guest_name,
                             "contact": guest_contact,
                             "extra": guest_extra,
                         },
+                        bottom_image_path=_materialize_bottom_image(bottom_image),
                     )
                 for result, segment in zip(results, manifest_segments):
                     db.add_clip(
@@ -409,10 +430,12 @@ if st.button("Export Clips (run full job)"):
                         transitions_threshold=transition_threshold,
                         transitions_max_per_clip=transition_max_per_clip,
                         guest_info={
+                            "title": guest_title,
                             "name": guest_name,
                             "contact": guest_contact,
                             "extra": guest_extra,
                         },
+                        bottom_image_path=_materialize_bottom_image(bottom_image),
                     )
                 st.success(f"Export completed. Manifest: {manifest_path}")
             except Exception as e:

@@ -83,6 +83,25 @@ def test_target_duration_builds_a_peak_centered_clip(tmp_path: Path):
     assert "peak-centered" in clip["reason"]
 
 
+def test_target_duration_prefers_key_point_with_follow_through(tmp_path: Path):
+    transcript = {
+        "duration": 100.0,
+        "segments": [
+            {"start": 10, "end": 30, "text": "The key point is to prepare first."},
+            {"start": 30, "end": 50, "text": "This is a separate topic."},
+            {"start": 50, "end": 65, "text": "The important result is 80%."},
+            {"start": 65, "end": 80, "text": "Therefore, you should apply this every time."},
+        ],
+    }
+    path = tmp_path / "sequence.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), target_duration=40, top_k=1)
+
+    assert len(picks) == 1
+    assert "follow-through" in picks[0]["reason"]
+
+
 def test_duration_bounds_enforces_three_minute_limit():
     assert duration_bounds(MAX_SHORT_DURATION) == (153, MAX_SHORT_DURATION)
     with pytest.raises(ValueError):
@@ -105,3 +124,57 @@ def test_selected_highlights_are_returned_in_source_order(tmp_path: Path):
 
     assert len(picks) == 2
     assert [clip["start"] for clip in picks] == sorted(clip["start"] for clip in picks)
+
+
+def test_intro_segments_are_excluded_from_top_candidates(tmp_path: Path):
+    transcript = {
+        "duration": 80.0,
+        "segments": [
+            {"start": 0, "end": 15, "text": "This is an introduction to the video."},
+            {"start": 15, "end": 35, "text": "The key point is that the process saves 50% time."},
+            {"start": 35, "end": 55, "text": "Important tip: focus on the main action."},
+        ],
+    }
+    path = tmp_path / "intro_exclusion.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), min_length=15, max_length=60, top_k=2)
+
+    assert len(picks) >= 1
+    assert all(clip["start"] >= 15 for clip in picks)
+
+
+def test_generic_opening_preamble_is_excluded_before_content(tmp_path: Path):
+    transcript = {
+        "duration": 120.0,
+        "segments": [
+            {"start": 0, "end": 12, "text": "We are going to talk about the feature today."},
+            {"start": 12, "end": 30, "text": "The big mistake is to skip the setup step."},
+            {"start": 30, "end": 50, "text": "Remember: the key point is to focus on the final result."},
+        ],
+    }
+    path = tmp_path / "generic_intro.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), min_length=15, max_length=60, top_k=2)
+
+    assert len(picks) >= 1
+    assert all(clip["start"] >= 12 for clip in picks)
+
+
+def test_first_ten_seconds_are_never_selected(tmp_path: Path):
+    transcript = {
+        "duration": 60.0,
+        "segments": [
+            {"start": 0, "end": 6, "text": "Opening music and welcome."},
+            {"start": 6, "end": 12, "text": "Opening context."},
+            {"start": 12, "end": 30, "text": "The important solution is to act early."},
+        ],
+    }
+    path = tmp_path / "first_ten_seconds.json"
+    path.write_text(json.dumps(transcript))
+
+    picks = score_sentences(str(path), min_length=5, max_length=60, top_k=3, target_duration=20)
+
+    assert picks
+    assert all(clip["start"] >= 10 for clip in picks)

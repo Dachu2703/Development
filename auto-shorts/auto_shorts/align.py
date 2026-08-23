@@ -89,6 +89,9 @@ def snap_to_silence(
 
         # clamp to duration if available
         if duration is not None:
+            duration = max(0.0, duration)
+            new_start = min(max(0.0, new_start), duration)
+            new_end = min(max(new_start, new_end), duration)
             if new_end > duration:
                 new_end = duration
             if new_start < 0:
@@ -97,6 +100,7 @@ def snap_to_silence(
         # A video shorter than min_length is valid; do not create an invalid
         # end-before-start interval when clamping to its duration.
         new_start = min(max(0.0, new_start), new_end)
+        new_end = max(new_start, new_end)
 
         out.append({"start": max(0.0, new_start), "end": float(new_end), **{k: v for k, v in c.items() if k not in ("start", "end")}})
 

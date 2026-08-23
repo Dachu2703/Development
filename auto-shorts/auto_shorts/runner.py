@@ -8,7 +8,7 @@ from .db import update_project_status, add_clip
 from .logging_config import logger
 
 
-def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, resolution: tuple = (1080, 1920), transitions_enabled: bool = False, transitions_type: str = "zoom_in", transitions_duration: float = 1.6, transitions_min_gap: float = 6.0, transitions_threshold: float = 3.0, transitions_max_per_clip: int = 3, guest_info: Optional[Dict] = None, **kwargs):
+def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, resolution: tuple = (1120, 1920), transitions_enabled: bool = False, transitions_type: str = "zoom_in", transitions_duration: float = 1.6, transitions_min_gap: float = 6.0, transitions_threshold: float = 3.0, transitions_max_per_clip: int = 3, guest_info: Optional[Dict] = None, **kwargs):
     src = project["source"]
     pid = project["id"]
     update_project_status(db_path, pid, "processing")
@@ -158,6 +158,7 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
             clean_audio_flag=clean_audio,
             resolution=resolution,
             guest_info=guest_info,
+            bottom_image_path=kwargs.get("bottom_image_path"),
         )
         # store clips
         for r in results:

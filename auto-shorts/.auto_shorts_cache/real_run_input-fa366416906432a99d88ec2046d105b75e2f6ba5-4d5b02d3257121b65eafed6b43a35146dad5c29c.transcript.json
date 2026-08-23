@@ -1,0 +1,14 @@
+{
+  "source": "output\\real_run_input.mp4",
+  "model": "small",
+  "duration": 18.0,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 18.400000000000002,
+      "text": " Thank you for watching, see you next time!",
+      "words": []
+    }
+  ],
+  "words": []
+}
