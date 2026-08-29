@@ -6,8 +6,6 @@ import tempfile
 import os
 import shutil
 
-from .audio_clean import clean_audio
-
 MAX_SHORT_DURATION = 180.0
 
 PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
@@ -203,20 +201,29 @@ def _build_fit_filter(
     return f"scale={out_w}:-2,crop={out_w}:{out_h}:(iw-{out_w})/2:(ih-{out_h})/2"
 
 
-def _find_font_file() -> str:
-    """Locate a system truetype font usable by ffmpeg's drawtext filter."""
-    candidates = [
+def _find_font_file(requested_path: Optional[str] = None) -> str:
+    """Return the best available font for ffmpeg text rendering.
+
+    When the user specifies a font file in the UI, prefer that exact path before
+    falling back to system fonts. This keeps the selected typography consistent in
+    the final exported short.
+    """
+    candidates: List[str] = []
+    if requested_path:
+        candidates.append(str(requested_path))
+    candidates += [
         "C:/Windows/Fonts/arial.ttf",
         "C:/Windows/Fonts/arialbd.ttf",
+        "C:/Windows/Fonts/Nirmala.ttf",
         "C:/Windows/Fonts/segoeui.ttf",
         "C:/Windows/Fonts/calibri.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "/System/Library/Fonts/Helvetica.ttc",
     ]
     for c in candidates:
-        if _Path(c).exists():
+        if c and _Path(c).exists():
             return c
-    return candidates[0]
+    return candidates[0] if candidates else "arial.ttf"
 
 
 def _format_srt_timestamp(seconds: float) -> str:
@@ -275,12 +282,12 @@ def _build_logo_overlay(logo_path: Optional[str], out_w: int, out_h: int) -> str
 
 
 def _build_three_band_filter(
-    out_w: int, out_h: int, guest_info: Optional[Dict], duration: float
+    out_w: int, out_h: int, guest_info: Optional[Dict], duration: float, font_path: Optional[str] = None
 ) -> str:
     video_h = int(round(out_h * 0.75))
     banner_h = int(round(out_h * 0.03))
     image_h = out_h - video_h - banner_h
-    banner = f"color=c=0x101522:s={out_w}x{banner_h}:d={duration}[banner]"
+    banner = f"color=c=0x101522:s={out_w}x{banner_h}:d={duration}"
     if guest_info:
         lines = [
             str(guest_info.get("title", "") or "").strip(),
@@ -292,19 +299,108 @@ def _build_three_band_filter(
         text = ""
     if text:
         safe = text.replace("\\", "\\\\").replace("'", "\\'").replace(":", "\\:")
-        font_file = _find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
-        banner += (
-            f",drawtext=fontfile='{font_file}':text='{safe}':"
-            f"fontcolor=white:fontsize={max(28, int(out_h * 0.032))}:"
-            f"x=(w-text_w)/2:y=(h-text_h)/2"
-        )
+        font_file = _find_font_file(font_path).replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+        banner += f",drawtext=fontfile='{font_file}':text='{safe}':fontcolor=white:fontsize={max(28, int(out_h * 0.032))}:x=(w-text_w)/2:y=(h-text_h)/2"
+    banner += "[banner]"
     return (
         f"[0:v]scale={out_w}:{video_h}:force_original_aspect_ratio=increase,"
         f"crop={out_w}:{video_h}:(iw-{out_w})/2:(ih-{video_h})/2[main];"
         f"{banner};"
-        f"[1:v]scale={out_w}:{image_h}:force_original_aspect_ratio=decrease,"
-        f"pad={out_w}:{image_h}:(ow-iw)/2:(oh-ih)/2:color=black[image];"
+        f"color=c=black:s={out_w}x{image_h}:d={duration}[bottom_bg];"
+        f"{_build_bottom_image_filter('[1:v]', '[bottom_image]', out_w, image_h)};"
+        f"[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[image];"
         f"[main][banner][image]vstack=inputs=3[vout]"
+    )
+
+
+def _escape_drawtext(value: str) -> str:
+    return str(value).replace("\\", "\\\\").replace("'", "\\'").replace(":", "\\:")
+
+
+def _build_image_fit_filter(input_label: str, output_label: str, out_w: int, out_h: int) -> str:
+    """Fill a panel without distortion and keep the image anchored to its bottom edge."""
+    return (
+        f"{input_label}scale=w='ceil(max({out_w},iw*{out_h}/ih)/2)*2':"
+        f"h='ceil(max({out_h},ih*{out_w}/iw)/2)*2',"
+        f"crop={out_w}:{out_h}:x='(iw-ow)/2':y='ih-oh'"
+        f"{output_label}"
+    )
+
+
+def _build_bottom_image_filter(input_label: str, output_label: str, out_w: int, out_h: int) -> str:
+    """Resize a bottom image to exactly the calculated bottom panel rectangle."""
+    return (
+        f"{input_label}scale={out_w}:{out_h}:force_original_aspect_ratio=disable,"
+        f"setsar=1{output_label}"
+    )
+
+
+def _build_reference_template_filter(
+    out_w: int,
+    out_h: int,
+    template: Dict,
+    duration: float,
+    has_bottom_image: bool,
+    has_title_image: bool = True,
+    font_path: Optional[str] = None,
+) -> str:
+    """Compose a configurable four-section Shorts template."""
+    top_h = max(1, int(template.get("top_height", round(out_h * 0.09))))
+    subscribe_h = max(1, int(template.get("subscribe_height", round(out_h * 0.12))))
+    video_h = max(1, int(template.get("video_height", round(out_h * 0.47))))
+    title_h = max(1, int(template.get("title_height", round(out_h * 0.16))))
+    bottom_h = out_h - top_h - video_h - title_h - subscribe_h
+    if bottom_h < 1:
+        raise ValueError("reference template section heights exceed output height")
+
+    top_color = str(template.get("top_color", "#d90000")).replace("#", "0x")
+    subscribe_color = str(template.get("subscribe_color", "#ff1717")).replace("#", "0x")
+    subscribe_text = _escape_drawtext(str(template.get("subscribe_text", "SUBSCRIBE")))
+    font_file = _find_font_file(font_path).replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+    subscribe_filter = (
+        f",drawtext=fontfile='{font_file}':text='{subscribe_text}':"
+        f"fontcolor=white:fontsize={max(24, int(subscribe_h * 0.34))}:"
+        "borderw=1:bordercolor=black:x=(w-text_w)/2:y=(h-text_h)/2"
+        if subscribe_text else ""
+    )
+    bottom_background = str(template.get("bottom_background", "image"))
+    title_input_index = 2 if has_bottom_image else 1
+    if bottom_background == "white_blue":
+        image_input = (
+            f"color=c=white:s={out_w}x{bottom_h}:d={duration},"
+            f"drawbox=x=0:y={bottom_h // 2}:w={out_w}:h={bottom_h - bottom_h // 2}:"
+            "color=0x2b6cb0:t=fill[bottom_bg];"
+            + (
+                f"{_build_bottom_image_filter('[1:v]', '[bottom_image]', out_w, bottom_h)};"
+                f"[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[bottom]"
+                if has_bottom_image else
+                "[bottom_bg]copy[bottom]"
+            )
+        )
+    else:
+        image_input = (
+            f"color=c=black:s={out_w}x{bottom_h}:d={duration}[bottom_bg];"
+            f"{_build_bottom_image_filter('[1:v]', '[bottom_image]', out_w, bottom_h)};"
+            "[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[bottom]"
+        if has_bottom_image else
+        f"color=c=black:s={out_w}x{bottom_h}:d={duration}[bottom]"
+        )
+    title_input = (
+        f"color=c=black:s={out_w}x{title_h}:d={duration}[title_bg];"
+        f"{_build_image_fit_filter(f'[{title_input_index}:v]', '[title_image]', out_w, title_h)};"
+        "[title_bg][title_image]overlay=x='(W-w)/2':y='H-h':shortest=1[title]"
+        if has_title_image else
+        f"color=c=white:s={out_w}x{title_h}:d={duration}[title]"
+    )
+    return (
+        f"color=c={top_color}:s={out_w}x{top_h}:d={duration}[top];"
+        f"[0:v]scale={out_w}:{video_h}:force_original_aspect_ratio=increase,"
+        f"crop={out_w}:{video_h}:(iw-{out_w})/2:(ih-{video_h})/2[main];"
+        f"{title_input};"
+        f"{image_input};"
+        f"color=c={subscribe_color}:s={out_w}x{subscribe_h}:d={duration}"
+        f"{subscribe_filter}[subscribe];"
+        "[top][main][title][bottom][subscribe]vstack=inputs=5[vout]"
     )
 
 
@@ -402,11 +498,13 @@ def export_clips(
     captions: bool = False,
     clean_audio_flag: bool = False,
     face_track: bool = False,
-    resolution: tuple = (1120, 1920),
+    resolution: tuple = (1080, 1920),
     guest_info: Optional[Dict] = None,
     transitions: Optional[Dict] = None,
     logo_path: Optional[str] = None,
     bottom_image_path: Optional[str] = None,
+    template_config: Optional[Dict] = None,
+    font_path: Optional[str] = None,
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
@@ -431,10 +529,12 @@ def export_clips(
         with tempfile.TemporaryDirectory(dir=str(PROJECT_TMP_ROOT)) as td:
             td = Path(td)
             cut_file = td / f"cut_{i:02d}.mp4"
+            title_path = None
             vf = []
             vf_str = None
             out_w, out_h = resolution
             use_three_band_layout = bool(bottom_image_path and Path(bottom_image_path).exists())
+            use_reference_template = bool(template_config and template_config.get("enabled"))
             if vertical:
                 # compute crop parameters based on target resolution aspect ratio
                 size = _get_video_size(video_path)
@@ -478,11 +578,45 @@ def export_clips(
                 "-t",
                 str(duration),
             ]
-            if use_three_band_layout:
+            if use_reference_template:
+                title_text = str(template_config.get("title", "")).strip()
+                if title_text:
+                    from .typography import render_shorts_title
+                    title_path = td / f"title_{i:02d}.png"
+                    render_shorts_title(
+                        title_text,
+                        str(title_path),
+                        {
+                            "videoWidth": out_w,
+                            "videoHeight": int(template_config.get("title_height", round(out_h * 0.16))),
+                            "position": template_config.get("title_position", "center"),
+                            "style": template_config.get("style", "NEWS"),
+                            "fontPath": template_config.get("font_path"),
+                        },
+                    )
+                if bottom_image_path and Path(bottom_image_path).exists():
+                    cmd += ["-loop", "1", "-i", str(bottom_image_path)]
+                if title_path:
+                    cmd += ["-loop", "1", "-i", str(title_path)]
+                cmd += [
+                    "-filter_complex",
+                    _build_reference_template_filter(
+                        out_w, out_h, template_config, duration,
+                        bool(bottom_image_path and Path(bottom_image_path).exists()),
+                        bool(title_path),
+                        font_path=font_path,
+                    ),
+                    "-map", "[vout]", "-map", "0:a:0?",
+                    "-map_metadata", "-1", "-map_chapters", "-1", "-sn", "-dn",
+                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                    "-r", "30", "-fps_mode", "cfr", "-pix_fmt", "yuv420p",
+                    "-level:v", "5.1", "-t", str(duration), "-c:a", "aac", "-b:a", "192k", str(cut_file),
+                ]
+            elif use_three_band_layout:
                 cmd += ["-loop", "1", "-i", str(bottom_image_path)]
                 cmd += [
                     "-filter_complex",
-                    _build_three_band_filter(out_w, out_h, guest_info, duration),
+                    _build_three_band_filter(out_w, out_h, guest_info, duration, font_path=font_path),
                     "-map", "[vout]",
                     "-map", "0:a:0?",
                     "-map_metadata", "-1",
@@ -511,6 +645,8 @@ def export_clips(
                     vf_parts.append(subtitle_vf)
                 if vf_parts:
                     cmd += ["-vf", ",".join(vf_parts)]
+                if clean_audio_flag:
+                    cmd += ["-af", "afftdn,loudnorm=I=-16:TP=-1.5:LRA=11"]
                 cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "192k", str(cut_file)]
             else:
                 cmd += ["-c", "copy", str(cut_file)]
@@ -519,13 +655,7 @@ def export_clips(
             if proc.returncode != 0:
                 raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
 
-            # optionally clean audio
-            if clean_audio_flag:
-                cleaned = td / f"cleaned_{i:02d}.mp4"
-                clean_audio(str(cut_file), str(cleaned), use_noisereduce=True)
-                proc_file = cleaned
-            else:
-                proc_file = cut_file
+            proc_file = cut_file
 
             # captions
             if captions and seg.get("words"):
@@ -565,7 +695,7 @@ def export_clips(
                         raise RuntimeError(f"Export failed moving file: {e} -> {e2}")
 
             # post-render verification (hard resolution requirement)
-            if use_three_band_layout:
+            if use_three_band_layout or use_reference_template:
                 _remove_extra_video_streams(out_file, out_w, out_h)
             verify_issues = _verify_video_file(out_file, out_w, out_h)
             if verify_issues:

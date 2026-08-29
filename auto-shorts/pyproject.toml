@@ -21,4 +21,6 @@ dependencies = [
     "streamlit",
     "opencv-python",
     "srt",
+    "Pillow>=10.0",
+    "uharfbuzz>=0.40",
 ]

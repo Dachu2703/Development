@@ -8,7 +8,21 @@ from .db import update_project_status, add_clip
 from .logging_config import logger
 
 
-def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, resolution: tuple = (1120, 1920), transitions_enabled: bool = False, transitions_type: str = "zoom_in", transitions_duration: float = 1.6, transitions_min_gap: float = 6.0, transitions_threshold: float = 3.0, transitions_max_per_clip: int = 3, guest_info: Optional[Dict] = None, **kwargs):
+def validate_requested_clip_count(requested: int | None, generated_results: list[dict]) -> None:
+    """Fail clearly if the pipeline produced fewer clips than requested."""
+    requested_count = int(requested) if requested is not None else 0
+    generated_count = len(generated_results or [])
+    if requested_count <= 0:
+        return
+    if generated_count < requested_count:
+        reason = (
+            f"Only {generated_count} suitable content segments were found for the requested "
+            f"{requested_count} short videos."
+        )
+        raise RuntimeError(f"Requested: {requested_count}\nGenerated: {generated_count}\nReason: {reason}")
+
+
+def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run: bool = True, platform: str = "YouTube Shorts", min_length: int = 15, max_length: int = 60, num_shorts: int | None = None, prioritize_length: bool = False, clean_audio: bool = False, vertical: bool = False, captions: bool = False, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False, target_duration: int | None = None, progress_callback=None, use_silence_detection: bool = False, resolution: tuple = (1080, 1920), transitions_enabled: bool = False, transitions_type: str = "zoom_in", transitions_duration: float = 1.6, transitions_min_gap: float = 6.0, transitions_threshold: float = 3.0, transitions_max_per_clip: int = 3, guest_info: Optional[Dict] = None, font_path: Optional[str] = None, **kwargs):
     src = project["source"]
     pid = project["id"]
     update_project_status(db_path, pid, "processing")
@@ -148,6 +162,9 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
             return str(manifest_path)
 
         report(92, "Exporting video clips…")
+        template_config = kwargs.get("template_config")
+        if not isinstance(template_config, dict):
+            template_config = {}
         results = export.export_clips(
             src,
             aligned,
@@ -159,7 +176,10 @@ def run_project(project: Dict[str, Any], db_path: str, output_dir: str, dry_run:
             resolution=resolution,
             guest_info=guest_info,
             bottom_image_path=kwargs.get("bottom_image_path"),
+            template_config=template_config,
+            font_path=font_path or template_config.get("font_path"),
         )
+        validate_requested_clip_count(num_shorts, results)
         # store clips
         for r in results:
             add_clip(db_path, pid, r.get("start"), r.get("end"), r.get("file"), r.get("score", 0.0), r.get("reason", ""))

@@ -4,6 +4,7 @@ import itertools
 import json
 import logging
 import subprocess
+from functools import lru_cache
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Dict, List
@@ -42,6 +43,23 @@ def _cache_key_for(path: Path) -> str:
     return hashlib.sha1(key_src.encode()).hexdigest()
 
 
+@lru_cache(maxsize=2)
+def _load_model(model_size: str):
+    """Load each selected Whisper model once per application process."""
+    from faster_whisper import WhisperModel
+
+    compute_type = "int8"
+    try:
+        model = WhisperModel(model_size, device="cpu", compute_type=compute_type)
+        logger.debug(f"faster-whisper using compute_type={compute_type} device=cpu model={model_size}")
+    except Exception as exc:
+        compute_type = "default"
+        logger.warning(f"faster-whisper compute_type={compute_type} failed, falling back to default: {exc}")
+        model = WhisperModel(model_size, device="cpu")
+        logger.debug(f"faster-whisper fallback to compute_type={compute_type} device=cpu model={model_size}")
+    return model
+
+
 def transcribe(video_path: str, cache_dir: str = None, model_size: str = "small", beam_size: int = 1, word_timestamps: bool = False) -> str:
     """Transcribe `video_path` with `faster-whisper` and cache results to JSON.
 
@@ -68,17 +86,8 @@ def transcribe(video_path: str, cache_dir: str = None, model_size: str = "small"
     if out_path.exists():
         return str(out_path)
 
-    # instantiate model (CPU by default)
-    compute_type = "int8"
-    try:
-        model = WhisperModel(model_size, device="cpu", compute_type=compute_type)
-        logger.debug(f"faster-whisper using compute_type={compute_type} device=cpu model={model_size}")
-    except Exception as exc:
-        compute_type = "default"
-        logger.warning(f"faster-whisper compute_type={compute_type} failed, falling back to default: {exc}")
-        model = WhisperModel(model_size, device="cpu")
-        logger.debug(f"faster-whisper fallback to compute_type={compute_type} device=cpu model={model_size}")
-
+    # Keep the model warm so repeated Streamlit actions do not reload it.
+    model = _load_model(model_size)
     segments = []
     words_all: List[Dict] = []
     # faster-whisper allows streaming over segments or returning (segments, info)
@@ -89,6 +98,7 @@ def transcribe(video_path: str, cache_dir: str = None, model_size: str = "small"
         str(src),
         beam_size=beam_size,
         word_timestamps=word_timestamps,
+        vad_filter=True,
     )
     logger.debug(f"transcribe result type={type(result)}")
     if isinstance(result, tuple) and len(result) == 2:
