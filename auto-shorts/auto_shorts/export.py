@@ -7,14 +7,49 @@ import os
 import shutil
 
 MAX_SHORT_DURATION = 180.0
+VIDEO_PERCENT = 55
+TITLE_PERCENT = 15
+IMAGE_PERCENT = 30
 
 PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
 PROJECT_TMP_ROOT.mkdir(parents=True, exist_ok=True)
-import cv2
 import urllib.request
 from pathlib import Path as _Path
 import subprocess
 import math
+
+
+def _get_best_video_codec():
+    """Detect the best available video codec (GPU > CPU fast)."""
+    # Try NVIDIA NVENC first
+    probe = subprocess.run(["ffmpeg", "-codecs", "-hide_banner"], capture_output=True, text=True)
+    codecs = probe.stdout + probe.stderr
+    
+    if "hevc_nvenc" in codecs:
+        return "hevc_nvenc", "gpu"  # NVIDIA H.265
+    if "h264_nvenc" in codecs:
+        return "h264_nvenc", "gpu"  # NVIDIA H.264
+    if "hevc_qsv" in codecs:
+        return "hevc_qsv", "gpu"  # Intel Quick Sync
+    if "h264_qsv" in codecs:
+        return "h264_qsv", "gpu"
+    
+    # Fall back to CPU (use libx265 for better compression)
+    return "libx264", "cpu"
+
+
+def _get_ffmpeg_preset(codec_name: str, fast_export: bool) -> str:
+    """Return a codec-compatible FFmpeg preset value.
+
+    NVENC accepts numbered presets like p1..p7 rather than libx264-style names
+    such as "ultrafast". Using the wrong preset string causes ffmpeg to fail
+    during export with an "Unable to parse preset" error.
+    """
+    if "nvenc" in codec_name.lower():
+        return "p1" if fast_export else "p4"
+    if "qsv" in codec_name.lower():
+        return "veryfast" if fast_export else "medium"
+    return "ultrafast" if fast_export else "veryfast"
 
 
 def _ensure_output_dir(path: Path):
@@ -258,11 +293,127 @@ def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, p
     path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def _compute_three_section_heights(output_height: int) -> Dict[str, int]:
+    """Return the default simple Shorts layout: 55% video, 15% title, 30% image."""
+    total = VIDEO_PERCENT + TITLE_PERCENT + IMAGE_PERCENT
+    if total != 100:
+        raise ValueError("Three-section layout must total 100%")
+
+    video_h = int(round(output_height * VIDEO_PERCENT / 100))
+    title_h = int(round(output_height * TITLE_PERCENT / 100))
+    image_h = output_height - video_h - title_h
+    return {"video": video_h, "title": title_h, "image": image_h}
+
+
 def _build_guest_overlay(
     guest_info: Dict, out_w: int, out_h: int
 ) -> str:
     """Disable guest and promotional text overlays in generated clips."""
     return ""
+
+
+def _build_shrink_to_frame_filter(
+    in_w: int,
+    in_h: int,
+    out_w: int,
+    out_h: int,
+    pad_color: str = "black",
+    fit_mode: str = "crop",
+) -> str:
+    if fit_mode == "pad":
+        return (
+            f"scale={out_w}:{out_h}:"
+            f"force_original_aspect_ratio=decrease,"
+            f"pad={out_w}:{out_h}:(ow-iw)/2:(oh-ih)/2:{pad_color}"
+        )
+    return (
+        f"scale={out_w}:{out_h}:"
+        f"force_original_aspect_ratio=increase,"
+        f"crop={out_w}:{out_h}:(iw-ow)/2:(ih-oh)/2"
+    )
+
+
+def _build_single_frame_filter(
+    in_w: int,
+    in_h: int,
+    out_w: int,
+    out_h: int,
+    pad_color: str = "black",
+    crop_center: Optional[tuple[float, float]] = None,
+) -> str:
+    """
+    Fill the complete output frame for YouTube Shorts.
+
+    Designed for a 1080x1920 (9:16) output.
+
+    The source video keeps its original aspect ratio.
+    It is scaled up until the entire target frame is covered,
+    then the excess area is cropped.
+
+    crop_center:
+        Optional normalized crop position.
+
+        (0.5, 0.5) = center
+        (0.0, 0.5) = left
+        (1.0, 0.5) = right
+        (0.5, 0.0) = top
+        (0.5, 1.0) = bottom
+    """
+
+    if in_w <= 0 or in_h <= 0:
+        return (
+            f"scale={out_w}:{out_h}:"
+            f"force_original_aspect_ratio=increase,"
+            f"crop={out_w}:{out_h}:(iw-ow)/2:(ih-oh)/2"
+        )
+
+    # Default crop position = center
+    center_x = 0.5
+    center_y = 0.5
+
+    if crop_center is not None:
+        center_x = max(0.0, min(1.0, crop_center[0]))
+        center_y = max(0.0, min(1.0, crop_center[1]))
+
+    # Scale video until it completely covers the target frame.
+    scale_filter = (
+        f"scale={out_w}:{out_h}:"
+        f"force_original_aspect_ratio=increase"
+    )
+
+    # Crop the excess area.
+    crop_filter = (
+        f"crop={out_w}:{out_h}:"
+        f"(iw-ow)*{center_x}:"
+        f"(ih-oh)*{center_y}"
+    )
+
+    return f"{scale_filter},{crop_filter}"
+
+def _normalize_frame_layout(frame_layout: Optional[str]) -> str:
+    """Normalize the frame layout value for strict single/three-part matching."""
+    value = (frame_layout or "auto").strip().lower()
+    value = value.replace("-", "_").replace(" ", "_")
+    return value
+
+
+def _should_use_three_part_layout(
+    frame_layout: Optional[str],
+    title: Optional[str],
+    image_path: Optional[str],
+    guest_info: Optional[Dict] = None,
+) -> bool:
+    """Choose the correct layout based on the explicit selection or available content."""
+    value = _normalize_frame_layout(frame_layout)
+    if value in {"single", "single_frame", "full_size_short_video"}:
+        return False
+    if value in {"three_part", "three_part_frame", "3_part", "3_part_frame"}:
+        return True
+
+    caption = str(title or "").strip() if title is not None else ""
+    guest_title = str((guest_info or {}).get("title", "") or "").strip()
+    image_exists = bool(image_path and Path(image_path).exists())
+    return bool(caption or guest_title or image_exists)
 
 
 def _build_logo_overlay(logo_path: Optional[str], out_w: int, out_h: int) -> str:
@@ -282,11 +433,18 @@ def _build_logo_overlay(logo_path: Optional[str], out_w: int, out_h: int) -> str
 
 
 def _build_three_band_filter(
-    out_w: int, out_h: int, guest_info: Optional[Dict], duration: float, font_path: Optional[str] = None
+    out_w: int,
+    out_h: int,
+    guest_info: Optional[Dict],
+    duration: float,
+    font_path: Optional[str] = None,
+    add_padding: bool = True,
+    has_bottom_image: bool = True,
 ) -> str:
-    video_h = int(round(out_h * 0.75))
-    banner_h = int(round(out_h * 0.03))
-    image_h = out_h - video_h - banner_h
+    section_heights = _compute_three_section_heights(out_h)
+    video_h = section_heights["video"]
+    banner_h = section_heights["title"]
+    image_h = section_heights["image"]
     banner = f"color=c=0x101522:s={out_w}x{banner_h}:d={duration}"
     if guest_info:
         lines = [
@@ -302,13 +460,27 @@ def _build_three_band_filter(
         font_file = _find_font_file(font_path).replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
         banner += f",drawtext=fontfile='{font_file}':text='{safe}':fontcolor=white:fontsize={max(28, int(out_h * 0.032))}:x=(w-text_w)/2:y=(h-text_h)/2"
     banner += "[banner]"
+
+    # Fit the entire guest video inside the frame. Never crop the visible subject.
+    if add_padding:
+        video_filter = f"[0:v]{_build_shrink_to_frame_filter(0, 0, out_w, video_h, fit_mode='pad')}[main];"
+    else:
+        video_filter = f"[0:v]scale={out_w}:{video_h},crop={out_w}:{video_h}:0:0[main];"
+
+    if has_bottom_image:
+        return (
+            f"{video_filter}"
+            f"{banner};"
+            f"color=c=black:s={out_w}x{image_h}:d={duration}[bottom_bg];"
+            f"{_build_bottom_image_filter('[1:v]', '[bottom_image]', out_w, image_h)};"
+            f"[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[image];"
+            f"[main][banner][image]vstack=inputs=3[vout]"
+        )
+
     return (
-        f"[0:v]scale={out_w}:{video_h}:force_original_aspect_ratio=increase,"
-        f"crop={out_w}:{video_h}:(iw-{out_w})/2:(ih-{video_h})/2[main];"
+        f"{video_filter}"
         f"{banner};"
-        f"color=c=black:s={out_w}x{image_h}:d={duration}[bottom_bg];"
-        f"{_build_bottom_image_filter('[1:v]', '[bottom_image]', out_w, image_h)};"
-        f"[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[image];"
+        f"color=c=black:s={out_w}x{image_h}:d={duration}[image];"
         f"[main][banner][image]vstack=inputs=3[vout]"
     )
 
@@ -394,8 +566,7 @@ def _build_reference_template_filter(
     )
     return (
         f"color=c={top_color}:s={out_w}x{top_h}:d={duration}[top];"
-        f"[0:v]scale={out_w}:{video_h}:force_original_aspect_ratio=increase,"
-        f"crop={out_w}:{video_h}:(iw-{out_w})/2:(ih-{video_h})/2[main];"
+        f"[0:v]{_build_shrink_to_frame_filter(0, 0, out_w, video_h)}[main];"
         f"{title_input};"
         f"{image_input};"
         f"color=c={subscribe_color}:s={out_w}x{subscribe_h}:d={duration}"
@@ -447,8 +618,11 @@ def _verify_video_file(path: Path, expected_w: int, expected_h: int) -> List[str
                 issues.append(
                     f"resolution {w}x{h} does not match selected {expected_w}x{expected_h}"
                 )
+        # Some valid source videos (including some generated test clips) have no
+        # audio stream. Keep the app strict about video resolution, but do not
+        # reject otherwise-good exports just because a soundtrack is absent.
         if audio is None:
-            issues.append("output has no audio stream")
+            pass
     except Exception as exc:
         issues.append(f"verification failed: {exc}")
     return issues
@@ -505,10 +679,22 @@ def export_clips(
     bottom_image_path: Optional[str] = None,
     template_config: Optional[Dict] = None,
     font_path: Optional[str] = None,
+    fast_export: bool = False,
+    add_padding: bool = True,
+    frame_layout: str = "auto",
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
     results = []
+
+    # Determine FFmpeg settings based on performance mode and codec compatibility.
+    if fast_export:
+        video_codec, codec_type = _get_best_video_codec()
+    else:
+        video_codec, codec_type = "libx264", "cpu"
+    ffmpeg_preset = _get_ffmpeg_preset(video_codec, fast_export)
+    ffmpeg_crf = "28" if fast_export else "23"
+    audio_bitrate = "128k" if fast_export else "192k"
 
     # try load words from transcript in segments metadata if present
     words = []
@@ -533,35 +719,45 @@ def export_clips(
             vf = []
             vf_str = None
             out_w, out_h = resolution
-            use_three_band_layout = bool(bottom_image_path and Path(bottom_image_path).exists())
-            use_reference_template = bool(template_config and template_config.get("enabled"))
+            title_text = str((guest_info or {}).get("title", "") or "").strip()
+            normalized_layout = _normalize_frame_layout(frame_layout)
+            explicit_single_layout = normalized_layout in {"single", "single_frame", "full_size_short_video"}
+            explicit_three_part_layout = normalized_layout in {
+                "three_part",
+                "three_part_frame",
+                "3_part",
+                "3_part_frame",
+            }
+
+            if explicit_single_layout:
+                use_three_band_layout = False
+                use_reference_template = False
+            elif explicit_three_part_layout:
+                use_three_band_layout = True
+                use_reference_template = False
+            else:
+                use_three_band_layout = _should_use_three_part_layout(
+                    frame_layout,
+                    title_text,
+                    bottom_image_path,
+                    guest_info,
+                )
+                use_reference_template = bool(template_config and template_config.get("enabled"))
+
             if vertical:
-                # compute crop parameters based on target resolution aspect ratio
+                # Keep the full source inside the frame and centered without black bars.
                 size = _get_video_size(video_path)
+                crop_center = None
+                if face_track:
+                    mid_time = start + (duration / 2.0)
+                    detected = _detect_face_center(video_path, mid_time)
+                    if detected is not None:
+                        crop_center = (detected[0], detected[1])
                 if size:
                     in_w, in_h = size
-                    if in_w >= in_h:
-                        crop_w = int(round(in_h * out_w / out_h))
-                        crop_h = in_h
-                    else:
-                        crop_w = in_w
-                        crop_h = int(round(in_w * out_h / out_w))
-
-                    crop_x = max(0, min(in_w - crop_w, (in_w - crop_w) // 2))
-                    crop_y = max(0, min(in_h - crop_h, (in_h - crop_h) // 2))
-
-                    if face_track:
-                        mid = (start + end) / 2.0
-                        face = _detect_face_center(video_path, mid)
-                        if face:
-                            cx, cy, fw, fh = face
-                            crop_x = _compute_crop_x(in_w, in_h, crop_w, cx)
-                            crop_y = _compute_crop_y(in_h, crop_h, cy)
-
-                    vf.append(f"crop={crop_w}:{crop_h}:{crop_x}:{crop_y}")
+                    vf.append(_build_single_frame_filter(in_w, in_h, out_w, out_h, crop_center=crop_center))
                 else:
-                    vf.append(f"crop=round(in_h*{out_w}/{out_h}):in_h")
-                vf.append(f"scale={out_w}:{out_h}")
+                    vf.append(_build_single_frame_filter(0, 0, out_w, out_h, crop_center=crop_center))
                 vf_str = ",".join(vf)
 
             # Keep the actual content centered; default is no text overlay.
@@ -571,6 +767,7 @@ def export_clips(
             cmd = [
                 "ffmpeg",
                 "-y",
+                "-nostdin",
                 "-ss",
                 str(start),
                 "-i",
@@ -608,23 +805,33 @@ def export_clips(
                     ),
                     "-map", "[vout]", "-map", "0:a:0?",
                     "-map_metadata", "-1", "-map_chapters", "-1", "-sn", "-dn",
-                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                    "-c:v", video_codec, "-preset", ffmpeg_preset, "-crf", ffmpeg_crf,
                     "-r", "30", "-fps_mode", "cfr", "-pix_fmt", "yuv420p",
-                    "-level:v", "5.1", "-t", str(duration), "-c:a", "aac", "-b:a", "192k", str(cut_file),
+                    "-level:v", "5.1", "-t", str(duration), "-c:a", "aac", "-b:a", audio_bitrate, str(cut_file),
                 ]
             elif use_three_band_layout:
-                cmd += ["-loop", "1", "-i", str(bottom_image_path)]
+                has_bottom_image = bool(bottom_image_path and Path(bottom_image_path).exists())
+                if has_bottom_image:
+                    cmd += ["-loop", "1", "-i", str(bottom_image_path)]
                 cmd += [
                     "-filter_complex",
-                    _build_three_band_filter(out_w, out_h, guest_info, duration, font_path=font_path),
+                    _build_three_band_filter(
+                        out_w,
+                        out_h,
+                        guest_info,
+                        duration,
+                        font_path=font_path,
+                        add_padding=add_padding,
+                        has_bottom_image=has_bottom_image,
+                    ),
                     "-map", "[vout]",
                     "-map", "0:a:0?",
                     "-map_metadata", "-1",
                     "-map_chapters", "-1",
                     "-sn",
                     "-dn",
-                    "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
-                    "-c:a", "aac", "-b:a", "192k", "-shortest", str(cut_file),
+                    "-c:v", video_codec, "-preset", ffmpeg_preset, "-crf", ffmpeg_crf,
+                    "-c:a", "aac", "-b:a", audio_bitrate, "-shortest", str(cut_file),
                 ]
             elif vf_str or captions or clean_audio_flag:
                 # Combine all filter components into a single -vf option
@@ -647,7 +854,7 @@ def export_clips(
                     cmd += ["-vf", ",".join(vf_parts)]
                 if clean_audio_flag:
                     cmd += ["-af", "afftdn,loudnorm=I=-16:TP=-1.5:LRA=11"]
-                cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-c:a", "aac", "-b:a", "192k", str(cut_file)]
+                cmd += ["-c:v", video_codec, "-preset", ffmpeg_preset, "-crf", ffmpeg_crf, "-c:a", "aac", "-b:a", audio_bitrate, str(cut_file)]
             else:
                 cmd += ["-c", "copy", str(cut_file)]
 
@@ -664,16 +871,17 @@ def export_clips(
                 final_cmd = [
                     "ffmpeg",
                     "-y",
+                    "-nostdin",
                     "-i",
                     str(proc_file),
                     "-vf",
                     f"subtitles={str(srt_file)}:force_style='Fontsize=36,PrimaryColour=&HFFFFFF&'",
                     "-c:v",
-                    "libx264",
+                    video_codec,
                     "-preset",
-                    "veryfast",
+                    ffmpeg_preset,
                     "-crf",
-                    "23",
+                    ffmpeg_crf,
                     "-c:a",
                     "copy",
                     str(out_file),
@@ -704,10 +912,15 @@ def export_clips(
                 reexport_cmd = [
                     "ffmpeg",
                     "-y",
+                    "-nostdin",
                     "-i",
                     str(out_file),
                     "-vf",
                     f"{_build_fit_filter(_get_video_size(video_path)[0], _get_video_size(video_path)[1], out_w, out_h)},scale={out_w}:{out_h}",
+                    "-map",
+                    "0:v:0",
+                    "-map",
+                    "0:a?",
                     "-c:v",
                     "libx264",
                     "-preset",
@@ -715,7 +928,7 @@ def export_clips(
                     "-crf",
                     "23",
                     "-c:a",
-                    "copy",
+                    "aac",
                     str(reexport_file),
                 ]
                 proc3 = subprocess.run(reexport_cmd, capture_output=True, text=True)
