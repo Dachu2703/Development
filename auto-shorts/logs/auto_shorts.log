@@ -2496,3 +2496,102 @@ FileNotFoundError: Source video does not exist: d:\tmp\stalin\mp4
 2026-09-06 23:22:17,769 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False language=en task=transcribe
 2026-09-06 23:22:23,779 DEBUG auto_shorts transcribe result type=<class 'tuple'>
 2026-09-06 23:22:23,779 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-09-06 23:29:08,444 DEBUG auto_shorts Source transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-0ec370f56f70cbecd7fef5975e18f39c31909361.transcript.json
+2026-09-06 23:29:08,463 DEBUG auto_shorts Source transcript segments: 119, words: 0, language=en
+2026-09-06 23:29:08,560 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 23:40:55,228 ERROR auto_shorts Project 152 failed while processing d:\tmp\stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 398, in run_project
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 906, in export_clips
+    if use_three_band_layout or use_reference_template:
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 676, in _apply_branding_and_fullsize_banner
+    guest_info: Optional[Dict] = None,
+                           ^^^^^^^^^^^^
+RuntimeError: branding render failed: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpn20o2dgz\cut_02.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.100
+  Duration: 00:02:59.50, start: 0.000000, bitrate: 1358 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1080x1920 [SAR 1:1 DAR 9:16], 1155 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc63.1.100 libx264
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 194 kb/s (default)
+    Metadata:
+      handler_name    : SoundHandler
+Input #1, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\.auto_shorts_tmp\auto-shorts-6h_b04ae\bottom_flood_related_india_7f1aef05 (1).png':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: png, rgb24(pc, gbr/unknown/unknown), 1024x1024, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\.auto_shorts_tmp\auto-shorts-6h_b04ae\logo_Sunastro logo new July 2026.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgb24(pc, gbr/unknown/unknown), 900x336 [SAR 11811:11811 DAR 75:28], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> overlay
+  Stream #1:0 (png) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  null:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[swscaler @ 000001c8b42682c0] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b427b3c0] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b428f680] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b42a3940] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b42b7c00] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b42cbec0] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b42e0180] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b42f4440] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b4308700] No accelerated colorspace conversion found from yuv420p to argb.
+[swscaler @ 000001c8b42682c0] [swscaler @ 000001c8b431c9c0] No accelerated colorspace conversion found from yuv420p to argb.
+[libx264 @ 000001c8b19c7480] using SAR=1/1
+[libx264 @ 000001c8b19c7480] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 000001c8b19c7480] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 000001c8b19c7480] 264 - core 165 r3223 0480cb0 - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=12 lookahead_threads=4 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpn20o2dgz\branded_02.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 30 fps, 15360 tbn
+    Metadata:
+      encoder         : Lavc63.1.100 libx264
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 192 kb/s (default)
+    Metadata:
+      encoder         : Lavc63.1.100 aac
+      handler_name    : SoundHandler
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=00:00:00.95 bitrate=   0.4kbits/s speed=0.895x elapsed=0:00:01.06    
+frame=    8 fps=4.9 q=29.0 size=       0KiB time=00:00:01.11 bitrate=   0.3kbits/s speed=0.69x elapsed=0:00:01.61    
+frame=   27 fps= 13 q=29.0 size=       0KiB time=00:00:01.71 bitrate=   0.2kbits/s speed=0.802x elapsed=0:00:02.14    
+frame=   44 fps= 16 q=29.0 size=     256KiB time=00:00:02.27 bitrate= 921.8kbits/s speed=0.831x elapsed=0:00:02.73    
+frame=   62 fps= 19 q=29.0 size=     256KiB time=00:00:02.87 bitrate= 728.5kbits/s speed=0.869x elapsed=0:00:03.31    
+frame=   81 fps= 21 q=29.0 size=     256KiB time=00:00:03.50 bitrate= 598.2kbits/s speed=0.904x elapsed=0:00:03.87    
+frame=   96 fps= 21 q=29.0 size=     512KiB time=00:00:04.10 bitrate=1020.6kbits/s speed=0.919x elapsed=0:00:04.47    
+frame=  109 fps= 22 q=29.0 size=     512KiB time=00:00:04.43 bitrate= 945.8kbits/s speed=0.883x elapsed=0:00:05.02    
+frame=  129 fps= 23 q=29.0 size=     512KiB time=00:00:05.10 bitrate= 821.1kbits/s speed=0.908x elapsed=0:00:05.62    
+frame=  144 fps= 23 q=29.0 size=     768KiB time=00:00:05.61 bitrate=1119.7kbits/s speed=0.914x elapsed=0:00:06.14    
+frame=  158 fps= 23 q=29.0 size=     768KiB time=00:00:06.08 bitrate=1034.2kbits/s speed=0.899x elapsed=0:00:06.77    
+frame=  171 fps= 23 q=29.0 size=     768KiB time=00:00:06.61 bitrate= 950.8kbits/s speed=0.908x elapsed=0:00:07.29    
+frame=  188 fps= 24 q=29.0 size=     768KiB time=00:00:07.08 bitrate= 888.4kbits/s speed=0.907x elapsed=0:00:07.80    
+frame=  203 fps= 24 q=29.0 size=    1024KiB time=00:00:07.61 bitrate=1101.5kbits/s speed=0.915x elapsed=0:00:08.32    
+frame=  217 fps= 25 q=29.0 size=    1024KiB time=00:00:08.03 bitrate=1044.2kbits/s speed=0.91x elapsed=0:00:08.82    
+frame=  232 fps= 25 q=29.0 size=    1024KiB time=00:00:08.54 bitrate= 981.7kbits/s speed=0.915x elapsed=0:00:09.34    
+frame=  246 fps= 25 q=29.0 size=    1280KiB time=00:00:09.00 bitrate=1163.9kbits/s speed=0.913x elapsed=0:00:09.86    
+frame=  258 fps= 25 q=29.0 size=    1280KiB time=00:00:09.45 bitrate=1109.6kbits/s speed=0.911x elapsed=0:00:10.37    
+frame=  271 fps= 25 q=29.0 size=    1536KiB time=00:00:09.93 bitrate=1266.2kbits/s speed=0.912x elapsed=0:00:10.89    
+[in#1/png_pipe @ 000001c8af25e200] Error during demuxing: Immediate exit requested
+Received > 3 system signals, hard exiting
+
