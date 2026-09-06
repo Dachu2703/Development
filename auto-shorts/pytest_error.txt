@@ -1,0 +1,48 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\rajas\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Nagaraj\soft\Development\auto-shorts
+configfile: pytest.ini
+plugins: anyio-4.14.2
+collecting ... collected 27 items
+
+tests/test_crop.py::test_compute_crop_center PASSED
+tests/test_crop.py::test_compute_crop_left_edge PASSED
+tests/test_crop.py::test_compute_crop_y_is_centered PASSED
+tests/test_crop.py::test_export_clips_accepts_transition_and_guest_metadata PASSED
+tests/test_crop.py::test_guest_overlay_is_disabled_by_default PASSED
+tests/test_crop.py::test_three_band_layout_uses_requested_percentages FAILED
+tests/test_crop.py::test_reference_template_supports_white_blue_bottom_background PASSED
+tests/test_crop.py::test_image_fit_never_pads_beyond_panel_dimensions PASSED
+tests/test_crop.py::test_reference_template_bottom_image_is_bottom_aligned PASSED
+tests/test_crop.py::test_find_font_file_prefers_custom_font_when_available PASSED
+tests/test_crop.py::test_requested_clip_count_must_match_generated_results PASSED
+tests/test_export.py::test_ffmpeg_preset_uses_nvenc_compatible_values PASSED
+tests/test_export.py::test_video_without_audio_is_still_valid_for_verification PASSED
+tests/test_export.py::test_image_fit_filter_uses_cover_scaling_and_bottom_crop PASSED
+tests/test_export.py::test_three_band_banner_labels_drawtext_output PASSED
+tests/test_export.py::test_three_band_filter_uses_selected_output_dimensions PASSED
+tests/test_export.py::test_bottom_image_is_scaled_to_exact_panel_rectangle PASSED
+tests/test_export.py::test_reference_template_bottom_image_is_composited_into_panel PASSED
+tests/test_export.py::test_three_section_layout_defaults_to_55_15_30 PASSED
+tests/test_export.py::test_three_section_layout_scales_for_720p_short PASSED
+tests/test_export.py::test_vertical_shorts_fill_selected_frame_with_crop PASSED
+tests/test_export.py::test_single_frame_layout_defaults_to_single_when_no_title_or_image PASSED
+tests/test_export.py::test_single_frame_selection_is_a_strict_override_even_with_title_or_image PASSED
+tests/test_export.py::test_three_part_selection_is_a_strict_override_even_without_title_or_image PASSED
+tests/test_export.py::test_three_part_layout_skips_missing_bottom_image_input PASSED
+tests/test_export.py::test_single_frame_filter_fills_selected_frame_with_crop PASSED
+tests/test_runner.py::test_db_create_and_project PASSED
+
+================================== FAILURES ===================================
+______________ test_three_band_layout_uses_requested_percentages ______________
+
+    def test_three_band_layout_uses_requested_percentages():
+        layout = _build_three_band_filter(1120, 1920, {"title": "Topic"}, 20.0)
+>       assert "scale=1120:1056:force_original_aspect_ratio=decrease" in layout
+E       assert 'scale=1120:1056:force_original_aspect_ratio=decrease' in "[0:v]scale=1120:1056:force_original_aspect_ratio=increase,crop=1120:1056:(iw-ow)/2:(ih-oh)/2[main];color=c=0x101522:s=1120x288:d=20.0,drawtext=fontfile='C\\:/Windows/Fonts/arial.ttf':text='Topic':fontcolor=white:fontsize=61:x=(w-text_w)/2:y=(h-text_h)/2[banner];color=c=black:s=1120x576:d=20.0[bottom_bg];[1:v]scale=1120:576:force_original_aspect_ratio=disable,setsar=1[bottom_image];[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[image];[main][banner][image]vstack=inputs=3[vout]"
+
+tests\test_crop.py:59: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_crop.py::test_three_band_layout_uses_requested_percentages - assert 'scale=1120:1056:force_original_aspect_ratio=decrease' in "[0:v]scale=1120:1056:force_original_aspect_ratio=increase,crop=1120:1056:(iw-ow)/2:(ih-oh)/2[main];color=c=0x101522:s=1120x288:d=20.0,drawtext=fontfile='C\\:/Windows/Fonts/arial.ttf':text='Topic':fontcolor=white:fontsize=61:x=(w-text_w)/2:y=(h-text_h)/2[banner];color=c=black:s=1120x576:d=20.0[bottom_bg];[1:v]scale=1120:576:force_original_aspect_ratio=disable,setsar=1[bottom_image];[bottom_bg][bottom_image]overlay=x='(W-w)/2':y='H-h':shortest=1[image];[main][banner][image]vstack=inputs=3[vout]"
+======================== 1 failed, 26 passed in 2.98s =========================

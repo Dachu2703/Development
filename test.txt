@@ -1,0 +1,34 @@
+
+Short video Size 1080 * 1920 
+
+
+One more point in the video already has guest name and his number captured so while make a short video the same name and his number , and others should come with normal size , also the vide size as per selected size and it should fit within the provided measurement. the final output video should properly should generated..
+
+
+
+bubeshsharanr@student.sathyabama.edu
+
+bubeshsharan@gmail.com
+Pass829212*
+bubesh
+
+
+
+python -m streamlit run auto_shorts/streamlit_app.py    --python run command for this program
+
+From your folder structure, the most suspicious files are:
+
+export.py ← ⭐ First file to check
+clip.py
+runner.py
+Possibly transitions.py
+
+
+if path not gettingon terminal / powershel
+Step 1 — Check if the settings change actually applied
+Did you reload/restart VS Code after adding "terminal.integrated.shellIntegration.enabled": false? Settings like this sometimes need a full window reload, not just a new terminal. Do:
+Ctrl+Shift+P → "Developer: Reload Window"
+
+Step 2 — Force a no-profile terminal directly in VS Code
+Instead of relying on default profile settings, explicitly create one:
+Ctrl+Shift+P → "Terminal: Create New Terminal (With Profile)" → if you don't see a no-profile option yet, click the dropdown arrow next to the + (visible in your screenshot) → "Select Default Profile" → choose Command Prompt temporarily, just as a test.

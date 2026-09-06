@@ -967,3 +967,1532 @@ AttributeError: 'NoneType' object has no attribute 'get'
 2026-08-29 02:18:05,333 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\raghu-d0cb66b62611a959cfa561ef6442534fd96d2ebf-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
 2026-08-29 02:18:05,334 DEBUG auto_shorts Transcript segments: 16, words: 0
 2026-08-29 02:18:05,337 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-29 19:01:28,991 ERROR auto_shorts Project 91 failed while processing d:\tmp\raghu.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 69, in transcribe
+    from faster_whisper import WhisperModel
+ModuleNotFoundError: No module named 'faster_whisper'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 45, in run_project
+    transcript = transcribe.transcribe(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 71, in transcribe
+    raise RuntimeError(
+RuntimeError: faster-whisper is required for transcription. Install with `pip install faster-whisper`.
+2026-08-29 19:01:28,998 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 69, in transcribe
+    from faster_whisper import WhisperModel
+ModuleNotFoundError: No module named 'faster_whisper'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 88, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 45, in run_project
+    transcript = transcribe.transcribe(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 71, in transcribe
+    raise RuntimeError(
+RuntimeError: faster-whisper is required for transcription. Install with `pip install faster-whisper`.
+2026-08-29 19:07:29,357 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\raghu-d0cb66b62611a959cfa561ef6442534fd96d2ebf-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-29 19:07:29,359 DEBUG auto_shorts Transcript segments: 16, words: 0
+2026-08-29 19:10:04,881 DEBUG auto_shorts Detected silences: 77
+2026-08-29 19:10:04,899 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-29 23:07:09,767 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-29 23:07:09,773 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:07:26,258 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:07:26,263 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:07:26,264 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:08:11,833 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:12:17,156 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:12:39,558 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:12:39,559 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:12:39,560 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:14:08,093 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:15:46,461 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:16:12,123 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:16:12,125 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:16:12,125 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:16:39,902 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:17:08,148 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:17:08,150 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:17:08,151 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:18:45,484 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:19:38,851 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:20:11,986 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:20:18,236 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:20:18,237 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:20:18,238 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:23:08,203 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:24:22,457 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-29 23:24:22,458 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:24:38,003 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:24:38,004 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:24:38,004 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:25:25,880 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:37:25,595 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-08-29 23:37:25,596 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-08-29 23:37:40,308 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-29 23:37:40,316 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-29 23:37:40,318 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-29 23:38:02,816 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-29 23:44:43,349 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-29 23:44:43,364 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-29 23:45:51,224 DEBUG auto_shorts Detected silences: 189
+2026-08-29 23:45:51,315 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-29 23:55:18,827 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-29 23:55:18,829 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-29 23:55:18,832 DEBUG auto_shorts Detected silences: 189
+2026-08-29 23:55:18,872 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-30 00:01:51,002 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 00:01:51,003 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 00:01:51,032 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-30 00:10:48,266 ERROR auto_shorts Project 41 failed while processing d:\tmp\Amitsha.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 45, in run_project
+    transcript = transcribe.transcribe(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 91, in transcribe
+    key = _cache_key_for(src)
+          ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 41, in _cache_key_for
+    st = path.stat()
+         ^^^^^^^^^^^
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1013, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'd:\\tmp\\Amitsha.mp4'
+2026-08-30 00:11:54,487 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 00:11:54,488 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 00:11:54,519 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-30 00:13:55,813 ERROR auto_shorts Project 45 failed while processing D:\tmp\Amitsha.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 45, in run_project
+    transcript = transcribe.transcribe(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 91, in transcribe
+    key = _cache_key_for(src)
+          ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\transcribe.py", line 41, in _cache_key_for
+    st = path.stat()
+         ^^^^^^^^^^^
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1013, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified: 'D:\\tmp\\Amitsha.mp4'
+2026-08-30 00:14:14,009 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-30 00:14:14,010 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-30 00:14:23,335 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-30 00:14:23,342 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-30 00:14:23,343 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-30 00:14:32,711 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-30 08:12:08,874 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps-717c492e80e2d418033231c7a3a74dd4c4148395-4d5b02d3257121b65eafed6b43a35146dad5c29c.transcript.json
+2026-08-30 08:12:08,881 DEBUG auto_shorts Transcript segments: 181, words: 0
+2026-08-30 08:12:08,892 DEBUG auto_shorts Initial candidate clips: 20
+2026-08-30 08:21:23,134 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:21:23,140 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:21:23,145 DEBUG auto_shorts Detected silences: 189
+2026-08-30 08:21:23,222 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 08:44:27,543 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:44:27,549 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:44:27,640 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 08:44:27,640 DEBUG auto_shorts Alignment skip enabled (lightning=True) — using candidates as-is
+2026-08-30 08:44:29,575 ERROR auto_shorts Project 105 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 708, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-f4y_fk0s\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpyoci9p1_\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 720x192, 25 fps, 25 tbr, 25 tbn
+[hevc_nvenc @ 000002a1c5e99000] [Eval @ 000000bf773fd500] Undefined constant or missing '(' in 'ultrafast'
+[hevc_nvenc @ 000002a1c5e99000] Unable to parse "preset" option value "ultrafast"
+[hevc_nvenc @ 000002a1c5e99000] Error setting option preset to value ultrafast.
+[vost#0:0/hevc_nvenc @ 000002a1c5aae540] Error applying encoder options: Invalid argument
+Error opening output file D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpyoci9p1_\cut_01.mp4.
+Error opening output files: Invalid argument
+
+2026-08-30 08:44:29,589 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 708, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-f4y_fk0s\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpyoci9p1_\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 720x192, 25 fps, 25 tbr, 25 tbn
+[hevc_nvenc @ 000002a1c5e99000] [Eval @ 000000bf773fd500] Undefined constant or missing '(' in 'ultrafast'
+[hevc_nvenc @ 000002a1c5e99000] Unable to parse "preset" option value "ultrafast"
+[hevc_nvenc @ 000002a1c5e99000] Error setting option preset to value ultrafast.
+[vost#0:0/hevc_nvenc @ 000002a1c5aae540] Error applying encoder options: Invalid argument
+Error opening output file D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpyoci9p1_\cut_01.mp4.
+Error opening output files: Invalid argument
+
+2026-08-30 08:47:45,888 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:47:45,888 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:47:45,897 DEBUG auto_shorts Detected silences: 189
+2026-08-30 08:47:45,952 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 08:47:48,225 ERROR auto_shorts Project 106 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 708, in export_clips
+    if subtitle_vf:
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp__fruf7b\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:47:48,231 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 708, in export_clips
+    if subtitle_vf:
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp__fruf7b\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:51:43,344 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:51:43,344 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:51:43,356 DEBUG auto_shorts Detected silences: 189
+2026-08-30 08:51:43,417 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 08:51:45,777 ERROR auto_shorts Project 107 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-twyku9k7\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpg5hjal3i\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:51:45,797 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-twyku9k7\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpg5hjal3i\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:54:13,810 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:54:13,814 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:54:13,814 DEBUG auto_shorts Detected silences: 189
+2026-08-30 08:54:13,902 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 08:54:16,041 ERROR auto_shorts Project 108 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-ua39n79c\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp93gb77jy\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:54:16,043 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-ua39n79c\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp93gb77jy\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:56:55,990 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 08:56:55,993 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 08:56:56,073 DEBUG auto_shorts Initial candidate clips: 2
+2026-08-30 08:56:58,229 ERROR auto_shorts Project 109 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-nd7sd5ua\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpkvwk_ban\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 08:56:58,232 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 687, in export_clips
+    "-map", "[vout]",
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-nd7sd5ua\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpkvwk_ban\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 09:00:37,285 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 09:00:37,285 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 09:00:37,356 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 09:00:39,675 ERROR auto_shorts Project 110 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 696, in export_clips
+    ]
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-mtnr8vk7\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpkt6mjxuv\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 09:00:39,686 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 696, in export_clips
+    ]
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-mtnr8vk7\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpkt6mjxuv\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+Press [q] to stop, [?] for help
+
+2026-08-30 09:06:00,052 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 09:06:00,058 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 09:06:00,138 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 09:06:02,864 ERROR auto_shorts Project 111 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-55b1v9ra\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp4tn4qi6y\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-08-30 09:06:02,871 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-55b1v9ra\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp4tn4qi6y\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-08-30 09:08:38,019 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-08-30 09:08:38,019 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False
+2026-08-30 09:08:44,010 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-08-30 09:08:44,010 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-08-30 09:08:44,010 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-08-30 09:08:49,682 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-08-30 09:15:46,658 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-08-30 09:15:46,668 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-08-30 09:15:46,792 DEBUG auto_shorts Initial candidate clips: 3
+2026-08-30 09:15:50,222 ERROR auto_shorts Project 113 failed while processing d:\tmp\eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-oaicwc5h\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpjm2jh3iu\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-08-30 09:15:50,222 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+Input #1, webp_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\auto-shorts-oaicwc5h\EPS11.webp':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: webp, yuv420p(tv, bt470bg/unknown/unknown), 1200x667, 25 fps, 25 tbr, 25 tbn
+Input #2, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpjm2jh3iu\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #2:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (webp) -> scale:default
+  Stream #2:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-08-30 09:18:29,691 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-4d5b02d3257121b65eafed6b43a35146dad5c29c.transcript.json
+2026-08-30 09:18:29,700 DEBUG auto_shorts Transcript segments: 414, words: 0
+2026-08-30 09:18:29,761 DEBUG auto_shorts Initial candidate clips: 3
+2026-09-01 22:17:29,315 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-09-01 22:17:29,316 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False
+2026-09-01 22:17:44,227 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-09-01 22:17:44,233 DEBUG auto_shorts transcribe returned tuple, first element type=<class 'generator'>
+2026-09-01 22:17:44,234 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-09-01 22:17:53,715 DEBUG auto_shorts first_item type: <class 'faster_whisper.transcribe.Segment'>
+2026-09-01 22:25:25,251 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 22:25:25,261 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 22:25:25,391 DEBUG auto_shorts Initial candidate clips: 4
+2026-09-01 22:25:43,398 ERROR auto_shorts Project 114 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[in#0 @ 00000299a2e293c0] st: 0 edit list: 1 Missing key frame while searching for timestamp: 3003
+[in#0 @ 00000299a2e293c0] st: 0 edit list 1 Cannot find an index entry before timestamp: 3003.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\flood.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    creation_time   : 2026-08-30T07:44:55.000000Z
+  Duration: 00:23:08.39, start: 0.000000, bitrate: 20129 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 19999 kb/s, 29.97 fps, 29.97 tbr, 90k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 125 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+Input #1, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpim6qoief\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-09-01 22:25:43,415 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 170, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 724, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[in#0 @ 00000299a2e293c0] st: 0 edit list: 1 Missing key frame while searching for timestamp: 3003
+[in#0 @ 00000299a2e293c0] st: 0 edit list 1 Cannot find an index entry before timestamp: 3003.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\flood.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    creation_time   : 2026-08-30T07:44:55.000000Z
+  Duration: 00:23:08.39, start: 0.000000, bitrate: 20129 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 19999 kb/s, 29.97 fps, 29.97 tbr, 90k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 125 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+Input #1, png_pipe, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmpim6qoief\title_01.png':
+  Duration: N/A, bitrate: N/A
+  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 1080x288, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (h264) -> scale:default
+  Stream #1:0 (png) -> scale:default
+  vstack:default -> Stream #0:0 (libx264)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+
+2026-09-01 22:40:28,014 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 22:40:28,017 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 22:40:28,071 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-01 22:55:14,327 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 22:55:14,329 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 22:55:14,422 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-01 23:00:13,931 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 23:00:13,956 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 23:00:14,246 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-01 23:32:03,439 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 23:32:03,439 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 23:32:03,489 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-01 23:54:12,898 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 23:54:12,898 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-01 23:54:12,914 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 23:54:12,916 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-01 23:54:13,033 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 00:14:28,363 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 00:14:28,363 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 00:14:28,513 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 00:32:58,506 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 00:32:58,509 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 00:32:58,578 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 00:52:54,036 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 00:52:54,036 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 00:52:54,160 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 01:16:48,941 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:16:48,946 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:16:49,061 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 01:26:32,231 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:26:32,244 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:26:32,395 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 01:39:39,395 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:39:39,399 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:39:39,519 DEBUG auto_shorts Initial candidate clips: 4
+2026-09-02 01:45:24,222 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:45:24,224 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:45:24,350 DEBUG auto_shorts Initial candidate clips: 4
+2026-09-02 01:45:25,552 ERROR auto_shorts Project 127 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 795, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[in#0 @ 000001ed8d7b6b00] st: 0 edit list: 1 Missing key frame while searching for timestamp: 3003
+[in#0 @ 000001ed8d7b6b00] st: 0 edit list 1 Cannot find an index entry before timestamp: 3003.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\flood.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    creation_time   : 2026-08-30T07:44:55.000000Z
+  Duration: 00:23:08.39, start: 0.000000, bitrate: 20129 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 19999 kb/s, 29.97 fps, 29.97 tbr, 90k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 125 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+[in#1 @ 000001ed90840280] Error opening input: No such file or directory
+Error opening input file None.
+Error opening input files: No such file or directory
+
+2026-09-02 01:45:25,563 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 175, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 795, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[in#0 @ 000001ed8d7b6b00] st: 0 edit list: 1 Missing key frame while searching for timestamp: 3003
+[in#0 @ 000001ed8d7b6b00] st: 0 edit list 1 Cannot find an index entry before timestamp: 3003.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\flood.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    creation_time   : 2026-08-30T07:44:55.000000Z
+  Duration: 00:23:08.39, start: 0.000000, bitrate: 20129 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 19999 kb/s, 29.97 fps, 29.97 tbr, 90k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 125 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+[in#1 @ 000001ed90840280] Error opening input: No such file or directory
+Error opening input file None.
+Error opening input files: No such file or directory
+
+2026-09-02 01:54:23,655 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:54:23,668 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:54:23,858 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 01:58:41,698 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 01:58:41,728 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 01:58:42,070 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 02:00:18,363 ERROR auto_shorts Project 128 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 828, in export_clips
+    "ffmpeg",
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmpqoyfcblb\\cut_04.mp4' -> 'output\\project_128\\YouTube_Shorts\\clip_youtube_shorts_04.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 832, in export_clips
+    str(proc_file),
+        ^^^^^^^^^^^^
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 448, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 258, in copyfile
+    with open(dst, 'wb') as fdst:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'output\\project_128\\YouTube_Shorts\\clip_youtube_shorts_04.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 835, in export_clips
+    "-c:v",
+        ^^^^
+RuntimeError: Export failed moving file: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmpqoyfcblb\\cut_04.mp4' -> 'output\\project_128\\YouTube_Shorts\\clip_youtube_shorts_04.mp4' -> [Errno 2] No such file or directory: 'output\\project_128\\YouTube_Shorts\\clip_youtube_shorts_04.mp4'
+2026-09-02 02:05:26,455 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 02:05:26,486 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 02:05:27,233 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 02:16:11,989 ERROR auto_shorts Project 130 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 852, in export_clips
+    os.replace(str(proc_file), str(out_file))
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmpqxnktcqp\\cut_05.mp4' -> 'output\\project_130\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 856, in export_clips
+    shutil.copy2(str(proc_file), str(out_file))
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 448, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 258, in copyfile
+    with open(dst, 'wb') as fdst:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'output\\project_130\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 859, in export_clips
+    raise RuntimeError(f"Export failed moving file: {e} -> {e2}")
+RuntimeError: Export failed moving file: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmpqxnktcqp\\cut_05.mp4' -> 'output\\project_130\\YouTube_Shorts\\clip_youtube_shorts_05.mp4' -> [Errno 2] No such file or directory: 'output\\project_130\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+2026-09-02 02:16:55,068 ERROR auto_shorts Project 129 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 852, in export_clips
+    os.replace(str(proc_file), str(out_file))
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmp4asr938l\\cut_05.mp4' -> 'output\\project_129\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 856, in export_clips
+    shutil.copy2(str(proc_file), str(out_file))
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 448, in copy2
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "C:\Users\rajas\AppData\Local\Programs\Python\Python311\Lib\shutil.py", line 258, in copyfile
+    with open(dst, 'wb') as fdst:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'output\\project_129\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 859, in export_clips
+    raise RuntimeError(f"Export failed moving file: {e} -> {e2}")
+RuntimeError: Export failed moving file: [WinError 3] The system cannot find the path specified: 'D:\\Nagaraj\\soft\\Development\\auto-shorts\\.auto_shorts_tmp\\tmp4asr938l\\cut_05.mp4' -> 'output\\project_129\\YouTube_Shorts\\clip_youtube_shorts_05.mp4' -> [Errno 2] No such file or directory: 'output\\project_129\\YouTube_Shorts\\clip_youtube_shorts_05.mp4'
+2026-09-02 02:18:17,558 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 02:18:17,560 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 02:18:17,649 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 02:23:30,093 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-02 02:23:30,130 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-02 02:23:30,429 DEBUG auto_shorts Initial candidate clips: 5
+2026-09-02 02:25:29,042 ERROR auto_shorts Project 132 failed while processing d:\tmp\flood.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 178, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 819, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 2: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[in#0 @ 0000018d4751b7c0] st: 0 edit list: 1 Missing key frame while searching for timestamp: 3003
+[in#0 @ 0000018d4751b7c0] st: 0 edit list 1 Cannot find an index entry before timestamp: 3003.
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'd:\tmp\flood.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    creation_time   : 2026-08-30T07:44:55.000000Z
+  Duration: 00:23:08.39, start: 0.000000, bitrate: 20129 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 19999 kb/s, 29.97 fps, 29.97 tbr, 90k tbn (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 125 kb/s (default)
+    Metadata:
+      creation_time   : 2026-08-30T07:44:55.000000Z
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> h264 (libx264))
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[libx264 @ 0000018d49442040] using SAR=1216/1215
+[libx264 @ 0000018d49442040] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 0000018d49442040] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0000018d49442040] 264 - core 165 r3223 0480cb0 - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=2 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=12 lookahead_threads=4 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_tmp\tmp2o95eqpb\cut_02.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 1
+    compatible_brands: mp42avc1
+    encoder         : Lavf63.1.100
+  Stream #0:0(und): Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1080x1920 [SAR 1216:1215 DAR 76:135], q=2-31, 29.97 fps, 30k tbn (default)
+    Metadata:
+      encoder         : Lavc63.1.100 libx264
+      creation_time   : 2026-08-30T07:44:55.000000Z
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 192 kb/s (default)
+    Metadata:
+      encoder         : Lavc63.1.100 aac
+      creation_time   : 2026-08-30T07:44:55.000000Z
+frame=   34 fps=0.0 q=29.0 size=       0KiB time=00:00:01.10 bitrate=   0.3kbits/s speed= 2.1x elapsed=0:00:00.52    
+frame=   87 fps= 83 q=29.0 size=       0KiB time=00:00:02.86 bitrate=   0.1kbits/s speed=2.75x elapsed=0:00:01.04    
+frame=  134 fps= 86 q=29.0 size=     256KiB time=00:00:04.50 bitrate= 466.0kbits/s speed=2.89x elapsed=0:00:01.55    
+frame=  170 fps= 82 q=29.0 size=     256KiB time=00:00:05.63 bitrate= 372.0kbits/s speed=2.72x elapsed=0:00:02.07    
+frame=  208 fps= 79 q=29.0 size=     512KiB time=00:00:06.90 bitrate= 607.3kbits/s speed=2.64x elapsed=0:00:02.62    
+frame=  247 fps= 79 q=29.0 size=     512KiB time=00:00:08.32 bitrate= 504.2kbits/s speed=2.65x elapsed=0:00:03.13    
+frame=  288 fps= 79 q=29.0 size=     768KiB time=00:00:09.57 bitrate= 657.0kbits/s speed=2.62x elapsed=0:00:03.65    
+frame=  317 fps= 76 q=29.0 size=     768KiB time=00:00:10.54 bitrate= 596.7kbits/s speed=2.53x elapsed=0:00:04.16    
+frame=  342 fps= 73 q=29.0 size=     768KiB time=00:00:11.37 bitrate= 553.0kbits/s speed=2.43x elapsed=0:00:04.67    
+frame=  384 fps= 74 q=29.0 size=    1024KiB time=00:00:12.77 bitrate= 656.4kbits/s speed=2.46x elapsed=0:00:05.19    
+frame=  428 fps= 75 q=29.0 size=    1024KiB time=00:00:14.33 bitrate= 585.2kbits/s speed=2.51x elapsed=0:00:05.71    
+frame=  467 fps= 75 q=29.0 size=    1280KiB time=00:00:15.54 bitrate= 674.4kbits/s speed= 2.5x elapsed=0:00:06.22    
+frame=  484 fps= 72 q=29.0 size=    1280KiB time=00:00:16.32 bitrate= 642.5kbits/s speed=2.42x elapsed=0:00:06.74    
+frame=  510 fps= 70 q=29.0 size=    1280KiB time=00:00:16.98 bitrate= 617.4kbits/s speed=2.34x elapsed=0:00:07.27    
+frame=  535 fps= 69 q=29.0 size=    1536KiB time=00:00:17.81 bitrate= 706.2kbits/s speed=2.29x elapsed=0:00:07.78    
+frame=  568 fps= 68 q=29.0 size=    1536KiB time=00:00:18.98 bitrate= 662.7kbits/s speed=2.29x elapsed=0:00:08.30    
+frame=  604 fps= 68 q=29.0 size=    1536KiB time=00:00:20.26 bitrate= 620.9kbits/s speed= 2.3x elapsed=0:00:08.82    
+frame=  644 fps= 69 q=29.0 size=    1792KiB time=00:00:21.45 bitrate= 684.3kbits/s speed= 2.3x elapsed=0:00:09.32    
+frame=  685 fps= 69 q=29.0 size=    1792KiB time=00:00:22.82 bitrate= 643.1kbits/s speed=2.32x elapsed=0:00:09.85    
+frame=  730 fps= 70 q=29.0 size=    2048KiB time=00:00:24.32 bitrate= 689.7kbits/s speed=2.34x elapsed=0:00:10.37    
+frame=  779 fps= 71 q=29.0 size=    2048KiB time=00:00:26.00 bitrate= 645.2kbits/s speed=2.39x elapsed=0:00:10.89    
+frame=  820 fps= 72 q=29.0 size=    2304KiB time=00:00:27.32 bitrate= 690.7kbits/s speed=2.39x elapsed=0:00:11.41    
+frame=  836 fps= 70 q=29.0 size=    2304KiB time=00:00:27.96 bitrate= 674.9kbits/s speed=2.35x elapsed=0:00:11.92    
+frame=  864 fps= 69 q=29.0 size=    2304KiB time=00:00:28.97 bitrate= 651.5kbits/s speed=2.33x elapsed=0:00:12.45    
+frame=  889 fps= 69 q=29.0 size=    2560KiB time=00:00:29.80 bitrate= 703.7kbits/s speed= 2.3x elapsed=0:00:12.96    
+frame=  927 fps= 69 q=29.0 size=    2560KiB time=00:00:30.89 bitrate= 678.8kbits/s speed=2.29x elapsed=0:00:13.48    
+frame=  970 fps= 69 q=29.0 size=    2560KiB time=00:00:32.34 bitrate= 648.5kbits/s speed=2.31x elapsed=0:00:14.00    
+frame= 1010 fps= 70 q=29.0 size=    2816KiB time=00:00:33.66 bitrate= 685.2kbits/s speed=2.32x elapsed=0:00:14.53    
+frame= 1050 fps= 70 q=29.0 size=    3072KiB time=00:00:35.00 bitrate= 719.0kbits/s speed=2.33x elapsed=0:00:15.04    
+frame= 1090 fps= 70 q=29.0 size=    3072KiB time=00:00:36.35 bitrate= 692.3kbits/s speed=2.34x elapsed=0:00:15.55    
+frame= 1131 fps= 70 q=29.0 size=    3328KiB time=00:00:37.84 bitrate= 720.4kbits/s speed=2.35x elapsed=0:00:16.07    
+frame= 1157 fps= 70 q=29.0 size=    3328KiB time=00:00:38.76 bitrate= 703.3kbits/s speed=2.34x elapsed=0:00:16.59    
+frame= 1198 fps= 70 q=29.0 size=    3328KiB time=00:00:39.93 bitrate= 682.6kbits/s speed=2.34x elapsed=0:00:17.10    
+frame= 1239 fps= 70 q=29.0 size=    3584KiB time=00:00:41.51 bitrate= 707.2kbits/s speed=2.36x elapsed=0:00:17.62    
+frame= 1284 fps= 71 q=29.0 size=    3840KiB time=00:00:42.98 bitrate= 731.8kbits/s speed=2.37x elapsed=0:00:18.13    
+frame= 1329 fps= 71 q=29.0 size=    3840KiB time=00:00:44.48 bitrate= 707.2kbits/s speed=2.38x elapsed=0:00:18.65    
+frame= 1369 fps= 71 q=29.0 size=    4096KiB time=00:00:45.84 bitrate= 731.9kbits/s speed=2.39x elapsed=0:00:19.17    
+frame= 1408 fps= 72 q=29.0 size=    4352KiB time=00:00:46.94 bitrate= 759.4kbits/s speed=2.39x elapsed=0:00:19.68    
+frame= 1448 fps= 72 q=29.0 size=    4352KiB time=00:00:48.28 bitrate= 738.4kbits/s speed=2.39x elapsed=0:00:20.20    
+frame= 1489 fps= 72 q=29.0 size=    4608KiB time=00:00:49.72 bitrate= 759.1kbits/s speed= 2.4x elapsed=0:00:20.70    
+frame= 1530 fps= 72 q=29.0 size=    4864KiB time=00:00:51.11 bitrate= 779.5kbits/s speed=2.41x elapsed=0:00:21.23    
+frame= 1566 fps= 72 q=29.0 size=    5120KiB time=00:00:52.45 bitrate= 799.6kbits/s speed=2.41x elapsed=0:00:21.75    
+frame= 1602 fps= 72 q=29.0 size=    5120KiB time=00:00:53.42 bitrate= 785.2kbits/s speed= 2.4x elapsed=0:00:22.28    
+frame= 1642 fps= 72 q=29.0 size=    5376KiB time=00:00:54.86 bitrate= 802.6kbits/s speed=2.41x elapsed=0:00:22.79    
+frame= 1681 fps= 72 q=29.0 size=    5376KiB time=00:00:56.19 bitrate= 783.8kbits/s speed=2.41x elapsed=0:00:23.31    
+frame= 1722 fps= 72 q=29.0 size=    5632KiB time=00:00:57.42 bitrate= 803.5kbits/s speed=2.41x elapsed=0:00:23.81    
+frame= 1766 fps= 73 q=29.0 size=    5632KiB time=00:00:58.89 bitrate= 783.4kbits/s speed=2.42x elapsed=0:00:24.33    
+frame= 1804 fps= 73 q=29.0 size=    5888KiB time=00:01:00.37 bitrate= 798.9kbits/s speed=2.43x elapsed=0:00:24.86    
+frame= 1840 fps= 73 q=29.0 size=    6144KiB time=00:01:01.37 bitrate= 820.1kbits/s speed=2.42x elapsed=0:00:25.37    
+frame= 1878 fps= 73 q=29.0 size=    6144KiB time=00:01:02.74 bitrate= 802.2kbits/s speed=2.42x elapsed=0:00:25.89    
+frame= 1919 fps= 73 q=29.0 size=    6400KiB time=00:01:03.99 bitrate= 819.2kbits/s speed=2.42x elapsed=0:00:26.40    
+frame= 1960 fps= 73 q=29.0 size=    6656KiB time=00:01:05.36 bitrate= 834.2kbits/s speed=2.43x elapsed=0:00:26.91    
+frame= 1997 fps= 73 q=29.0 size=    6656KiB time=00:01:06.59 bitrate= 818.7kbits/s speed=2.43x elapsed=0:00:27.42    
+frame= 2050 fps= 73 q=29.0 size=    6912KiB time=00:01:08.37 bitrate= 828.2kbits/s speed=2.45x elapsed=0:00:27.95    
+frame= 2087 fps= 73 q=29.0 size=    7168KiB time=00:01:09.67 bitrate= 842.8kbits/s speed=2.45x elapsed=0:00:28.47    
+frame= 2130 fps= 73 q=29.0 size=    7168KiB time=00:01:11.14 bitrate= 825.3kbits/s speed=2.45x elapsed=0:00:29.01    
+frame= 2166 fps= 73 q=29.0 size=    7424KiB time=00:01:12.23 bitrate= 841.9kbits/s speed=2.44x elapsed=0:00:29.57    
+frame= 2197 fps= 73 q=29.0 size=    7680KiB time=00:01:13.51 bitrate= 855.8kbits/s speed=2.44x elapsed=0:00:30.09    
+[out#0/mp4 @ 0000018d47497880] video:6780KiB audio:1887KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 1.004401%
+frame= 2394 fps= 72 q=-1.0 Lsize=    8754KiB time=00:01:19.84 bitrate= 898.1kbits/s speed=2.39x elapsed=0:00:33.47    
+[libx264 @ 0000018d49442040] frame I:10    Avg QP:11.21  size: 32792
+[libx264 @ 0000018d49442040] frame P:603   Avg QP:15.84  size:  6807
+[libx264 @ 0000018d49442040] frame B:1781  Avg QP:19.91  size:  1409
+[libx264 @ 0000018d49442040] consecutive B-frames:  0.8%  0.0%  0.1% 99.1%
+[libx264 @ 0000018d49442040] mb I  I16..4: 78.2% 15.4%  6.3%
+[libx264 @ 0000018d49442040] mb P  I16..4:  2.0%  2.2%  0.2%  P16..4:  5.5%  2.3%  1.4%  0.0%  0.0%    skip:86.4%
+[libx264 @ 0000018d49442040] mb B  I16..4:  0.2%  0.2%  0.0%  B16..8:  2.4%  0.7%  0.1%  direct: 1.6%  skip:94.8%  L0:35.2% L1:44.5% BI:20.3%
+[libx264 @ 0000018d49442040] 8x8 transform intra:40.4% inter:27.0%
+[libx264 @ 0000018d49442040] coded y,uvDC,uvAC intra: 23.5% 34.0% 9.8% inter: 0.8% 2.2% 0.0%
+[libx264 @ 0000018d49442040] i16 v,h,dc,p: 57% 23% 11%  9%
+[libx264 @ 0000018d49442040] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 18% 20% 37%  4%  5%  5%  6%  3%  4%
+[libx264 @ 0000018d49442040] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 18% 21% 12%  7%  9%  8% 10%  7%  7%
+[libx264 @ 0000018d49442040] i8c dc,h,v,p: 64% 17% 16%  3%
+[libx264 @ 0000018d49442040] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0000018d49442040] kb/s:694.06
+[aac @ 0000018d4959b340] Qavg: 669.282
+Exiting normally, received signal 15.
+
+2026-09-05 23:50:41,603 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-05 23:50:41,609 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-09-05 23:50:41,718 DEBUG auto_shorts Initial candidate clips: 3
+2026-09-06 00:02:42,705 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\Stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 00:02:42,719 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 00:02:42,728 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 00:05:52,203 ERROR auto_shorts Project 134 failed while processing d:\tmp\Stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 195, in run_project
+    validate_requested_clip_count(num_shorts, results)
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 22, in validate_requested_clip_count
+    raise RuntimeError(f"Requested: {requested_count}\nGenerated: {generated_count}\nReason: {reason}")
+RuntimeError: Requested: 4
+Generated: 2
+Reason: Only 2 suitable content segments were found for the requested 4 short videos.
+2026-09-06 00:05:52,219 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 175, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 195, in run_project
+    validate_requested_clip_count(num_shorts, results)
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 22, in validate_requested_clip_count
+    raise RuntimeError(f"Requested: {requested_count}\nGenerated: {generated_count}\nReason: {reason}")
+RuntimeError: Requested: 4
+Generated: 2
+Reason: Only 2 suitable content segments were found for the requested 4 short videos.
+2026-09-06 02:12:32,026 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 02:12:32,028 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-06 02:12:32,086 DEBUG auto_shorts Initial candidate clips: 3
+2026-09-06 02:17:29,675 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 02:17:29,695 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-06 02:17:30,091 DEBUG auto_shorts Initial candidate clips: 3
+2026-09-06 16:54:22,491 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 16:54:22,495 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 16:54:22,503 DEBUG auto_shorts Initial candidate clips: 3
+2026-09-06 17:22:30,938 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 17:22:30,941 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 17:22:30,951 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 17:25:37,142 WARNING auto_shorts Fewer clips were generated than requested: Requested: 3
+Generated: 2
+Reason: Only 2 suitable content segments were found for the requested 3 short videos.
+2026-09-06 17:33:38,708 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 17:33:38,709 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 17:33:38,715 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 17:49:27,103 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 17:49:27,105 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 17:49:27,113 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 18:22:36,312 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 18:22:36,316 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 18:22:36,324 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 18:30:52,906 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 18:30:52,908 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 18:30:52,915 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 18:41:44,454 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\eps1-e3051947fbbca0921c24fd6d7f9ddcdab8b95793-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 18:41:44,456 DEBUG auto_shorts Transcript segments: 219, words: 0
+2026-09-06 18:41:44,487 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 21:18:34,937 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 21:18:34,939 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 21:18:34,945 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 21:27:40,432 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 21:27:40,434 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 21:27:40,446 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 21:48:33,280 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 21:48:33,284 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 21:48:33,298 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 21:48:33,335 ERROR auto_shorts Project 146 failed while processing d:\tmp\stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 184, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+TypeError: export_clips() got an unexpected keyword argument 'watermark_text'
+2026-09-06 21:48:33,339 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 397, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 184, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+TypeError: export_clips() got an unexpected keyword argument 'watermark_text'
+2026-09-06 21:52:54,563 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 21:52:54,567 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 21:52:54,580 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 21:57:28,206 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 21:57:28,209 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 21:57:28,214 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 22:23:17,078 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 22:23:17,081 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 22:23:17,088 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 22:26:51,707 ERROR auto_shorts Project 149 failed while processing d:\tmp\stalin.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 226, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 905, in export_clips
+    proc_file = _apply_branding_and_fullsize_banner(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 675, in _apply_branding_and_fullsize_banner
+    if proc.returncode!=0: raise RuntimeError(f"branding render failed: {proc.stderr}")
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: branding render failed: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[AVFilterGraph @ 000002c7f28e9840] No option name near '/Windows/Fonts/arial.ttf:text=Edapadi:x=(w-text_w)/2:y=h-480+(480-text_h)/2:fontsize=48:fontcolor=white:box=1:boxcolor=black@0.35:boxborderw=18'
+[AVFilterGraph @ 000002c7f28e9840] Error parsing a filter description around: [b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]
+[AVFilterGraph @ 000002c7f28e9840] Error parsing filterchain '[b0]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Edapadi':x=(w-text_w)/2:y=h-480+(480-text_h)/2:fontsize=48:fontcolor=white:box=1:boxcolor=black@0.35:boxborderw=18[b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]' around: [b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]
+Error : Invalid argument
+
+2026-09-06 22:26:51,724 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 397, in <module>
+    manifest_path = runner.run_project(
+                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 226, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 905, in export_clips
+    proc_file = _apply_branding_and_fullsize_banner(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 675, in _apply_branding_and_fullsize_banner
+    if proc.returncode!=0: raise RuntimeError(f"branding render failed: {proc.stderr}")
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: branding render failed: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+[AVFilterGraph @ 000002c7f28e9840] No option name near '/Windows/Fonts/arial.ttf:text=Edapadi:x=(w-text_w)/2:y=h-480+(480-text_h)/2:fontsize=48:fontcolor=white:box=1:boxcolor=black@0.35:boxborderw=18'
+[AVFilterGraph @ 000002c7f28e9840] Error parsing a filter description around: [b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]
+[AVFilterGraph @ 000002c7f28e9840] Error parsing filterchain '[b0]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Edapadi':x=(w-text_w)/2:y=h-480+(480-text_h)/2:fontsize=48:fontcolor=white:box=1:boxcolor=black@0.35:boxborderw=18[b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]' around: [b1];[2:v]scale=129:129:force_original_aspect_ratio=decrease[logo];[b1][logo]overlay=W-w-21:21:format=auto[lout];[lout]drawtext=fontfile='C:/Windows/Fonts/arial.ttf':text='Sun Astro TV':x=w-text_w-30:y=40:fontsize=34:fontcolor=white@0.35:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm];[wm]null[vout]
+Error : Invalid argument
+
+2026-09-06 22:33:38,216 ERROR auto_shorts Pipeline failed during final processing
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\streamlit_app.py", line 314, in <module>
+    raise FileNotFoundError(f"Source video does not exist: {source_path}")
+FileNotFoundError: Source video does not exist: d:\tmp\stalin\mp4
+2026-09-06 22:33:59,424 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\stalin-6bc2259eba76680af5051f02ac1e39fd97026788-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 22:33:59,426 DEBUG auto_shorts Transcript segments: 39, words: 0
+2026-09-06 22:33:59,435 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 22:56:06,781 DEBUG auto_shorts Transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\flood-feccefaaade6cc9c1520ad5ec00e78a8b969ff5b-237c9da1a68dff540a7be46f6633b7ac243e5651.transcript.json
+2026-09-06 22:56:06,784 DEBUG auto_shorts Transcript segments: 295, words: 0
+2026-09-06 22:56:06,880 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-06 23:22:17,769 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-09-06 23:22:17,769 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False language=en task=transcribe
+2026-09-06 23:22:23,779 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-09-06 23:22:23,779 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True

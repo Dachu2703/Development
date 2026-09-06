@@ -56,10 +56,10 @@ def test_guest_overlay_is_disabled_by_default():
 
 def test_three_band_layout_uses_requested_percentages():
     layout = _build_three_band_filter(1120, 1920, {"title": "Topic"}, 20.0)
-    assert "scale=1120:1440" in layout
-    assert "crop=1120:1440" in layout
-    assert "1120x58" in layout
-    assert "scale=1120:422:force_original_aspect_ratio=disable,setsar=1[bottom_image]" in layout
+    assert "scale=1120:1056:force_original_aspect_ratio=decrease" in layout
+    assert "pad=1120:1056:(ow-iw)/2:(oh-ih)/2:black" in layout
+    assert "color=c=0x101522:s=1120x288" in layout
+    assert "scale=1120:576:force_original_aspect_ratio=disable,setsar=1[bottom_image]" in layout
     assert "overlay=x='(W-w)/2':y='H-h':shortest=1[image]" in layout
     assert "text='Topic'" in layout
 
