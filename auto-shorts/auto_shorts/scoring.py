@@ -220,7 +220,7 @@ def _peak_centered_window(segments: List[Dict], peak_index: int, target: float, 
     return start, end
 
 
-def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5, prioritize_length: bool = False, force_exact_length: bool = False, exact_clip_length: int | None = None, target_duration: Optional[int] = None) -> List[Dict]:
+def score_sentences(transcript_path: str, min_length: int = 15, max_length: int = 60, top_k: int = 5, prioritize_length: bool = False, force_exact_length: bool = False, exact_clip_length: int | None = None, target_duration: Optional[int] = None, analysis_start: float | None = None, analysis_end: float | None = None) -> List[Dict]:
     """Score sentences/segments from a transcript JSON and return top candidate clips.
 
     Transcript JSON should contain `segments` (with start,end,text) or `words`.
@@ -231,6 +231,14 @@ def score_sentences(transcript_path: str, min_length: int = 15, max_length: int 
 
     segments = data.get("segments") or []
     words = data.get("words") or []
+    if analysis_start is not None or analysis_end is not None:
+        window_start = float(analysis_start or 0.0)
+        window_end = float(analysis_end if analysis_end is not None else data.get("duration", 0.0))
+        segments = [
+            segment for segment in segments
+            if float(segment.get("end", 0.0)) > window_start
+            and float(segment.get("start", 0.0)) < window_end
+        ]
     if not segments and words:
         # Aggregate words into rough segments sized around desired top_k candidates
         segments = []

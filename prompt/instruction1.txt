@@ -419,3 +419,33 @@ Generate professional-quality short videos with proper editing and transitions.
 Create different layouts without any hardcoded positioning or development changes.
 
 This approach provides maximum flexibility and allows every user to create short videos according to their own design preferences and content strategy.
+
+===================
+
+Here is a clearer and more precise version of your requirement:
+
+The **End Seconds** field is currently restricted to a maximum of **180 seconds**. Please remove this restriction.
+
+The segment duration should instead be validated against the **actual length of the long video**.
+
+For example, if the long video is **600 seconds**:
+
+* **1st segment:** Start = 5 seconds, End = 350 seconds
+* **2nd segment:** Start must be **greater than 350 seconds**, and the End can be any value less than or equal to the long video's maximum duration (600 seconds).
+* **3rd segment:** Start must be **greater than the End of the 2nd segment**, and the End must not exceed the long video's total duration.
+
+### Required validation rules
+
+1. Do **not** hard-code the End Seconds maximum to 180 seconds.
+2. The maximum allowed End Seconds should be the **actual long video duration**.
+3. A segment's Start Seconds must be **greater than the End Seconds of the previous segment**.
+4. A segment's End Seconds must be **greater than its Start Seconds**.
+5. No segment's End Seconds can exceed the **total duration of the long video**.
+6. Apply these rules dynamically to all segments (1st, 2nd, 3rd, etc.).
+7. If the long video is 600 seconds, values such as **5–350, 351–500, and 501–600** should be valid.
+8. If the user enters an End Seconds value greater than the long video's duration, show an appropriate validation error.
+
+If you want, I can also rewrite this as a **Copilot coding prompt** so you can paste it directly into Copilot Chat.
+
+
+===============

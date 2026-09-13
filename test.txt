@@ -23,6 +23,23 @@ D:\Nagaraj\soft\Development\auto-shorts>powershell.exe -NoLogo -NoProfile
 
 PS D:\Nagaraj\soft\Development\auto-shorts>
 
+node --version
+npm --version
+
+npm is working correctly ✅
+You currently have npm 11.19.0 ✅
+A newer version (12.0.2) is available ✅
+Updating is optional ✅
+
+
+##app running
+Push-Location D:\Nagaraj\soft\Development\auto-shorts\frontend
+npm run dev -- --host 0.0.0.0 --port 5173
+Pop-Location
+
+##restart the api
+cd D:\Nagaraj\soft\Development\auto-shorts
+python -m uvicorn auto_shorts.api:app --reload --port 8000
 
 
 

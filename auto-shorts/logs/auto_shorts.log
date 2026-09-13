@@ -3038,3 +3038,10 @@ frame= 5344 fps= 28 q=-1.0 Lsize=   33113KiB time=00:02:58.06 bitrate=1523.4kbit
 [aac @ 000001c135679200] Qavg: 734.736
 Exiting normally, received signal 2.
 
+2026-09-14 02:31:26,578 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=small
+2026-09-14 02:31:26,579 DEBUG auto_shorts transcribe starting model=small beam_size=1 word_timestamps=False language=en task=transcribe
+2026-09-14 02:31:33,306 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-09-14 02:31:33,306 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-09-14 02:41:03,116 DEBUG auto_shorts Source transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\94f0db4adf5f48fbad8addc549c3b7e9_eps-59bf466a7ffa9306c35ac478365bd8a8cda18f5c-96efe8399c1ac5439443b2c882e4e04112195c36.transcript.json
+2026-09-14 02:41:03,124 DEBUG auto_shorts Source transcript segments: 197, words: 0, language=en
+2026-09-14 02:41:03,141 DEBUG auto_shorts Initial candidate clips: 1

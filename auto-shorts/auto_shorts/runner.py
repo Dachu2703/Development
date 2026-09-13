@@ -230,7 +230,10 @@ def run_project(
             sil = []
 
         ks = num_shorts if num_shorts is not None else kwargs.get("num_shorts")
+        manual_windows = kwargs.get("manual_segments") or []
         top_k = int(ks) if ks else 20
+        if manual_windows:
+            top_k = max(top_k, len(manual_windows) * 20)
 
         if lightning_mode:
             top_k = max(int(ks) if ks else 8, int(num_shorts) if num_shorts else 8)
@@ -243,14 +246,33 @@ def run_project(
         )
 
         report(75, "Scoring high-engagement moments…")
-        candidates = scoring.score_sentences(
-            transcript,
-            min_length=min_length,
-            max_length=max_length,
-            top_k=top_k,
-            prioritize_length=pl,
-            target_duration=target_duration,
-        )
+        if manual_windows:
+            candidates = []
+            for window in manual_windows:
+                window_start = float(window.get("start", 0.0))
+                window_end = float(window.get("end", 0.0))
+                window_max = int(window.get("max_seconds", max_length))
+                candidates.extend(
+                    scoring.score_sentences(
+                        transcript,
+                        min_length=min_length,
+                        max_length=window_max,
+                        top_k=1,
+                        prioritize_length=pl,
+                        target_duration=window_max,
+                        analysis_start=window_start,
+                        analysis_end=window_end,
+                    )
+                )
+        else:
+            candidates = scoring.score_sentences(
+                transcript,
+                min_length=min_length,
+                max_length=max_length,
+                top_k=top_k,
+                prioritize_length=pl,
+                target_duration=target_duration,
+            )
         if candidates is None:
             logger.debug("scoring.score_sentences returned None, normalizing to []")
             candidates = []
@@ -293,15 +315,38 @@ def run_project(
             for index, segment in enumerate(manual_segments, start=1):
                 start = float(segment.get("start", 0.0))
                 end = float(segment.get("end", 0.0))
+                max_seconds = int(segment.get("max_seconds", max_length))
                 if start < 0 or end <= start:
                     raise ValueError(
                         f"Manual segment {index} must have end greater than start"
                     )
-                if end - start > scoring.MAX_SHORT_DURATION:
+                if not 1 <= max_seconds <= scoring.MAX_SHORT_DURATION:
                     raise ValueError(
-                        f"Manual segment {index} exceeds the {int(scoring.MAX_SHORT_DURATION)} second maximum"
+                        f"Manual segment {index} max_seconds must be between 1 and {int(scoring.MAX_SHORT_DURATION)}"
                     )
-                aligned.append({"start": start, "end": end, "reason": "manual segment"})
+                window_candidates = [
+                    candidate
+                    for candidate in candidates
+                    if float(candidate.get("start", 0.0)) < end
+                    and float(candidate.get("end", 0.0)) > start
+                ]
+                if window_candidates:
+                    best = max(window_candidates, key=lambda item: item.get("score", 0))
+                    clip_start = max(start, float(best["start"]))
+                    clip_end = min(end, float(best["end"]))
+                    if clip_end - clip_start > max_seconds:
+                        clip_end = clip_start + max_seconds
+                    aligned.append({
+                        "start": clip_start,
+                        "end": clip_end,
+                        "reason": "best moment in analysis window",
+                    })
+                else:
+                    aligned.append({
+                        "start": start,
+                        "end": min(end, start + max_seconds),
+                        "reason": "analysis window fallback",
+                    })
 
         # Attach captions without changing the selected clip boundaries.
         if captions:

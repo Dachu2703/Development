@@ -5,10 +5,13 @@ Run with: python -m uvicorn auto_shorts.api:app --reload --port 8000
 
 from pathlib import Path
 from typing import Any
+import os
 import shutil
+import subprocess
 from uuid import uuid4
 
 from fastapi import BackgroundTasks, FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -20,6 +23,24 @@ OUTPUT_ROOT = ROOT / "output"
 UPLOAD_ROOT = ROOT / ".auto_shorts_uploads"
 DB_PATH = ROOT / "auto_shorts.db"
 JOBS: dict[str, dict[str, Any]] = {}
+
+
+def _video_duration(path: Path) -> float:
+    result = subprocess.run(
+        [
+            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1", str(path),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise HTTPException(status_code=400, detail="Could not determine video duration.")
+    try:
+        return float(result.stdout.strip())
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail="Video duration is invalid.") from exc
 
 app = FastAPI(title="auto-shorts Studio API", version="0.1.0")
 app.add_middleware(
@@ -34,6 +55,7 @@ app.add_middleware(
 class Segment(BaseModel):
     start: float = Field(ge=0)
     end: float = Field(gt=0)
+    max_seconds: int = Field(default=180, ge=1, le=180)
     selected: bool = True
 
 
@@ -61,9 +83,18 @@ def projects() -> list[dict[str, Any]]:
 @app.get("/api/videos")
 def videos() -> list[dict[str, str]]:
     return [
-        {"name": path.name, "path": str(path.relative_to(ROOT))}
+        {"name": path.name, "path": str(path.relative_to(ROOT)), "url": f"/api/video?path={path.relative_to(ROOT).as_posix()}"}
         for path in sorted(OUTPUT_ROOT.rglob("*.mp4"), key=lambda item: item.stat().st_mtime, reverse=True)
     ] if OUTPUT_ROOT.exists() else []
+
+
+@app.get("/api/video")
+def video(path: str) -> FileResponse:
+    requested = (ROOT / path).resolve()
+    output_root = OUTPUT_ROOT.resolve()
+    if output_root not in requested.parents or requested.suffix.lower() != ".mp4" or not requested.is_file():
+        raise HTTPException(status_code=404, detail="Video not found")
+    return FileResponse(requested, media_type="video/mp4", filename=requested.name)
 
 
 @app.post("/api/upload")
@@ -78,6 +109,14 @@ async def upload_source(file: UploadFile = File(...)) -> dict[str, str]:
 
 def _run_job(job_id: str, request: RenderRequest, source: Path) -> None:
     try:
+        def report(progress: int, message: str) -> None:
+            JOBS[job_id] = {
+                **JOBS.get(job_id, {}),
+                "status": "running",
+                "progress": max(0, min(100, int(progress))),
+                "message": message,
+            }
+
         db.init_db(str(DB_PATH))
         project_id = db.create_project(str(DB_PATH), source.stem, str(source))
         project = db.get_project(str(DB_PATH), project_id)
@@ -93,14 +132,29 @@ def _run_job(job_id: str, request: RenderRequest, source: Path) -> None:
             vertical=height >= width,
             resolution=(width, height),
             num_shorts=len(request.segments) or 1,
-            target_duration=int(max(5, min(180, request.segments[0].end - request.segments[0].start))) if request.segments else 60,
+            target_duration=max((segment.max_seconds for segment in request.segments), default=60),
             manual_segments=[segment.model_dump() for segment in request.segments] or None,
             guest_info={**request.guest, "title": request.title},
             frame_layout="full_size_short_video",
+            model_size=os.getenv("AUTO_SHORTS_MODEL_SIZE", "tiny"),
+            lightning_mode=os.getenv("AUTO_SHORTS_LIGHTNING", "true").lower() == "true",
+            beam_size=1,
+            word_timestamps=False,
+            progress_callback=report,
         )
-        JOBS[job_id] = {"status": "completed", "manifest": manifest}
+        JOBS[job_id] = {
+            **JOBS.get(job_id, {}),
+            "status": "completed",
+            "progress": 100,
+            "message": "Render complete",
+            "manifest": manifest,
+        }
     except Exception as exc:
-        JOBS[job_id] = {"status": "error", "detail": str(exc)}
+        JOBS[job_id] = {
+            **JOBS.get(job_id, {}),
+            "status": "error",
+            "detail": str(exc),
+        }
 
 
 @app.get("/api/render/{job_id}")
@@ -115,12 +169,28 @@ def render(request: RenderRequest, background_tasks: BackgroundTasks) -> dict[st
         source = (ROOT / source).resolve()
     if not source.exists():
         raise HTTPException(status_code=400, detail="Upload or provide a valid source video path.")
+    duration = _video_duration(source)
+    previous_end = -1.0
     for index, segment in enumerate(request.segments, start=1):
+        if index > 1 and segment.start <= previous_end:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Segment {index} start must be greater than Segment {index - 1} end.",
+            )
         if segment.end <= segment.start:
             raise HTTPException(status_code=400, detail=f"Segment {index} end must be greater than start.")
-        if segment.end - segment.start > 180:
-            raise HTTPException(status_code=400, detail=f"Segment {index} exceeds 180 seconds.")
+        if segment.end > duration:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Segment {index} end cannot exceed video duration ({duration:.1f} seconds).",
+            )
+        previous_end = segment.end
     job_id = uuid4().hex
-    JOBS[job_id] = {"status": "queued", "name": source.name}
+    JOBS[job_id] = {
+        "status": "queued",
+        "progress": 0,
+        "message": "Waiting to start",
+        "name": source.name,
+    }
     background_tasks.add_task(_run_job, job_id, request, source)
     return {"status": "queued", "job_id": job_id, "name": source.name}
