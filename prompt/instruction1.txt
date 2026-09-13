@@ -1,0 +1,421 @@
+The program has already been developed. The required changes should be implemented within the existing application based on the requirements outlined below.
+
+
+Dynamic Short Video Generation Platform - Requirement Enhancement
+Objective
+
+You can add the following point to your requirement document:
+
+UI/UX, Dashboard, and Branding Enhancements
+
+In addition to the video generation functionality, the application should have a modern, professional, and user-friendly web design.
+
+Dashboard Requirements
+
+The application should include a professional dashboard with:
+
+Clean and responsive UI design.
+Modern layout following current UX best practices.
+Easy navigation between modules.
+Mobile, tablet, and desktop compatibility.
+Professional color themes and branding support.
+Navigation Menu
+
+A structured navigation menu should be available, preferably on the left side, containing:
+
+Dashboard
+Video Upload
+Segment Management
+Layout Designer
+Preview
+Video Rendering
+Generated Videos
+Templates
+Settings
+Header Section
+
+The top header should include:
+
+Application name
+User profile information
+Notifications
+Search option (optional)
+Logo Placement
+
+The company/application logo should be displayed in a prominent position, preferably:
+
+Top-right corner of the application, or
+Top-left corner beside the application name
+
+The logo should be configurable from the Settings page and should automatically appear across all screens based on branding settings.
+
+Dynamic Layout Builder UI
+
+The Layout Designer should provide a drag-and-drop experience where users can:
+
+Move video frames dynamically.
+Resize video frames.
+Position titles anywhere on the canvas.
+Position guest names anywhere on the canvas.
+Place images, logos, and watermarks dynamically.
+Configure fonts, colors, alignment, and spacing.
+Preview Dashboard
+
+Before rendering, users should see a professional preview screen showing:
+
+Selected video segment.
+Layout configuration.
+Video frame location.
+Title placement.
+Guest details placement.
+Logo placement.
+Thumbnail-style preview.
+
+This preview should closely represent the final output, enabling users to validate the design before rendering.
+
+Overall Objective
+
+The entire application should feel like a professional video editing and short-content creation platform, with a highly dynamic and configurable UI. Users should be able to control all design elements from the dashboard and generate short videos without requiring any code changes or hardcoded layouts. The system should prioritize flexibility, usability, branding, and a professional user experience.
+
+
+
+
+
+The objective is to build a dynamic short video generation system that creates professional short videos from a long video source. The entire screen layout, positioning, and video composition should be configurable through the UI without any hardcoded values.
+
+The system should primarily focus on generating short videos from a long video and allow users to design the layout dynamically before rendering the final output.
+
+Functional Requirements
+1. Long Video Input
+
+The user will upload a long video (for example, a 15-minute video).
+
+The system should:
+
+Accept long video uploads.
+Display video information.
+Allow users to create multiple short videos from the same source video.
+Support extraction of specific segments from the long video.
+
+Example:
+
+Long Video Duration: 15 minutes
+Short Video 1: 00:01:30 - 00:04:30
+Short Video 2: 00:05:00 - 00:08:00
+Short Video 3: 00:09:00 - 00:12:00
+
+Each short video should allow the user to define:
+
+Start Time
+End Time
+Output Duration
+2. Dynamic Layout Designer
+
+The screen layout should be completely dynamic.
+
+No element position should be hardcoded.
+
+The user should be able to configure:
+
+Video Frame
+
+Define:
+
+Width
+Height
+X Position
+Y Position
+
+Possible placements:
+
+Top
+Middle
+Bottom
+Left
+Right
+Custom Position
+
+Example:
+
+Video Position:
+☐ Top
+☐ Center
+☐ Bottom
+☐ Custom
+
+Title Placement
+
+The user should be able to define:
+
+Title Text
+Font Family
+Font Size
+Font Weight
+Font Color
+Background Color
+Alignment
+Position
+
+Possible positions:
+
+Above Video
+Below Video
+Inside Video
+Left Side
+Right Side
+Custom
+Guest Name Placement
+
+The user should be able to define:
+
+Guest Name
+Host Name
+Position
+Style
+
+Placement Options:
+
+Lower Third
+Top Corner
+Bottom Corner
+Center
+Custom Position
+Image Placement
+
+Users should be able to upload images such as:
+
+Profile Picture
+Company Logo
+Thumbnail
+Sponsor Logo
+
+And define:
+
+Width
+Height
+Position
+Alignment
+
+Possible locations:
+
+Top Left
+Top Right
+Bottom Left
+Bottom Right
+Center
+Custom
+3. UI-Based Configuration
+
+All design settings should be configurable from the UI.
+
+No code changes should be required.
+
+Users should be able to modify:
+
+Visual Settings
+Video Frame Position
+Frame Size
+Border Radius
+Shadow
+Background
+Overlay Color
+Typography
+Title
+Subtitle
+Guest Name
+Captions
+Branding
+Logo Placement
+Watermark Placement
+Brand Colors
+4. Preview Before Rendering
+
+Before generating the final video, the user should see a preview of the designed layout.
+
+Preview Mode
+
+The preview does not need to play the video.
+
+Instead, it can show:
+
+Placeholder Frame
+Thumbnail Image
+Sample Layout
+
+Similar to a design mockup.
+
+This allows users to verify:
+
+Video Position
+Title Position
+Guest Name Position
+Logo Placement
+Image Alignment
+Overall Visual Appearance
+
+If satisfied, they can proceed to rendering.
+
+5. Professional Video Editing
+
+When generating short videos, the system should ensure:
+
+Proper Start and End
+
+The output video should:
+
+Start smoothly
+End naturally
+Avoid abrupt cuts
+Quality Enhancements
+
+Support:
+
+Fade In
+Fade Out
+Smooth Transition
+Intro Animation
+Outro Animation
+
+Optional:
+
+Zoom Effects
+Motion Graphics
+Dynamic Captions
+6. Highlight and Peak Content Selection
+
+The system should support identifying:
+
+Peak Moments
+High Engagement Segments
+Important Discussion Points
+
+Users can:
+
+Manual Mode
+
+Define:
+
+Start Time
+End Time
+AI Mode (Future Enhancement)
+
+Automatically detect:
+
+Highlights
+Viral Moments
+Key Topics
+High Energy Discussions
+7. Multiple Aspect Ratios
+
+The layout designer should support multiple output formats.
+
+Supported Sizes
+Platform	ResolutionYouTube Shorts	1080 × 1920
+Instagram Reels	1080 × 1920
+TikTok	1080 × 1920
+Landscape Video	1920 × 1080
+Square Video	1080 × 1080
+
+All elements should automatically adapt to the selected frame size.
+
+8. Dynamic Content Positioning
+
+The key requirement is that every element should be dynamically positioned.
+
+Configurable elements:
+
+Video Frame
+Title
+Subtitle
+Guest Name
+Logo
+Image
+Watermark
+Captions
+
+Each element should support:
+
+X Position
+Y Position
+Width
+Height
+Alignment
+Layer Order (Z-Index)
+Visibility
+
+
+This enables different users to create different layouts based on their creative preferences.
+
+9. Rendering Workflow
+Step 1
+
+Upload Long Video
+
+Step 2
+
+Select Short Video Segments
+
+Segment 1
+Segment 2
+Segment 3
+Step 3
+
+Configure Dynamic Layout
+
+Video Position
+Title Position
+Guest Name Position
+Image Position
+Step 4
+
+Preview Layout
+
+Display a static mockup preview.
+
+Step 5
+
+Approve Design
+
+User verifies layout.
+
+Step 6
+
+Generate Final Video
+
+Render and export the final short videos.
+
+Recommended UI Screens
+Screen 1 - Video Upload
+Upload Long Video
+Video Details
+Duration Information
+Screen 2 - Segment Selection
+Timeline
+Start Time
+End Time
+Add Multiple Segments
+Screen 3 - Dynamic Layout Builder
+Drag-and-Drop Editor
+Video Frame
+Title
+Images
+Guest Information
+Screen 4 - Preview Screen
+Layout Preview
+Validation
+Design Confirmation
+Screen 5 - Render Screen
+Generate Short Videos
+Download Outputs
+Expected Outcome
+
+The system should function as a fully dynamic short video creation platform where users can:
+
+Upload a long video.
+Define multiple short video segments.
+Configure video, title, image, logo, and guest-name positions through the UI.
+Preview the layout before rendering.
+Generate professional-quality short videos with proper editing and transitions.
+Create different layouts without any hardcoded positioning or development changes.
+
+This approach provides maximum flexibility and allows every user to create short videos according to their own design preferences and content strategy.

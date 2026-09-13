@@ -1,0 +1,4 @@
+python -m auto_shorts.cli create-project "Test Project" "D:\tmp\raghu.mp4"
+
+
+python -m streamlit run auto_shorts/auto_shorts/streamlit_app.py

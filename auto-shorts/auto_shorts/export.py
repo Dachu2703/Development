@@ -7,9 +7,9 @@ import os
 import shutil
 
 MAX_SHORT_DURATION = 180.0
-VIDEO_PERCENT = 55
-TITLE_PERCENT = 15
-IMAGE_PERCENT = 30
+VIDEO_PERCENT = 65
+TITLE_PERCENT = 10
+IMAGE_PERCENT = 25
 
 PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
 PROJECT_TMP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -294,7 +294,7 @@ def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, p
 
 
 def _compute_three_section_heights(output_height: int) -> Dict[str, int]:
-    """Return the default simple Shorts layout: 55% video, 15% title, 30% image."""
+    """Return the default simple Shorts layout: 65% video, 10% title, 25% image."""
     total = VIDEO_PERCENT + TITLE_PERCENT + IMAGE_PERCENT
     if total != 100:
         raise ValueError("Three-section layout must total 100%")
@@ -340,55 +340,35 @@ def _build_single_frame_filter(
     out_h: int,
     pad_color: str = "black",
     crop_center: Optional[tuple[float, float]] = None,
+    content_scale: float = 1.00,
 ) -> str:
+    """Build a complex FFmpeg graph for a full-screen vertical Short.
+
+    A blurred, cropped copy fills the entire 9:16 canvas. The original video is
+    then fitted on top without cropping, so a landscape guest remains fully
+    visible. The foreground is centered vertically, keeping the guest/head near
+    the middle of the Short.
+
+    The returned graph ends in [vout] and must be used with -filter_complex.
     """
-    Fill the complete output frame for YouTube Shorts.
+    try:
+        scale_factor = float(content_scale)
+    except (TypeError, ValueError):
+        scale_factor = 1.00
+    scale_factor = max(0.85, min(1.00, scale_factor))
 
-    Designed for a 1080x1920 (9:16) output.
+    inner_w = max(2, int(round(out_w * scale_factor)) // 2 * 2)
+    inner_h = max(2, int(round(out_h * scale_factor)) // 2 * 2)
 
-    The source video keeps its original aspect ratio.
-    It is scaled up until the entire target frame is covered,
-    then the excess area is cropped.
-
-    crop_center:
-        Optional normalized crop position.
-
-        (0.5, 0.5) = center
-        (0.0, 0.5) = left
-        (1.0, 0.5) = right
-        (0.5, 0.0) = top
-        (0.5, 1.0) = bottom
-    """
-
-    if in_w <= 0 or in_h <= 0:
-        return (
-            f"scale={out_w}:{out_h}:"
-            f"force_original_aspect_ratio=increase,"
-            f"crop={out_w}:{out_h}:(iw-ow)/2:(ih-oh)/2"
-        )
-
-    # Default crop position = center
-    center_x = 0.5
-    center_y = 0.5
-
-    if crop_center is not None:
-        center_x = max(0.0, min(1.0, crop_center[0]))
-        center_y = max(0.0, min(1.0, crop_center[1]))
-
-    # Scale video until it completely covers the target frame.
-    scale_filter = (
-        f"scale={out_w}:{out_h}:"
-        f"force_original_aspect_ratio=increase"
+    return (
+        f"[0:v]split=2[bgsrc][fgsrc];"
+        f"[bgsrc]scale={out_w}:{out_h}:force_original_aspect_ratio=increase,"
+        f"crop={out_w}:{out_h}:(iw-ow)/2:(ih-oh)/2,"
+        f"gblur=sigma=20,setsar=1[bg];"
+        f"[fgsrc]scale={inner_w}:{inner_h}:force_original_aspect_ratio=decrease,"
+        f"setsar=1[fg];"
+        f"[bg][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1,setsar=1[vout]"
     )
-
-    # Crop the excess area.
-    crop_filter = (
-        f"crop={out_w}:{out_h}:"
-        f"(iw-ow)*{center_x}:"
-        f"(ih-oh)*{center_y}"
-    )
-
-    return f"{scale_filter},{crop_filter}"
 
 def _normalize_frame_layout(frame_layout: Optional[str]) -> str:
     """Normalize the frame layout value for strict single/three-part matching."""
@@ -566,7 +546,7 @@ def _build_reference_template_filter(
     )
     return (
         f"color=c={top_color}:s={out_w}x{top_h}:d={duration}[top];"
-        f"[0:v]{_build_shrink_to_frame_filter(0, 0, out_w, video_h)}[main];"
+        f"[0:v]{_build_shrink_to_frame_filter(0, 0, out_w, video_h, fit_mode='pad')}[main];"
         f"{title_input};"
         f"{image_input};"
         f"color=c={subscribe_color}:s={out_w}x{subscribe_h}:d={duration}"
@@ -663,6 +643,40 @@ def _remove_extra_video_streams(path: Path, expected_w: int, expected_h: int) ->
         return
 
 
+def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out_w: int, out_h: int, duration: float, *, logo_path: Optional[str], watermark_text: str, watermark_enabled: bool, watermark_position: str, watermark_opacity: float, bottom_image_path: Optional[str], title_text: str, full_size: bool, video_codec: str, ffmpeg_preset: str, ffmpeg_crf: str, audio_bitrate: str) -> Path:
+    """Apply logo/watermark to every layout and optional banner to Full Size."""
+    inputs=["-i", str(input_file)]
+    graph=[]; current="[0:v]"; idx=1
+    if full_size and bottom_image_path and Path(bottom_image_path).exists():
+        inputs += ["-loop","1","-i",str(bottom_image_path)]
+        bh=max(2,int(out_h*0.25)//2*2)
+        graph.append(f"[{idx}:v]scale={out_w}:{bh}:force_original_aspect_ratio=increase,crop={out_w}:{bh}:(iw-{out_w})/2:(ih-{bh})/2[banner]")
+        graph.append(f"[0:v][banner]overlay=0:H-{bh}[b0]"); current="[b0]"; idx+=1
+        if title_text:
+            font=_find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+            safe=title_text.replace("\\", "\\\\").replace("'", "\\'").replace(":", "\\:")
+            graph.append(f"{current}drawtext=fontfile='{font}':text='{safe}':x=(w-text_w)/2:y=h-{bh}+({bh}-text_h)/2:fontsize={max(28,int(out_w*0.045))}:fontcolor=white:box=1:boxcolor=black@0.35:boxborderw=18[b1]")
+            current="[b1]"
+    if logo_path and Path(logo_path).exists():
+        inputs += ["-i",str(logo_path)]
+        size=max(48,int(out_w*0.12)); margin=max(20,int(out_w*0.02))
+        graph.append(f"[{idx}:v]scale={size}:{size}:force_original_aspect_ratio=decrease[logo]")
+        graph.append(f"{current}[logo]overlay=W-w-{margin}:{margin}:format=auto[lout]"); current="[lout]"; idx+=1
+    if watermark_enabled and watermark_text.strip():
+        pos=watermark_position.lower(); alpha=max(0.05,min(0.8,float(watermark_opacity)))
+        x,y={"bottom left":("30","h-text_h-40"),"bottom right":("w-text_w-30","h-text_h-40"),"top left":("30","40"),"top right":("w-text_w-30","40"),"center":("(w-text_w)/2","(h-text_h)/2")}.get(pos,("w-text_w-30","h-text_h-40"))
+        font=_find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+        safe=watermark_text.replace("\\", "\\\\").replace("'", "\\'").replace(":", "\\:")
+        graph.append(f"{current}drawtext=fontfile='{font}':text='{safe}':x={x}:y={y}:fontsize={max(24,int(out_w*0.032))}:fontcolor=white@{alpha:.2f}:shadowcolor=black@0.35:shadowx=2:shadowy=2[wm]"); current="[wm]"
+    if not graph:
+        return input_file
+    graph.append(f"{current}null[vout]")
+    cmd=["ffmpeg","-y","-nostdin",*inputs,"-filter_complex",";".join(graph),"-map","[vout]","-map","0:a?","-c:v",video_codec,"-preset",ffmpeg_preset,"-crf",ffmpeg_crf,"-pix_fmt","yuv420p","-c:a","aac","-b:a",audio_bitrate,"-shortest",str(output_file)]
+    proc=subprocess.run(cmd,capture_output=True,text=True)
+    if proc.returncode!=0: raise RuntimeError(f"branding render failed: {proc.stderr}")
+    return output_file
+
+
 def export_clips(
     video_path: str,
     segments: List[Dict],
@@ -682,6 +696,11 @@ def export_clips(
     fast_export: bool = False,
     add_padding: bool = True,
     frame_layout: str = "auto",
+    watermark_text: str = "",
+    watermark_enabled: bool = False,
+    watermark_position: str = "Bottom Right",
+    watermark_opacity: float = 0.35,
+    watermark_softness: int = 0,
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
@@ -745,20 +764,23 @@ def export_clips(
                 use_reference_template = bool(template_config and template_config.get("enabled"))
 
             if vertical:
-                # Keep the full source inside the frame and centered without black bars.
+                # Keep the full source visible in front of a full-screen blurred background.
                 size = _get_video_size(video_path)
                 crop_center = None
                 if face_track:
                     mid_time = start + (duration / 2.0)
                     detected = _detect_face_center(video_path, mid_time)
                     if detected is not None:
-                        crop_center = (detected[0], detected[1])
+                        face_cx, face_cy, frame_w, frame_h = detected
+                        crop_center = (
+                            face_cx / frame_w,
+                            face_cy / frame_h,
+                        )
                 if size:
                     in_w, in_h = size
-                    vf.append(_build_single_frame_filter(in_w, in_h, out_w, out_h, crop_center=crop_center))
+                    vf_str = _build_single_frame_filter(in_w, in_h, out_w, out_h, crop_center=crop_center)
                 else:
-                    vf.append(_build_single_frame_filter(0, 0, out_w, out_h, crop_center=crop_center))
-                vf_str = ",".join(vf)
+                    vf_str = _build_single_frame_filter(0, 0, out_w, out_h, crop_center=crop_center)
 
             # Keep the actual content centered; default is no text overlay.
             guest_vf = _build_guest_overlay(guest_info, out_w, out_h) or None
@@ -775,7 +797,21 @@ def export_clips(
                 "-t",
                 str(duration),
             ]
-            if use_reference_template:
+            if explicit_single_layout and vertical and vf_str:
+                # _build_single_frame_filter returns a multi-branch graph, so it
+                # must use -filter_complex (not -vf). This is what prevents the
+                # blank/black areas seen in the earlier versions.
+                cmd += [
+                    "-filter_complex", vf_str,
+                    "-map", "[vout]",
+                    "-map", "0:a:0?",
+                    "-map_metadata", "-1", "-map_chapters", "-1", "-sn", "-dn",
+                    "-c:v", video_codec, "-preset", ffmpeg_preset, "-crf", ffmpeg_crf,
+                    "-r", "30", "-fps_mode", "cfr", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", audio_bitrate,
+                    "-t", str(duration), str(cut_file),
+                ]
+            elif use_reference_template:
                 title_text = str(template_config.get("title", "")).strip()
                 if title_text:
                     from .typography import render_shorts_title
@@ -863,6 +899,17 @@ def export_clips(
                 raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
 
             proc_file = cut_file
+            # Final branding pass. Full Size can also receive the uploaded bottom image + title.
+            branded_file = td / f"branded_{i:02d}.mp4"
+            needs_branding = bool(logo_path or (watermark_enabled and watermark_text.strip()) or (explicit_single_layout and (bottom_image_path or title_text)))
+            if needs_branding:
+                proc_file = _apply_branding_and_fullsize_banner(
+                    proc_file, branded_file, out_w, out_h, duration,
+                    logo_path=logo_path, watermark_text=watermark_text, watermark_enabled=watermark_enabled,
+                    watermark_position=watermark_position, watermark_opacity=watermark_opacity,
+                    bottom_image_path=bottom_image_path, title_text=title_text, full_size=explicit_single_layout,
+                    video_codec=video_codec, ffmpeg_preset=ffmpeg_preset, ffmpeg_crf=ffmpeg_crf, audio_bitrate=audio_bitrate,
+                )
 
             # captions
             if captions and seg.get("words"):
