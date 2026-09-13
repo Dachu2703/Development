@@ -5,11 +5,11 @@ from typing import List, Dict, Optional
 import tempfile
 import os
 import shutil
-
+ 
 MAX_SHORT_DURATION = 180.0
-VIDEO_PERCENT = 65
-TITLE_PERCENT = 10
-IMAGE_PERCENT = 25
+VIDEO_PERCENT = 55
+TITLE_PERCENT = 15
+IMAGE_PERCENT = 30
 
 PROJECT_TMP_ROOT = Path(__file__).resolve().parents[1] / ".auto_shorts_tmp"
 PROJECT_TMP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -294,7 +294,7 @@ def _write_srt_for_clip(words: List[Dict], clip_start: float, clip_end: float, p
 
 
 def _compute_three_section_heights(output_height: int) -> Dict[str, int]:
-    """Return the default simple Shorts layout: 65% video, 10% title, 25% image."""
+    """Return the default simple Shorts layout: 55% video, 15% title, 30% image."""
     total = VIDEO_PERCENT + TITLE_PERCENT + IMAGE_PERCENT
     if total != 100:
         raise ValueError("Three-section layout must total 100%")
@@ -308,8 +308,20 @@ def _compute_three_section_heights(output_height: int) -> Dict[str, int]:
 def _build_guest_overlay(
     guest_info: Dict, out_w: int, out_h: int
 ) -> str:
-    """Disable guest and promotional text overlays in generated clips."""
-    return ""
+    """Return a lower-third guest name/contact overlay for simple exports."""
+    lines = [
+        str((guest_info or {}).get("name", "") or "").strip(),
+        str((guest_info or {}).get("contact", "") or "").strip(),
+    ]
+    text = "\\n".join(line for line in lines if line)
+    if not text:
+        return ""
+    font_file = _find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+    return (
+        f"drawtext=fontfile='{font_file}':text='{_escape_drawtext(text)}':"
+        f"fontcolor=white:fontsize={max(24, int(out_w * 0.035))}:"
+        "x=(w-text_w)/2:y=h-text_h-80:box=1:boxcolor=black@0.45:boxborderw=18"
+    )
 
 
 def _build_shrink_to_frame_filter(
@@ -341,6 +353,7 @@ def _build_single_frame_filter(
     pad_color: str = "black",
     crop_center: Optional[tuple[float, float]] = None,
     content_scale: float = 1.00,
+    guest_info: Optional[Dict] = None,
 ) -> str:
     """Build a complex FFmpeg graph for a full-screen vertical Short.
 
@@ -360,6 +373,15 @@ def _build_single_frame_filter(
     inner_w = max(2, int(round(out_w * scale_factor)) // 2 * 2)
     inner_h = max(2, int(round(out_h * scale_factor)) // 2 * 2)
 
+    guest_lines = [
+        str((guest_info or {}).get("name", "") or "").strip(),
+        str((guest_info or {}).get("contact", "") or "").strip(),
+    ]
+    guest_text = "\\n".join(line for line in guest_lines if line)
+    guest_overlay = ""
+    if guest_text:
+        guest_overlay = "," + _build_guest_overlay(guest_info, out_w, out_h)
+
     return (
         f"[0:v]split=2[bgsrc][fgsrc];"
         f"[bgsrc]scale={out_w}:{out_h}:force_original_aspect_ratio=increase,"
@@ -367,7 +389,8 @@ def _build_single_frame_filter(
         f"gblur=sigma=20,setsar=1[bg];"
         f"[fgsrc]scale={inner_w}:{inner_h}:force_original_aspect_ratio=decrease,"
         f"setsar=1[fg];"
-        f"[bg][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1,setsar=1[vout]"
+        f"[bg][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1,setsar=1"
+        f"{guest_overlay}[vout]"
     )
 
 def _normalize_frame_layout(frame_layout: Optional[str]) -> str:
