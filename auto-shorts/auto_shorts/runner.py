@@ -287,6 +287,22 @@ def run_project(
                 )
                 raise
 
+        manual_segments = kwargs.get("manual_segments")
+        if manual_segments:
+            aligned = []
+            for index, segment in enumerate(manual_segments, start=1):
+                start = float(segment.get("start", 0.0))
+                end = float(segment.get("end", 0.0))
+                if start < 0 or end <= start:
+                    raise ValueError(
+                        f"Manual segment {index} must have end greater than start"
+                    )
+                if end - start > scoring.MAX_SHORT_DURATION:
+                    raise ValueError(
+                        f"Manual segment {index} exceeds the {int(scoring.MAX_SHORT_DURATION)} second maximum"
+                    )
+                aligned.append({"start": start, "end": end, "reason": "manual segment"})
+
         # Attach captions without changing the selected clip boundaries.
         if captions:
             if tamil_to_english:
@@ -455,6 +471,7 @@ def run_project(
             resolution=resolution,
             guest_info=guest_info,
             logo_path=kwargs.get("logo_path"),
+            logo_position=kwargs.get("logo_position", "Top Right"),
             bottom_image_path=kwargs.get("bottom_image_path"),
             template_config=template_config,
             font_path=font_path or template_config.get("font_path"),
@@ -466,6 +483,7 @@ def run_project(
             watermark_position=kwargs.get("watermark_position", "Bottom Right"),
             watermark_opacity=kwargs.get("watermark_opacity", 0.35),
             watermark_softness=kwargs.get("watermark_softness", 0),
+            content_scale=float(kwargs.get("content_scale", 1.0)),
         )
 
         validate_requested_clip_count(num_shorts, results)

@@ -181,6 +181,30 @@ def test_vertical_shorts_fill_selected_frame_with_crop():
     assert "pad=" not in filter_text
 
 
+def test_single_frame_layout_fits_source_on_black_canvas():
+    filter_text = _build_single_frame_filter(1920, 1080, 1080, 1920)
+
+    assert "color=c=black:s=1080x1920" in filter_text
+    assert "force_original_aspect_ratio=decrease" in filter_text
+    assert "gblur=" not in filter_text
+
+
+def test_single_frame_layout_includes_guest_details_when_provided():
+    filter_text = _build_single_frame_filter(
+        1920,
+        1080,
+        1080,
+        1920,
+        guest_info={
+            "name": "Guest Name",
+            "contact": "+91 1234567890",
+        },
+    )
+
+    assert "Guest Name" in filter_text
+    assert "+91 1234567890" in filter_text
+
+
 def test_single_frame_layout_defaults_to_single_when_no_title_or_image():
     assert (
         _should_use_three_part_layout(

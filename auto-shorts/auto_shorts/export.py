@@ -317,10 +317,20 @@ def _build_guest_overlay(
     if not text:
         return ""
     font_file = _find_font_file().replace("\\", "/").replace(":", "\\:").replace("'", "\\'")
+    position = str((guest_info or {}).get("position", "Bottom Center")).lower()
+    positions = {
+        "top left": ("30", "40"),
+        "top right": ("w-text_w-30", "40"),
+        "center": ("(w-text_w)/2", "(h-text_h)/2"),
+        "bottom left": ("30", "h-text_h-80"),
+        "bottom right": ("w-text_w-30", "h-text_h-80"),
+        "bottom center": ("(w-text_w)/2", "h-text_h-80"),
+    }
+    x, y = positions.get(position, positions["bottom center"])
     return (
         f"drawtext=fontfile='{font_file}':text='{_escape_drawtext(text)}':"
         f"fontcolor=white:fontsize={max(24, int(out_w * 0.035))}:"
-        "x=(w-text_w)/2:y=h-text_h-80:box=1:boxcolor=black@0.45:boxborderw=18"
+        f"x={x}:y={y}:box=1:boxcolor=black@0.45:boxborderw=18"
     )
 
 
@@ -357,10 +367,9 @@ def _build_single_frame_filter(
 ) -> str:
     """Build a complex FFmpeg graph for a full-screen vertical Short.
 
-    A blurred, cropped copy fills the entire 9:16 canvas. The original video is
-    then fitted on top without cropping, so a landscape guest remains fully
-    visible. The foreground is centered vertically, keeping the guest/head near
-    the middle of the Short.
+    The source video is fitted on a black canvas without cropping, so a
+    landscape guest remains fully visible. The foreground is centered
+    vertically, keeping the guest/head near the middle of the Short.
 
     The returned graph ends in [vout] and must be used with -filter_complex.
     """
@@ -383,10 +392,8 @@ def _build_single_frame_filter(
         guest_overlay = "," + _build_guest_overlay(guest_info, out_w, out_h)
 
     return (
-        f"[0:v]split=2[bgsrc][fgsrc];"
-        f"[bgsrc]scale={out_w}:{out_h}:force_original_aspect_ratio=increase,"
-        f"crop={out_w}:{out_h}:(iw-ow)/2:(ih-oh)/2,"
-        f"gblur=sigma=20,setsar=1[bg];"
+        f"color=c={pad_color}:s={out_w}x{out_h}:d=600[bg];"
+        f"[0:v]split=1[fgsrc];"
         f"[fgsrc]scale={inner_w}:{inner_h}:force_original_aspect_ratio=decrease,"
         f"setsar=1[fg];"
         f"[bg][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1,setsar=1"
@@ -666,7 +673,7 @@ def _remove_extra_video_streams(path: Path, expected_w: int, expected_h: int) ->
         return
 
 
-def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out_w: int, out_h: int, duration: float, *, logo_path: Optional[str], watermark_text: str, watermark_enabled: bool, watermark_position: str, watermark_opacity: float, bottom_image_path: Optional[str], title_text: str, full_size: bool, video_codec: str, ffmpeg_preset: str, ffmpeg_crf: str, audio_bitrate: str) -> Path:
+def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out_w: int, out_h: int, duration: float, *, logo_path: Optional[str], logo_position: str, watermark_text: str, watermark_enabled: bool, watermark_position: str, watermark_opacity: float, bottom_image_path: Optional[str], title_text: str, full_size: bool, video_codec: str, ffmpeg_preset: str, ffmpeg_crf: str, audio_bitrate: str) -> Path:
     """Apply logo/watermark to every layout and optional banner to Full Size."""
     inputs=["-i", str(input_file)]
     graph=[]; current="[0:v]"; idx=1
@@ -684,7 +691,13 @@ def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out
         inputs += ["-i",str(logo_path)]
         size=max(48,int(out_w*0.12)); margin=max(20,int(out_w*0.02))
         graph.append(f"[{idx}:v]scale={size}:{size}:force_original_aspect_ratio=decrease[logo]")
-        graph.append(f"{current}[logo]overlay=W-w-{margin}:{margin}:format=auto[lout]"); current="[lout]"; idx+=1
+        logo_xy = {
+            "top left": (str(margin), str(margin)),
+            "top right": (f"W-w-{margin}", str(margin)),
+            "bottom left": (str(margin), f"H-h-{margin}"),
+            "bottom right": (f"W-w-{margin}", f"H-h-{margin}"),
+        }.get(str(logo_position).lower(), (f"W-w-{margin}", str(margin)))
+        graph.append(f"{current}[logo]overlay={logo_xy[0]}:{logo_xy[1]}:format=auto[lout]"); current="[lout]"; idx+=1
     if watermark_enabled and watermark_text.strip():
         pos=watermark_position.lower(); alpha=max(0.05,min(0.8,float(watermark_opacity)))
         x,y={"bottom left":("30","h-text_h-40"),"bottom right":("w-text_w-30","h-text_h-40"),"top left":("30","40"),"top right":("w-text_w-30","40"),"center":("(w-text_w)/2","(h-text_h)/2")}.get(pos,("w-text_w-30","h-text_h-40"))
@@ -713,6 +726,7 @@ def export_clips(
     guest_info: Optional[Dict] = None,
     transitions: Optional[Dict] = None,
     logo_path: Optional[str] = None,
+    logo_position: str = "Top Right",
     bottom_image_path: Optional[str] = None,
     template_config: Optional[Dict] = None,
     font_path: Optional[str] = None,
@@ -724,6 +738,7 @@ def export_clips(
     watermark_position: str = "Bottom Right",
     watermark_opacity: float = 0.35,
     watermark_softness: int = 0,
+    content_scale: float = 1.0,
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
@@ -801,9 +816,25 @@ def export_clips(
                         )
                 if size:
                     in_w, in_h = size
-                    vf_str = _build_single_frame_filter(in_w, in_h, out_w, out_h, crop_center=crop_center)
+                    vf_str = _build_single_frame_filter(
+                        in_w,
+                        in_h,
+                        out_w,
+                        out_h,
+                        crop_center=crop_center,
+                        content_scale=content_scale,
+                        guest_info=guest_info,
+                    )
                 else:
-                    vf_str = _build_single_frame_filter(0, 0, out_w, out_h, crop_center=crop_center)
+                    vf_str = _build_single_frame_filter(
+                        0,
+                        0,
+                        out_w,
+                        out_h,
+                        crop_center=crop_center,
+                        content_scale=content_scale,
+                        guest_info=guest_info,
+                    )
 
             # Keep the actual content centered; default is no text overlay.
             guest_vf = _build_guest_overlay(guest_info, out_w, out_h) or None
@@ -928,7 +959,7 @@ def export_clips(
             if needs_branding:
                 proc_file = _apply_branding_and_fullsize_banner(
                     proc_file, branded_file, out_w, out_h, duration,
-                    logo_path=logo_path, watermark_text=watermark_text, watermark_enabled=watermark_enabled,
+                    logo_path=logo_path, logo_position=logo_position, watermark_text=watermark_text, watermark_enabled=watermark_enabled,
                     watermark_position=watermark_position, watermark_opacity=watermark_opacity,
                     bottom_image_path=bottom_image_path, title_text=title_text, full_size=explicit_single_layout,
                     video_codec=video_codec, ffmpeg_preset=ffmpeg_preset, ffmpeg_crf=ffmpeg_crf, audio_bitrate=audio_bitrate,

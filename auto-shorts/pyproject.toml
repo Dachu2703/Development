@@ -23,4 +23,7 @@ dependencies = [
     "srt",
     "Pillow>=10.0",
     "uharfbuzz>=0.40",
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
 ]
