@@ -66,6 +66,24 @@ class RenderRequest(BaseModel):
     guest: dict[str, str] = Field(default_factory=dict)
     segments: list[Segment] = Field(default_factory=list)
     elements: list[dict[str, Any]] = Field(default_factory=list)
+    logo_path: str | None = None
+    logo_position: str = "Top Right"
+    bottom_image_path: str | None = None
+    watermark_text: str = ""
+    watermark_enabled: bool = False
+    watermark_position: str = "Bottom Right"
+    watermark_opacity: float = Field(default=0.35, ge=0.05, le=0.8)
+    frame_layout: str = "full_size_short_video"
+
+
+def _resolve_workspace_path(value: str | None) -> Path | None:
+    if not value:
+        return None
+    candidate = Path(value).expanduser()
+    resolved = (candidate if candidate.is_absolute() else ROOT / candidate).resolve()
+    if UPLOAD_ROOT.resolve() not in resolved.parents:
+        raise HTTPException(status_code=400, detail="Asset must come from the upload directory.")
+    return resolved
 
 
 @app.get("/api/health")
@@ -107,6 +125,11 @@ async def upload_source(file: UploadFile = File(...)) -> dict[str, str]:
     return {"source": str(target.relative_to(ROOT))}
 
 
+@app.post("/api/upload-asset")
+async def upload_asset(file: UploadFile = File(...)) -> dict[str, str]:
+    return await upload_source(file)
+
+
 def _run_job(job_id: str, request: RenderRequest, source: Path) -> None:
     try:
         def report(progress: int, message: str) -> None:
@@ -135,7 +158,15 @@ def _run_job(job_id: str, request: RenderRequest, source: Path) -> None:
             target_duration=max((segment.max_seconds for segment in request.segments), default=60),
             manual_segments=[segment.model_dump() for segment in request.segments] or None,
             guest_info={**request.guest, "title": request.title},
-            frame_layout="full_size_short_video",
+            frame_layout=request.frame_layout,
+            logo_path=str(_resolve_workspace_path(request.logo_path)) if request.logo_path else None,
+            logo_position=request.logo_position,
+            bottom_image_path=str(_resolve_workspace_path(request.bottom_image_path)) if request.bottom_image_path else None,
+            watermark_text=request.watermark_text,
+            watermark_enabled=request.watermark_enabled,
+            watermark_position=request.watermark_position,
+            watermark_opacity=request.watermark_opacity,
+            layout_config=request.elements,
             model_size=os.getenv("AUTO_SHORTS_MODEL_SIZE", "tiny"),
             lightning_mode=os.getenv("AUTO_SHORTS_LIGHTNING", "true").lower() == "true",
             beam_size=1,
@@ -164,11 +195,19 @@ def render_status(job_id: str) -> dict[str, Any]:
 
 @app.post("/api/render")
 def render(request: RenderRequest, background_tasks: BackgroundTasks) -> dict[str, str]:
+    try:
+        width, height = (int(value) for value in request.resolution.lower().split("x", 1))
+    except (ValueError, AttributeError):
+        raise HTTPException(status_code=400, detail="Resolution must use WIDTHxHEIGHT format.")
+    if width < 2 or height < 2:
+        raise HTTPException(status_code=400, detail="Resolution dimensions must be positive.")
     source = Path(request.source).expanduser()
     if not source.is_absolute():
         source = (ROOT / source).resolve()
     if not source.exists():
         raise HTTPException(status_code=400, detail="Upload or provide a valid source video path.")
+    _resolve_workspace_path(request.logo_path)
+    _resolve_workspace_path(request.bottom_image_path)
     duration = _video_duration(source)
     previous_end = -1.0
     for index, segment in enumerate(request.segments, start=1):

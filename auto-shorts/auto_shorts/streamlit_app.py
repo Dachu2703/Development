@@ -159,6 +159,7 @@ with st.expander("1. Video & Content", expanded=True):
         resolution_text = st.selectbox(
             "Output resolution",
             ["1080x1920", "720x1280", "1920x1080", "1080x1080"],
+            index=0
         )
 
     st.markdown("#### Segment Management")

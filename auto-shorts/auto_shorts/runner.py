@@ -529,6 +529,7 @@ def run_project(
             watermark_opacity=kwargs.get("watermark_opacity", 0.35),
             watermark_softness=kwargs.get("watermark_softness", 0),
             content_scale=float(kwargs.get("content_scale", 1.0)),
+            layout_config=kwargs.get("layout_config") or [],
         )
 
         validate_requested_clip_count(num_shorts, results)

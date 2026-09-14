@@ -72,6 +72,10 @@ const initialElements = [
 function App() {
   const [active, setActive] = useState("Dashboard");
   const [source, setSource] = useState(null);
+  const [logoFile, setLogoFile] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [logoPreview, setLogoPreview] = useState("");
+  const [imagePreview, setImagePreview] = useState("");
   const [videoDuration, setVideoDuration] = useState(null);
   const [segments, setSegments] = useState([
     { id: 1, start: 0, end: 45, maxSeconds: 180, selected: true },
@@ -84,6 +88,13 @@ function App() {
     contact: "Guest contact",
   });
   const [title, setTitle] = useState("Your short video title");
+  const [branding, setBranding] = useState({
+    logoPosition: "Top Right",
+    watermark: "",
+    watermarkEnabled: false,
+    watermarkPosition: "Bottom Right",
+    watermarkOpacity: 0.35,
+  });
   const [status, setStatus] = useState("Ready to design");
   const [renderProgress, setRenderProgress] = useState(null);
   const [renderMessage, setRenderMessage] = useState("");
@@ -105,6 +116,26 @@ function App() {
       )
       .catch(() => setOutputs([]));
   }, []);
+
+  useEffect(() => {
+    if (!logoFile) {
+      setLogoPreview("");
+      return undefined;
+    }
+    const url = URL.createObjectURL(logoFile);
+    setLogoPreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [logoFile]);
+
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreview("");
+      return undefined;
+    }
+    const url = URL.createObjectURL(imageFile);
+    setImagePreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [imageFile]);
 
   useEffect(() => {
     if (!source) {
@@ -247,6 +278,19 @@ function App() {
       });
       if (!uploadResponse.ok) throw new Error("Upload failed");
       const uploaded = await uploadResponse.json();
+      const uploadAsset = async (file) => {
+        if (!file) return null;
+        const form = new FormData();
+        form.append("file", file);
+        const response = await fetch("/api/upload-asset", {
+          method: "POST",
+          body: form,
+        });
+        if (!response.ok) throw new Error("Asset upload failed");
+        return (await response.json()).source;
+      };
+      const logoPath = await uploadAsset(logoFile);
+      const imagePath = await uploadAsset(imageFile);
       const payload = {
         source: uploaded.source,
         resolution,
@@ -259,6 +303,14 @@ function App() {
             max_seconds: maxSeconds,
           })),
         elements,
+        logo_path: logoPath,
+        logo_position: branding.logoPosition,
+        bottom_image_path: imagePath,
+        watermark_text: branding.watermark,
+        watermark_enabled: branding.watermarkEnabled,
+        watermark_position: branding.watermarkPosition,
+        watermark_opacity: Number(branding.watermarkOpacity),
+        frame_layout: "full_size_short_video",
       };
       const response = await fetch("/api/render", {
         method: "POST",
@@ -409,6 +461,24 @@ function App() {
                   Video duration: {videoDuration.toFixed(1)} seconds
                 </p>
               )}
+              <div className="asset-inputs">
+                <label>
+                  Logo
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) => setLogoFile(event.target.files?.[0] || null)}
+                  />
+                </label>
+                <label>
+                  Bottom image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) => setImageFile(event.target.files?.[0] || null)}
+                  />
+                </label>
+              </div>
             </div>
             <div className="panel">
               <div className="panel-heading">
@@ -570,6 +640,9 @@ function App() {
                             setDragging(element);
                           }}
                         >
+                          {element.kind === "logo" && logoPreview ? (
+                            <img src={logoPreview} alt="Logo layer" />
+                          ) : (
                           <span>
                             {element.kind === "video"
                               ? "VIDEO"
@@ -579,6 +652,7 @@ function App() {
                                   ? title
                                   : `${guest.name} · ${guest.contact}`}
                           </span>
+                          )}
                         </div>
                       ))}
                   </div>
@@ -712,6 +786,9 @@ function App() {
                           zIndex: element.z,
                         }}
                       >
+                        {element.kind === "logo" && logoPreview ? (
+                          <img src={logoPreview} alt="Logo layer" />
+                        ) : (
                         <span>
                           {element.kind === "title"
                             ? title
@@ -719,6 +796,7 @@ function App() {
                               ? `${guest.name}\n${guest.contact}`
                               : element.kind.toUpperCase()}
                         </span>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -768,7 +846,12 @@ function App() {
               </div>
               <label>
                 Logo position
-                <select defaultValue="Top right">
+                <select
+                  value={branding.logoPosition}
+                  onChange={(event) =>
+                    setBranding({ ...branding, logoPosition: event.target.value })
+                  }
+                >
                   <option>Top right</option>
                   <option>Top left</option>
                   <option>Bottom right</option>
@@ -777,11 +860,30 @@ function App() {
               </label>
               <label>
                 Watermark
-                <input placeholder="Your channel name" />
+                <input
+                  value={branding.watermark}
+                  placeholder="Your channel name"
+                  onChange={(event) =>
+                    setBranding({
+                      ...branding,
+                      watermark: event.target.value,
+                      watermarkEnabled: Boolean(event.target.value.trim()),
+                    })
+                  }
+                />
               </label>
               <label>
-                Accent color
-                <input type="color" defaultValue="#ef8354" />
+                Watermark opacity
+                <input
+                  type="range"
+                  min="0.05"
+                  max="0.8"
+                  step="0.05"
+                  value={branding.watermarkOpacity}
+                  onChange={(event) =>
+                    setBranding({ ...branding, watermarkOpacity: event.target.value })
+                  }
+                />
               </label>
             </div>
             <div className="side-panel">

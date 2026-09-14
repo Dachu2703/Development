@@ -1,5 +1,7 @@
 import subprocess
 import json
+import cv2
+import numpy as np
 from pathlib import Path
 from typing import List, Dict, Optional
 import tempfile
@@ -20,22 +22,28 @@ import math
 
 
 def _get_best_video_codec():
-    """Detect the best available video codec (GPU > CPU fast)."""
-    # Try NVIDIA NVENC first
-    probe = subprocess.run(["ffmpeg", "-codecs", "-hide_banner"], capture_output=True, text=True)
-    codecs = probe.stdout + probe.stderr
-    
-    if "hevc_nvenc" in codecs:
-        return "hevc_nvenc", "gpu"  # NVIDIA H.265
-    if "h264_nvenc" in codecs:
-        return "h264_nvenc", "gpu"  # NVIDIA H.264
-    if "hevc_qsv" in codecs:
-        return "hevc_qsv", "gpu"  # Intel Quick Sync
-    if "h264_qsv" in codecs:
-        return "h264_qsv", "gpu"
-    
-    # Fall back to CPU (use libx265 for better compression)
+    """
+    Detect an encoder that actually works on this machine.
+    Prefer NVIDIA NVENC when available, then Intel Quick Sync, then libx264.
+    """
+    for codec, codec_type in (("h264_nvenc", "gpu"), ("h264_qsv", "gpu")):
+        try:
+            test = subprocess.run(
+                [
+                    "ffmpeg", "-hide_banner", "-loglevel", "error",
+                    "-f", "lavfi", "-i", "testsrc=size=128x128:rate=1",
+                    "-t", "1", "-c:v", codec, "-f", "null", "-",
+                ],
+                capture_output=True,
+                text=True,
+            )
+            if test.returncode == 0:
+                return codec, codec_type
+        except OSError:
+            break
+
     return "libx264", "cpu"
+
 
 
 def _get_ffmpeg_preset(codec_name: str, fast_export: bool) -> str:
@@ -395,6 +403,8 @@ def _build_single_frame_filter(
         f"color=c={pad_color}:s={out_w}x{out_h}:d=600[bg];"
         f"[0:v]split=1[fgsrc];"
         f"[fgsrc]scale={inner_w}:{inner_h}:force_original_aspect_ratio=decrease,"
+        f"scale={inner_w}:{inner_h}:force_original_aspect_ratio=increase,"
+        f"crop={inner_w}:{inner_h}:(iw-{inner_w})/2:(ih-{inner_h})/2,"
         f"setsar=1[fg];"
         f"[bg][fg]overlay=x=(W-w)/2:y=(H-h)/2:shortest=1,setsar=1"
         f"{guest_overlay}[vout]"
@@ -673,7 +683,7 @@ def _remove_extra_video_streams(path: Path, expected_w: int, expected_h: int) ->
         return
 
 
-def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out_w: int, out_h: int, duration: float, *, logo_path: Optional[str], logo_position: str, watermark_text: str, watermark_enabled: bool, watermark_position: str, watermark_opacity: float, bottom_image_path: Optional[str], title_text: str, full_size: bool, video_codec: str, ffmpeg_preset: str, ffmpeg_crf: str, audio_bitrate: str) -> Path:
+def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out_w: int, out_h: int, duration: float, *, logo_path: Optional[str], logo_position: str, watermark_text: str, watermark_enabled: bool, watermark_position: str, watermark_opacity: float, bottom_image_path: Optional[str], title_text: str, full_size: bool, video_codec: str, ffmpeg_preset: str, ffmpeg_crf: str, audio_bitrate: str, layout_config: Optional[List[Dict]] = None) -> Path:
     """Apply logo/watermark to every layout and optional banner to Full Size."""
     inputs=["-i", str(input_file)]
     graph=[]; current="[0:v]"; idx=1
@@ -689,14 +699,22 @@ def _apply_branding_and_fullsize_banner(input_file: Path, output_file: Path, out
             current="[b1]"
     if logo_path and Path(logo_path).exists():
         inputs += ["-i",str(logo_path)]
-        size=max(48,int(out_w*0.12)); margin=max(20,int(out_w*0.02))
+        logo_layer = next((layer for layer in (layout_config or []) if layer.get("id") == "logo"), {})
+        size=max(48, int(out_w * float(logo_layer.get("w", 12)) / 100))
+        margin=max(20,int(out_w*0.02))
         graph.append(f"[{idx}:v]scale={size}:{size}:force_original_aspect_ratio=decrease[logo]")
-        logo_xy = {
-            "top left": (str(margin), str(margin)),
-            "top right": (f"W-w-{margin}", str(margin)),
-            "bottom left": (str(margin), f"H-h-{margin}"),
-            "bottom right": (f"W-w-{margin}", f"H-h-{margin}"),
-        }.get(str(logo_position).lower(), (f"W-w-{margin}", str(margin)))
+        if logo_layer:
+            logo_xy = (
+                f"W-w-{int(out_w * (100 - float(logo_layer.get('x', 76)) - float(logo_layer.get('w', 12))) / 100)}",
+                f"H-h-{int(out_h * (100 - float(logo_layer.get('y', 4)) - float(logo_layer.get('h', 8))) / 100)}",
+            )
+        else:
+            logo_xy = {
+                "top left": (str(margin), str(margin)),
+                "top right": (f"W-w-{margin}", str(margin)),
+                "bottom left": (str(margin), f"H-h-{margin}"),
+                "bottom right": (f"W-w-{margin}", f"H-h-{margin}"),
+            }.get(str(logo_position).lower(), (f"W-w-{margin}", str(margin)))
         graph.append(f"{current}[logo]overlay={logo_xy[0]}:{logo_xy[1]}:format=auto[lout]"); current="[lout]"; idx+=1
     if watermark_enabled and watermark_text.strip():
         pos=watermark_position.lower(); alpha=max(0.05,min(0.8,float(watermark_opacity)))
@@ -739,16 +757,16 @@ def export_clips(
     watermark_opacity: float = 0.35,
     watermark_softness: int = 0,
     content_scale: float = 1.0,
+    layout_config: Optional[List[Dict]] = None,
 ) -> List[Dict]:
     out_dir = Path(output_dir)
     _ensure_output_dir(out_dir)
     results = []
 
     # Determine FFmpeg settings based on performance mode and codec compatibility.
-    if fast_export:
-        video_codec, codec_type = _get_best_video_codec()
-    else:
-        video_codec, codec_type = "libx264", "cpu"
+    video_codec, codec_type = _get_best_video_codec()
+
+        
     ffmpeg_preset = _get_ffmpeg_preset(video_codec, fast_export)
     ffmpeg_crf = "28" if fast_export else "23"
     audio_bitrate = "128k" if fast_export else "192k"
@@ -963,6 +981,7 @@ def export_clips(
                     watermark_position=watermark_position, watermark_opacity=watermark_opacity,
                     bottom_image_path=bottom_image_path, title_text=title_text, full_size=explicit_single_layout,
                     video_codec=video_codec, ffmpeg_preset=ffmpeg_preset, ffmpeg_crf=ffmpeg_crf, audio_bitrate=audio_bitrate,
+                    layout_config=layout_config,
                 )
 
             # captions
