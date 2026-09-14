@@ -88,10 +88,11 @@ function App() {
   const [renderProgress, setRenderProgress] = useState(null);
   const [renderMessage, setRenderMessage] = useState("");
   const [outputs, setOutputs] = useState([]);
+  const [previewUrl, setPreviewUrl] = useState("");
   const [dragging, setDragging] = useState(null);
   const canvasRef = useRef(null);
   const sessionOutputPaths = useRef(
-    new Set(JSON.parse(sessionStorage.getItem("auto-shorts-session-outputs") || "[]")),
+    new Set(JSON.parse(sessionStorage.getItem("auto-shorts-session-outputs-v2") || "[]")),
   );
 
   useEffect(() => {
@@ -104,6 +105,16 @@ function App() {
       )
       .catch(() => setOutputs([]));
   }, []);
+
+  useEffect(() => {
+    if (!source) {
+      setPreviewUrl("");
+      return undefined;
+    }
+    const url = URL.createObjectURL(source);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [source]);
 
   const selectedElement =
     elements.find((element) => element.id === selected) || elements[0];
@@ -221,6 +232,13 @@ function App() {
     try {
       if (!source) throw new Error("Choose a source video first");
       if (hasSegmentErrors) throw new Error("Fix the segment validation errors first");
+      const existingVideosResponse = await fetch("/api/videos");
+      const existingVideos = existingVideosResponse.ok
+        ? await existingVideosResponse.json()
+        : [];
+      const previousOutputPaths = new Set(
+        existingVideos.map((output) => output.path),
+      );
       const upload = new FormData();
       upload.append("file", source);
       const uploadResponse = await fetch("/api/upload", {
@@ -266,13 +284,14 @@ function App() {
       const videosResponse = await fetch("/api/videos");
       if (!videosResponse.ok) throw new Error("Generated videos unavailable");
       const videos = await videosResponse.json();
-      const currentSessionVideos = videos.filter((video) => {
-        if (sessionOutputPaths.current.has(video.path)) return true;
-        sessionOutputPaths.current.add(video.path);
-        return true;
-      });
+      const currentSessionVideos = videos.filter(
+        (video) => !previousOutputPaths.has(video.path),
+      );
+      currentSessionVideos.forEach((video) =>
+        sessionOutputPaths.current.add(video.path),
+      );
       sessionStorage.setItem(
-        "auto-shorts-session-outputs",
+        "auto-shorts-session-outputs-v2",
         JSON.stringify([...sessionOutputPaths.current]),
       );
       setOutputs(currentSessionVideos);
@@ -656,11 +675,28 @@ function App() {
                   <span className="section-kicker">04 / PREVIEW</span>
                   <h3>Final composition</h3>
                 </div>
-                <button className="button secondary">
+                <button
+                  className="button secondary"
+                  type="button"
+                  disabled={!previewUrl}
+                  onClick={() =>
+                    document
+                      .querySelector(".source-preview")
+                      ?.scrollIntoView({ behavior: "smooth", block: "center" })
+                  }
+                >
                   <Play size={15} /> Preview
                 </button>
               </div>
               <div className="preview-stage">
+                {previewUrl && (
+                  <video
+                    className="source-preview"
+                    src={previewUrl}
+                    controls
+                    preload="metadata"
+                  />
+                )}
                 <div className="phone-preview" style={previewStyle}>
                   {elements
                     .sort((a, b) => a.z - b.z)

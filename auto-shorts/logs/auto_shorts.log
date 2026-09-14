@@ -3045,3 +3045,62 @@ Exiting normally, received signal 2.
 2026-09-14 02:41:03,116 DEBUG auto_shorts Source transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\94f0db4adf5f48fbad8addc549c3b7e9_eps-59bf466a7ffa9306c35ac478365bd8a8cda18f5c-96efe8399c1ac5439443b2c882e4e04112195c36.transcript.json
 2026-09-14 02:41:03,124 DEBUG auto_shorts Source transcript segments: 197, words: 0, language=en
 2026-09-14 02:41:03,141 DEBUG auto_shorts Initial candidate clips: 1
+2026-09-14 02:49:54,651 DEBUG auto_shorts faster-whisper using compute_type=int8 device=cpu model=tiny
+2026-09-14 02:49:54,652 DEBUG auto_shorts transcribe starting model=tiny beam_size=1 word_timestamps=False language=en task=transcribe
+2026-09-14 02:49:59,102 DEBUG auto_shorts transcribe result type=<class 'tuple'>
+2026-09-14 02:49:59,102 DEBUG auto_shorts segment_iter type before normalization=<class 'generator'> isiterator=True
+2026-09-14 02:59:48,514 DEBUG auto_shorts Source transcription output path: D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_cache\53f9857ef5b845ce818f4c987122e9b9_eps1-ac44a6600b9e8f2bebf65656b3dcb031a32ad77a-6c063ecd4776fcaf18c544a30370f04d857159cb.transcript.json
+2026-09-14 02:59:48,523 DEBUG auto_shorts Source transcript segments: 277, words: 0, language=en
+2026-09-14 02:59:48,540 DEBUG auto_shorts Initial candidate clips: 2
+2026-09-14 02:59:48,540 DEBUG auto_shorts Alignment skip enabled (lightning=True) — using candidates as-is
+2026-09-14 02:59:50,117 ERROR auto_shorts Project 157 failed while processing D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_uploads\53f9857ef5b845ce818f4c987122e9b9_eps1.mp4
+Traceback (most recent call last):
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\runner.py", line 508, in run_project
+    results = export.export_clips(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Nagaraj\soft\Development\auto-shorts\auto_shorts\export.py", line 953, in export_clips
+    raise RuntimeError(f"ffmpeg cut failed for segment {i}: {proc.stderr}")
+RuntimeError: ffmpeg cut failed for segment 1: ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 16.1.0 (Rev2, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      61.  1.100 / 61.  1.100
+  libavcodec     63.  1.100 / 63.  1.100
+  libavformat    63.  1.100 / 63.  1.100
+  libavdevice    63.  1.100 / 63.  1.100
+  libavfilter    12.  1.100 / 12.  1.100
+  libswscale     10.  1.100 / 10.  1.100
+  libswresample   7.  1.100 /  7.  1.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'D:\Nagaraj\soft\Development\auto-shorts\.auto_shorts_uploads\53f9857ef5b845ce818f4c987122e9b9_eps1.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2026-07-18T11:50:44.000000Z
+    encoder         : Google
+  Duration: 00:16:55.46, start: 0.000000, bitrate: 835 kb/s
+  Stream #0:0[0x1](und): Video: h264 (Main) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 703 kb/s, 29.97 fps, 29.97 tbr, 30k tbn (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)
+    Metadata:
+      creation_time   : 2026-07-18T11:50:44.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 07/18/2026.
+[out#0/mp4 @ 0000021c65ee2e40] Codec AVOption crf (Select the quality for constant quality mode) has not been used for any stream. The most likely reason is either wrong type (e.g. a video option with no video streams) or that it is a private option of some decoder which was not actually used for any stream.
+Stream mapping:
+  Stream #0:0 (h264) -> split:default
+  drawtext:default -> Stream #0:0 (hevc_nvenc)
+  Stream #0:1 -> #0:1 (aac (native) -> aac (native))
+[hevc_nvenc @ 0000021c65f70080] Cannot load nvcuda.dll
+[vost#0:0/hevc_nvenc @ 0000021c65f6fd80] [enc:hevc_nvenc @ 0000021c67992200] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[fc#0 @ 0000021c65ec1740] Error sending frames to consumers: Operation not permitted
+[fc#0 @ 0000021c65ec1740] Task finished with error code: -1 (Operation not permitted)
+[fc#0 @ 0000021c65ec1740] Terminating thread with return code -1 (Operation not permitted)
+[vost#0:0/hevc_nvenc @ 0000021c65f6fd80] [enc:hevc_nvenc @ 0000021c67992200] Could not open encoder before EOF
+[vost#0:0/hevc_nvenc @ 0000021c65f6fd80] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/hevc_nvenc @ 0000021c65f6fd80] Terminating thread with return code -22 (Invalid argument)
+[out#0/mp4 @ 0000021c65ee2e40] Nothing was written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=00:00:00.56 bitrate=   0.0kbits/s speed=4.26x elapsed=0:00:00.13    
+[aac @ 0000021c67f2e8c0] Qavg: 2741.163
+Conversion failed!
+
